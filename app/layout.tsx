@@ -21,8 +21,8 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background-100 text-foreground">
         <main className="min-h-screen flex flex-col items-center w-full">
-          <nav className="w-full max-w-6xl flex justify-center bg-white border-b border-b-foreground/10 h-16">
-            <div className="w-full flex justify-between items-center p-3 text-sm">
+          <nav className="w-full flex justify-center bg-white border-b border-b-foreground/10 h-16">
+            <div className="w-full flex max-w-6xl justify-between items-center p-3 text-sm">
               {/* <DeployButton /> */}
               <LinkButton path="proifilí" />
               <LinkButton path="imeachtaí" />

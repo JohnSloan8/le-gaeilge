@@ -16,6 +16,9 @@ module.exports = {
           "background-hover": "hsl(var(--btn-background-hover))",
         },
       },
+      textColor: {
+        english: colors.gray[400],
+      },
     },
   },
   plugins: [],
