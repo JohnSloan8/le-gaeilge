@@ -13,7 +13,7 @@ interface EventCardProps {
   description_ga: string;
   description_en: string;
   image: string;
-  // members: number;
+  attendees: number | undefined;
 }
 
 export default async function EventCard({
@@ -26,18 +26,18 @@ export default async function EventCard({
   description_ga,
   description_en,
   image,
-}: // members,
-EventCardProps) {
+  attendees,
+}: EventCardProps) {
   // console.log("members:", members);
   return (
-    <div className="p-1 md:p-3 ">
+    <div className="py-1 md:py-3 ">
       <div className="w-full flex flex-row max-h-[150px]">
         <div className="flex-grow">
           <div className="mb-2 mr-2">
             <div className="mb-1">
               <div className="inline">{`${dayjs(start)
-                .format("ddd, MMM DD, YYYY, HH:mm A")
-                .toUpperCase()} - ${dayjs(end).format("HH:mm A")}`}</div>
+                .format("ddd, MMM DD, YYYY, hh:mm A")
+                .toUpperCase()}`}</div>
             </div>
             <div className="mb-1">
               <div className="text-2xl inline font-bold">
@@ -74,10 +74,12 @@ EventCardProps) {
             {"  " + description_en}
           </span>
         </div>
-        {/* <div className="text-md">
-          {members + " "}baill
-          <span className="text-sm font-light text-english">{" members"}</span>
-        </div> */}
+        <div className="text-md">
+          {attendees + " "}attendees
+          <span className="text-sm font-light text-english">
+            {" attendees"}
+          </span>
+        </div>
       </div>
     </div>
   );

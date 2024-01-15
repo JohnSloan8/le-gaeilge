@@ -10,7 +10,7 @@ interface GroupCardProps {
   description_ga: string;
   description_en: string;
   image: string;
-  members: number;
+  members: number | undefined;
 }
 
 export default async function GroupCard({
