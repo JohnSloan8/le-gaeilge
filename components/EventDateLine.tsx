@@ -9,12 +9,10 @@ dayjs.extend(weekday);
 
 interface EventDateLineProps {
   start_date: string;
-  start_time: string;
 }
 
 export default async function EventDateLine({
   start_date,
-  start_time,
 }: EventDateLineProps) {
   console.log("start_date:", start_date);
   const eventDayJsObject = dayjs(start_date);
@@ -23,8 +21,18 @@ export default async function EventDateLine({
   const month_ga = monthsOfYear["ga"][Number(eventDayJsObject.format("M")) - 1];
   const month_en = monthsOfYear["en"][Number(eventDayJsObject.format("M")) - 1];
 
-  const displayText = eventDayJsObject.isToday()
+  const displayText_ga = eventDayJsObject.isToday()
     ? "Inniu"
     : `${dayOfWeek_ga}, ${eventDayJsObject.format("D")} ${month_ga}`;
-  return <div className="text-lg">{displayText}</div>;
+  const displayText_en = eventDayJsObject.isToday()
+    ? "Today"
+    : `${dayOfWeek_en}, ${eventDayJsObject.format("D")} ${month_en}`;
+  console.log("displayText:", displayText_en);
+  return (
+    <div className="w-full mt-1 md:mt-3">
+      <div className="text-lg inline font-bold">{displayText_ga}</div>
+      <div className="inline english-text">{" " + displayText_en}</div>
+      <hr></hr>
+    </div>
+  );
 }

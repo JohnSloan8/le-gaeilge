@@ -40,3 +40,7 @@
     transform: translateY(0);
   }
 }
+
+.english-text {
+  @apply inline text-sm font-light text-english;
+}

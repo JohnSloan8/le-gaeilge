@@ -16,7 +16,7 @@ export default async function Page() {
     <div className="w-full p-2 flex flex-col items-center">
       <div className="p-4 flex flex-col items-center">
         <div className="text-4xl font-bold">Grupaí</div>
-        <div className="text-sm font-light text-english">Groups</div>
+        <div className="english-text">Groups</div>
       </div>
       <div className="max-w-2xl">
         {groups?.map((group, index) => (

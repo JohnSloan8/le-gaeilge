@@ -15,9 +15,16 @@ module.exports = {
           background: colors.blue,
           "background-hover": "hsl(var(--btn-background-hover))",
         },
+        primary: {
+          main: colors.green[600],
+          light: colors.green[400],
+        },
       },
       textColor: {
-        english: colors.gray[400],
+        english: colors.blue[400],
+        dark: colors.gray[700],
+        medium: colors.gray[500],
+        light: colors.gray[300],
       },
     },
   },

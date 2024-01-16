@@ -41,26 +41,24 @@ export default async function GroupCard({
         <div className="mb-2">
           <div className="text-2xl font-bold">
             {capitalizeNonGrammatical(name_ga)}
-            <span className="text-sm font-light text-english">
+            <span className="english-text">
               {"  " + capitalizeNonGrammatical(name_en)}
             </span>
           </div>
           <div className="">
             {location_ga.toUpperCase()}
-            <span className="text-sm font-light text-english">
+            <span className="english-text">
               {"  " + location_en.toUpperCase()}
             </span>
           </div>
         </div>
         <div className="text-md mb-2">
           {capitalizeFirstLetter(description_ga)}
-          <span className="text-sm font-light text-english">
-            {"  " + description_en}
-          </span>
+          <span className="english-text">{"  " + description_en}</span>
         </div>
         <div className="text-md">
           {members + " "}baill
-          <span className="text-sm font-light text-english">{" members"}</span>
+          <span className="english-text">{" members"}</span>
         </div>
       </div>
     </div>

@@ -1,17 +1,16 @@
 import Image from "next/image";
-import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
-import capitalizeFirstLetter from "@/utils/NLP/capitalise-first-letter";
-import dayjs from "dayjs";
+import { LargeTitle, SmallCapitalisedTitle, DateAndTime } from "@/components";
 
 interface EventCardProps {
   name_ga: string;
   name_en: string;
+  group_name_ga: string;
+  group_name_en: string;
   location_ga: string;
   location_en: string;
-  start: string;
+  start_date: string;
+  start_time: string;
   end: string;
-  description_ga: string;
-  description_en: string;
   image: string;
   attendees: number | undefined;
 }
@@ -19,39 +18,30 @@ interface EventCardProps {
 export default async function EventCard({
   name_ga,
   name_en,
+  group_name_ga,
+  group_name_en,
   location_ga,
   location_en,
-  start,
-  end,
-  description_ga,
-  description_en,
+  start_date,
+  start_time,
   image,
   attendees,
 }: EventCardProps) {
   // console.log("members:", members);
   return (
-    <div className="py-1 md:py-3 ">
+    <div className="py-1 md:py-3 mb-1 md:mb-3">
       <div className="w-full flex flex-row max-h-[150px]">
         <div className="flex-grow">
           <div className="mb-2 mr-2">
-            <div className="mb-1">
-              <div className="inline">{`${dayjs(start)
-                .format("ddd, MMM DD, YYYY, hh:mm A")
-                .toUpperCase()}`}</div>
-            </div>
-            <div className="mb-1">
-              <div className="text-2xl inline font-bold">
-                {capitalizeNonGrammatical(name_ga)}
-              </div>
-              <div className="text-sm inline font-light text-english">
-                {"  " + capitalizeNonGrammatical(name_en)}
-              </div>
-            </div>
-            <div className="mb-1">
-              <div className="inline">{location_ga.toUpperCase()}</div>
-              <div className="text-sm inline font-light text-english">
-                {"  " + location_en.toUpperCase()}
-              </div>
+            <DateAndTime start_date={start_date} start_time={start_time} />
+            <LargeTitle text_ga={name_ga} text_en={name_en} />
+            <SmallCapitalisedTitle
+              text_ga={location_ga}
+              text_en={location_en}
+            />
+            <div className="text-medium">
+              {attendees + " "}attendees
+              <span className="english-text">{" attendees"}</span>
             </div>
           </div>
         </div>
@@ -67,20 +57,13 @@ export default async function EventCard({
           </div>
         )}
       </div>
-      <div>
+      {/* <div>
         <div className="text-md mb-2">
           {capitalizeFirstLetter(description_ga)}
-          <span className="text-sm font-light text-english">
-            {"  " + description_en}
-          </span>
+          <span className="english-text">{"  " + description_en}</span>
         </div>
-        <div className="text-md">
-          {attendees + " "}attendees
-          <span className="text-sm font-light text-english">
-            {" attendees"}
-          </span>
-        </div>
-      </div>
+       
+      </div> */}
     </div>
   );
 }
