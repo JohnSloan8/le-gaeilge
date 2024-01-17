@@ -11,7 +11,7 @@ export default async function DateAndTime({
   start_date,
   start_time,
 }: DateAndTimeProps) {
-  const dayJsObject = dayjs(start_date);
+  const dayJsObject = dayjs(start_date + start_time);
   const startTime = dayJsObject.format("hh:mm A");
   const startDayMonth_en = dayJsObject.format("ddd, MMM");
   const startDate = dayJsObject.format("DD");

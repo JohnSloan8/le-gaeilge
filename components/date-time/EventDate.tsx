@@ -7,13 +7,15 @@ import monthsOfYear from "@/utils/NLP/months-of-year";
 dayjs.extend(isToday);
 dayjs.extend(weekday);
 
-interface EventDateLineProps {
+interface EventDateProps {
   start_date: string;
+  line?: boolean;
 }
 
-export default async function EventDateLine({
+export default async function EventDate({
   start_date,
-}: EventDateLineProps) {
+  line = false,
+}: EventDateProps) {
   console.log("start_date:", start_date);
   const eventDayJsObject = dayjs(start_date);
   const dayOfWeek_ga = daysOfWeek["ga"][Number(eventDayJsObject.format("d"))];
@@ -29,10 +31,10 @@ export default async function EventDateLine({
     : `${dayOfWeek_en}, ${eventDayJsObject.format("D")} ${month_en}`;
   console.log("displayText:", displayText_en);
   return (
-    <div className="w-full mt-1 md:mt-3">
-      <div className="text-lg inline font-bold">{displayText_ga}</div>
+    <div className="w-full">
+      <div className="text-base md:text-lg inline">{displayText_ga}</div>
       <div className="inline english-text">{" " + displayText_en}</div>
-      <hr></hr>
+      {line && <hr></hr>}
     </div>
   );
 }

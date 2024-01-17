@@ -22,9 +22,9 @@ module.exports = {
       },
       textColor: {
         english: colors.blue[400],
-        dark: colors.gray[700],
-        medium: colors.gray[500],
-        light: colors.gray[300],
+        dark: colors.gray[600],
+        medium: colors.gray[400],
+        light: colors.gray[200],
       },
     },
   },

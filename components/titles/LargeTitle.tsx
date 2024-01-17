@@ -10,8 +10,8 @@ export default async function LargeTitle({
   text_en,
 }: LargeTitleProps) {
   return (
-    <div className="mb-1">
-      <div className="text-2xl inline font-bold">
+    <div>
+      <div className="text-xl md:text-2xl inline font-bold">
         {capitalizeNonGrammatical(text_ga)}
       </div>
       <div className="inline english-text">

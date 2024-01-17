@@ -1,7 +1,7 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-import LinkButton from "../components/LinkButton";
-import AuthButton from "../components/AuthButton";
+import { LinkButton, AuthButton } from "@/components";
+
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -22,16 +22,14 @@ export default function RootLayout({
       <body className="bg-background-100 text-foreground">
         <main className="min-h-screen flex flex-col items-center w-full">
           <nav className="w-full flex justify-center bg-white border-b border-b-foreground/10 h-16">
-            <div className="w-full flex max-w-6xl justify-between items-center p-3 text-sm">
-              {/* <DeployButton /> */}
+            <div className="w-full flex max-w-6xl justify-center items-center p-3 text-sm">
               <LinkButton path="proifilí" />
               <LinkButton path="imeachtaí" />
               <LinkButton path="grupaí" />
-
               <AuthButton />
             </div>
           </nav>
-          <div className="w-full flex flex-grow md:max-w-6xl bg-white">
+          <div className="w-full flex flex-grow md:max-w-3xl bg-white p-2 md:p-5">
             {children}
           </div>
         </main>

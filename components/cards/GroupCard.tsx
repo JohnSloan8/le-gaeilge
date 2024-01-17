@@ -1,6 +1,10 @@
 import Image from "next/image";
-import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
-import capitalizeFirstLetter from "@/utils/NLP/capitalise-first-letter";
+import {
+  LargeTitle,
+  SmallCapitalisedTitle,
+  DateAndTime,
+  SmallGrayText,
+} from "@/components";
 
 interface GroupCardProps {
   name_ga: string;
@@ -10,7 +14,7 @@ interface GroupCardProps {
   description_ga: string;
   description_en: string;
   image: string;
-  members: number | undefined;
+  members: any[];
 }
 
 export default async function GroupCard({
@@ -38,26 +42,12 @@ export default async function GroupCard({
         </div>
       )}
       <div className="flex-grow mx-2">
-        <div className="mb-2">
-          <div className="text-2xl font-bold">
-            {capitalizeNonGrammatical(name_ga)}
-            <span className="english-text">
-              {"  " + capitalizeNonGrammatical(name_en)}
-            </span>
-          </div>
-          <div className="">
-            {location_ga.toUpperCase()}
-            <span className="english-text">
-              {"  " + location_en.toUpperCase()}
-            </span>
-          </div>
-        </div>
-        <div className="text-md mb-2">
-          {capitalizeFirstLetter(description_ga)}
-          <span className="english-text">{"  " + description_en}</span>
-        </div>
+        <LargeTitle text_ga={name_ga} text_en={name_en} />
+        <SmallCapitalisedTitle text_ga={location_ga} text_en={location_en} />
+        <SmallGrayText text_ga={description_ga} text_en={description_en} />
+
         <div className="text-md">
-          {members + " "}baill
+          {members.length + " "}baill
           <span className="english-text">{" members"}</span>
         </div>
       </div>

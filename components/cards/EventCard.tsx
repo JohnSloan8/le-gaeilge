@@ -1,5 +1,10 @@
 import Image from "next/image";
-import { LargeTitle, SmallCapitalisedTitle, DateAndTime } from "@/components";
+import {
+  LargeTitle,
+  SmallCapitalisedTitle,
+  DateAndTime,
+  SmallGrayText,
+} from "@/components";
 
 interface EventCardProps {
   name_ga: string;
@@ -12,7 +17,7 @@ interface EventCardProps {
   start_time: string;
   end: string;
   image: string;
-  attendees: number | undefined;
+  attendees: any[];
 }
 
 export default async function EventCard({
@@ -27,43 +32,31 @@ export default async function EventCard({
   image,
   attendees,
 }: EventCardProps) {
-  // console.log("members:", members);
   return (
-    <div className="py-1 md:py-3 mb-1 md:mb-3">
-      <div className="w-full flex flex-row max-h-[150px]">
-        <div className="flex-grow">
-          <div className="mb-2 mr-2">
-            <DateAndTime start_date={start_date} start_time={start_time} />
-            <LargeTitle text_ga={name_ga} text_en={name_en} />
-            <SmallCapitalisedTitle
-              text_ga={location_ga}
-              text_en={location_en}
-            />
-            <div className="text-medium">
-              {attendees + " "}attendees
-              <span className="english-text">{" attendees"}</span>
-            </div>
-          </div>
+    <div className="w-full flex flex-row max-h-[150px]">
+      <div className="flex-grow">
+        <div className="mb-2 mr-2">
+          <DateAndTime start_date={start_date} start_time={start_time} />
+          <LargeTitle text_ga={name_ga} text_en={name_en} />
+          <SmallCapitalisedTitle text_ga={location_ga} text_en={location_en} />
+          <SmallGrayText text_ga={group_name_ga} text_en={group_name_en} />
+          <SmallGrayText
+            text_ga={attendees.length + " attendees"}
+            text_en="attendees"
+          />
         </div>
-        {image && (
-          <div className="">
-            <Image
-              className="rounded-lg max-w-[150px]"
-              src={image} // Replace with the path to your image
-              alt={`image of ${name_en}`}
-              width={150}
-              height={150}
-            />
-          </div>
-        )}
       </div>
-      {/* <div>
-        <div className="text-md mb-2">
-          {capitalizeFirstLetter(description_ga)}
-          <span className="english-text">{"  " + description_en}</span>
+      {image && (
+        <div className="">
+          <Image
+            className="rounded-lg max-w-[150px]"
+            src={image} // Replace with the path to your image
+            alt={`image of ${name_en}`}
+            width={150}
+            height={150}
+          />
         </div>
-       
-      </div> */}
+      )}
     </div>
   );
 }
