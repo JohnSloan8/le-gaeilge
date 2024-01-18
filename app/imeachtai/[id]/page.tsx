@@ -41,18 +41,17 @@ export default async function Page({ params }: { params: { id: string } }) {
             height={10}
             width={10}
             layout="responsive"
-            objectFit="contain"
           />
         </div>
         <div className="md:w-1/2 ">
           <SmallPaddingContainer>
-            <div className="flex inline w-full">
+            <div className="flex w-full">
               <div className="p-1">
                 <CalendarIcon />
               </div>
               <EventDate start_date={event.start_date} />
             </div>
-            <div className="flex inline w-full">
+            <div className="flex w-full">
               <div className="p-1">
                 <ClockIcon />
               </div>
@@ -61,7 +60,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 start_time={event.start_time}
               />
             </div>
-            <div className="flex inline">
+            <div className="flex">
               <div className="p-1">
                 <LocationIcon />
               </div>

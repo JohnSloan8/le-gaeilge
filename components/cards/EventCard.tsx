@@ -1,9 +1,9 @@
-import Image from "next/image";
 import {
   LargeTitle,
   SmallCapitalisedTitle,
   DateAndTime,
   SmallGrayText,
+  GroupImage,
 } from "@/components";
 
 interface EventCardProps {
@@ -46,17 +46,7 @@ export default async function EventCard({
           />
         </div>
       </div>
-      {image && (
-        <div className="">
-          <Image
-            className="rounded-lg max-w-[150px]"
-            src={image} // Replace with the path to your image
-            alt={`image of ${name_en}`}
-            width={150}
-            height={150}
-          />
-        </div>
-      )}
+      {image && <GroupImage url={image} />}
     </div>
   );
 }

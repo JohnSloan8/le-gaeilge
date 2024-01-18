@@ -1,6 +1,7 @@
 // cards
 import GroupCard from "./cards/GroupCard";
 import EventCard from "./cards/EventCard";
+import ProfileCard from "./cards/ProfileCard";
 
 //buttons
 import LinkButton from "./buttons/LinkButton";
@@ -22,6 +23,14 @@ import SmallText from "./titles/SmallText";
 import SmallPaddingContainer from "./padding/SmallPaddingContainer";
 import PaddingContainer from "./padding/PaddingContainer";
 
+// images
+import ProfileImage from "./images/ProfileImage";
+import ProfileImageLarge from "./images/ProfileImageLarge";
+import GroupImage from "./images/GroupImage";
+
+// links
+import CardLink from "./links/CardLink";
+
 export {
   GroupCard,
   EventCard,
@@ -37,4 +46,9 @@ export {
   SmallPaddingContainer,
   PaddingContainer,
   SmallText,
+  ProfileCard,
+  ProfileImage,
+  ProfileImageLarge,
+  GroupImage,
+  CardLink,
 };
