@@ -26,7 +26,7 @@ export default async function DateAndTime({
 
   return (
     <div className="">
-      <div className="inline text-primary-main">
+      <div className="inline text-sm md:text-base text-primary-main">
         {displayDate_ga.toUpperCase()}
       </div>
       <div className="inline english-text">{` ${displayDate_en.toUpperCase()}`}</div>

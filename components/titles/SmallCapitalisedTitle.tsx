@@ -11,7 +11,7 @@ export default async function SmallCapitalisedTitle({
 }: SmallCapitalisedTitleProps) {
   return (
     <div>
-      <div className="inline">{text_ga.toUpperCase()}</div>
+      <div className="inline text-sm md:text-base">{text_ga.toUpperCase()}</div>
       <div className="inline english-text">{"  " + text_en}</div>
     </div>
   );

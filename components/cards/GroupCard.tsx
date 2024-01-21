@@ -26,7 +26,6 @@ export default async function GroupCard({
   image,
   members,
 }: GroupCardProps) {
-  console.log("members:", members);
   return (
     <div className="w-full p-1 md:p-3 flex flex-row">
       {image && <GroupImage url={image} />}

@@ -22,8 +22,6 @@ export default async function EventsPage() {
     .order("start_date", { ascending: true })
     .order("start_time", { ascending: true });
 
-  console.log("events:", events);
-
   return (
     <div className="w-full flex flex-col items-center">
       <SmallPaddingContainer>

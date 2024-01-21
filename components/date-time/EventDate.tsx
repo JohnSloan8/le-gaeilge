@@ -16,7 +16,6 @@ export default async function EventDate({
   start_date,
   line = false,
 }: EventDateProps) {
-  console.log("start_date:", start_date);
   const eventDayJsObject = dayjs(start_date);
   const dayOfWeek_ga = daysOfWeek["ga"][Number(eventDayJsObject.format("d"))];
   const dayOfWeek_en = daysOfWeek["en"][Number(eventDayJsObject.format("d"))];
@@ -29,7 +28,7 @@ export default async function EventDate({
   const displayText_en = eventDayJsObject.isToday()
     ? "Today"
     : `${dayOfWeek_en}, ${eventDayJsObject.format("D")} ${month_en}`;
-  console.log("displayText:", displayText_en);
+
   return (
     <div className="w-full">
       <div className="text-base md:text-lg inline">{displayText_ga}</div>

@@ -8,7 +8,7 @@ export default async function ProfileImageLarge({
   url,
 }: ProfileImageLargeProps) {
   return (
-    <div className="relative h-[300px] w-[200px]">
+    <div className="relative h-[240px] w-[180px]">
       <Image
         src={
           url
@@ -16,9 +16,9 @@ export default async function ProfileImageLarge({
             : "https://soks.org.au/wp-content/plugins/give/assets/dist/images/anonymous-user.svg"
         }
         alt={`image of ${url}`}
-        className="h-[300px] w-full object-cover object-center rounded-md"
-        width={200}
-        height={300}
+        className="h-[240px] w-full object-cover object-center rounded-md"
+        width={180}
+        height={240}
       />
     </div>
   );

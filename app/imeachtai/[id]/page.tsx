@@ -1,17 +1,21 @@
-import Link from "next/link";
 import Image from "next/image";
 import {
   LargeTitle,
   XLargeTitle,
   SmallPaddingContainer,
+  MarginTopContainer,
   SmallCapitalisedTitle,
   EventDate,
   EventTime,
   SmallText,
+  CardLink,
+  ProfileCard,
+  PrimaryButton,
 } from "@/components";
 import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
@@ -23,60 +27,94 @@ export default async function Page({ params }: { params: { id: string } }) {
     .eq("id", params.id)
     .single();
 
-  console.log("event:", event);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // console.log("attendees:", event.attendees);
+  console.log("user:", user);
+
+  const attend = async () => {
+    await supabase.from("attendees").insert({ profile_id: 4 });
+    return redirect("/login");
+  };
 
   return event ? (
     <div className="w-full">
-      <XLargeTitle
-        text_ga={event.name_ga}
-        text_en={event.name_en}
-        centered={false}
-      />
-
-      <div className="md:flex md:flex-row my-1 md:my-3">
-        <div className="md:w-1/2">
-          <Image
-            src={event.image} // Replace with the path to your image
-            alt={`image of ${event.name_en}`}
-            height={10}
-            width={10}
-            layout="responsive"
-          />
+      <MarginTopContainer>
+        <XLargeTitle
+          text_ga={event.name_ga}
+          text_en={event.name_en}
+          centered={false}
+        />
+      </MarginTopContainer>
+      <MarginTopContainer>
+        <div className="flex items-center w-full h-12">
+          {/* <form action={attend}> */}
+          <PrimaryButton text_ga="Attend" text_en="Attend" />
+          {/* </form> */}
         </div>
-        <div className="md:w-1/2 ">
-          <SmallPaddingContainer>
-            <div className="flex w-full">
-              <div className="p-1">
-                <CalendarIcon />
+      </MarginTopContainer>
+      <MarginTopContainer>
+        <div className="md:flex md:flex-row my-1 md:my-3">
+          <div className="md:w-1/2">
+            <Image
+              src={event.image} // Replace with the path to your image
+              alt={`image of ${event.name_en}`}
+              height={10}
+              width={10}
+              layout="responsive"
+            />
+          </div>
+          <div className="md:w-1/2 ">
+            <SmallPaddingContainer>
+              <div className="flex w-full">
+                <div className="p-1">
+                  <CalendarIcon />
+                </div>
+                <EventDate start_date={event.start_date} />
               </div>
-              <EventDate start_date={event.start_date} />
-            </div>
-            <div className="flex w-full">
-              <div className="p-1">
-                <ClockIcon />
+              <div className="flex w-full">
+                <div className="p-1">
+                  <ClockIcon />
+                </div>
+                <EventTime
+                  start_date={event.start_date}
+                  start_time={event.start_time}
+                />
               </div>
-              <EventTime
-                start_date={event.start_date}
-                start_time={event.start_time}
-              />
-            </div>
-            <div className="flex">
-              <div className="p-1">
-                <LocationIcon />
+              <div className="flex">
+                <div className="p-1">
+                  <LocationIcon />
+                </div>
+                <SmallCapitalisedTitle
+                  text_ga={event.location.name_ga}
+                  text_en={event.location.name_en}
+                />
               </div>
-              <SmallCapitalisedTitle
-                text_ga={event.location.name_ga}
-                text_en={event.location.name_en}
-              />
-            </div>
-          </SmallPaddingContainer>
+            </SmallPaddingContainer>
+          </div>
         </div>
-      </div>
-      <LargeTitle text_ga="Sonraí" text_en="Details" />
-      <SmallText
-        text_ga={event.description_ga}
-        text_en={event.description_en}
-      />
+      </MarginTopContainer>
+      <MarginTopContainer>
+        <LargeTitle text_ga="Sonraí" text_en="Details" />
+        <SmallText
+          text_ga={event.description_ga}
+          text_en={event.description_en}
+        />
+      </MarginTopContainer>
+      <MarginTopContainer>
+        <LargeTitle text_ga="Attendees" text_en="Attendees" />
+        <div className="flex flex-wrap w-full justify-center">
+          {event.attendees?.map((profile: any, index: number) => (
+            <div key={String(index)}>
+              <CardLink href={`/proifili/${profile.id}`}>
+                <ProfileCard name={profile.name} image={profile.image} />
+              </CardLink>
+            </div>
+          ))}
+        </div>
+      </MarginTopContainer>
     </div>
   ) : null;
 }

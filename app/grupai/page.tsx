@@ -1,9 +1,14 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { GroupCard, XLargeTitle, SmallPaddingContainer } from "@/components";
+import {
+  GroupCard,
+  XLargeTitle,
+  SmallPaddingContainer,
+  CardLink,
+} from "@/components";
 
-export default async function GroupPage() {
+export default async function GroupsPage() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { data: groups } = await supabase
@@ -17,20 +22,22 @@ export default async function GroupPage() {
       </SmallPaddingContainer>
       <div className="w-full">
         {groups?.map((group, index) => (
-          <Link key={index} href={`/grupai/${group.URL}`}>
-            <SmallPaddingContainer>
-              <GroupCard
-                name_ga={group.name_ga}
-                name_en={group.name_en}
-                location_ga={group.location.name_ga}
-                location_en={group.location.name_en}
-                description_ga={group.description_ga}
-                description_en={group.description_en}
-                image={group.image}
-                members={group.members}
-              />
-            </SmallPaddingContainer>
-          </Link>
+          <div key={index}>
+            <CardLink href={`/grupai/${group.URL}`}>
+              <SmallPaddingContainer>
+                <GroupCard
+                  name_ga={group.name_ga}
+                  name_en={group.name_en}
+                  location_ga={group.location.name_ga}
+                  location_en={group.location.name_en}
+                  description_ga={group.description_ga}
+                  description_en={group.description_en}
+                  image={group.image}
+                  members={group.members}
+                />
+              </SmallPaddingContainer>
+            </CardLink>
+          </div>
         ))}
       </div>
     </div>

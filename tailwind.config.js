@@ -12,8 +12,8 @@ module.exports = {
         background: colors.gray,
         foreground: "#000",
         btn: {
-          background: colors.blue,
-          "background-hover": "hsl(var(--btn-background-hover))",
+          background: colors.green[500],
+          "background-hover": colors.green[600],
         },
         primary: {
           main: colors.green[600],
