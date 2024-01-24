@@ -16,7 +16,8 @@ import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
+import { revalidatePath } from "next/cache";
+import attendAction from "./attendAction";
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
 
@@ -35,8 +36,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   console.log("user:", user);
 
   const attend = async () => {
-    await supabase.from("attendees").insert({ profile_id: 4 });
-    return redirect("/login");
+    const profiles = await attendAction(supabase);
   };
 
   return event ? (
@@ -50,9 +50,10 @@ export default async function Page({ params }: { params: { id: string } }) {
       </MarginTopContainer>
       <MarginTopContainer>
         <div className="flex items-center w-full h-12">
-          {/* <form action={attend}> */}
-          <PrimaryButton text_ga="Attend" text_en="Attend" />
-          {/* </form> */}
+          <form action={attend}>
+            {/* <PrimaryButton text_ga="Attend" text_en="Attend" /> */}
+            <button> attend</button>
+          </form>
         </div>
       </MarginTopContainer>
       <MarginTopContainer>
