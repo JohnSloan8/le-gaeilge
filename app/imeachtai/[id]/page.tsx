@@ -15,9 +15,8 @@ import {
 import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
-import attendAction from "./attendAction";
+import Link from "next/link";
+
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
 
@@ -32,11 +31,30 @@ export default async function Page({ params }: { params: { id: string } }) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  let profile_id: any;
+  if (user) {
+    const u_id = user.id;
+    console.log("user_id", u_id);
+    const { data: profile_id } = await supabase.rpc("getprofileidfromuserid", {
+      u_id,
+    });
+    console.log("profile_id:", profile_id);
+  }
+
   // console.log("attendees:", event.attendees);
-  console.log("user:", user);
+  // console.log("user:", user);
+  // console.log("event:", event);
 
   const attend = async () => {
-    const profiles = await attendAction(supabase);
+    "use server";
+    if (profile_id) {
+      const e_id = event.id;
+      const u_id = user!.id;
+      await supabase.rpc("attendevent", {
+        e_id,
+        u_id,
+      });
+    }
   };
 
   return event ? (
@@ -50,10 +68,16 @@ export default async function Page({ params }: { params: { id: string } }) {
       </MarginTopContainer>
       <MarginTopContainer>
         <div className="flex items-center w-full h-12">
-          <form action={attend}>
-            {/* <PrimaryButton text_ga="Attend" text_en="Attend" /> */}
-            <button> attend</button>
-          </form>
+          {user ? (
+            <form action={attend}>
+              <PrimaryButton text_ga="Attend" text_en="Attend" />
+              {/* <button> attend</button> */}
+            </form>
+          ) : (
+            <Link href="/login">
+              <PrimaryButton text_ga="Attend" text_en="Attend" />
+            </Link>
+          )}
         </div>
       </MarginTopContainer>
       <MarginTopContainer>
