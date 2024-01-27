@@ -12,11 +12,13 @@ import {
   ProfileCard,
   PrimaryButton,
   SecondaryButton,
+  WarningButton,
 } from "@/components";
 import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { revalidatePath } from 'next/cache'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
@@ -31,33 +33,52 @@ export default async function Page({ params }: { params: { id: string } }) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  let profileId: any;
-  if (user) {
-    const u_id = user.id;
-    console.log("user_id", u_id);
-    const { data: profileId } = await supabase.rpc("getprofileidfromuserid", {
-      u_id,
-    });
-    console.log("profileId:", profileId);
-  } else {
-    console.log("user is null");
+  const userId = user ? user.id : null;
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select()
+    .eq("user_id", userId)
+    .single();
+
+  const attendingThisEvent = () => {
+    const attendeeIds = event.attendees.map((a: any) => a.id);
+    return attendeeIds.includes(profile.id);
+  };
+
+  const getAttendeeId = () => {
+    
   }
 
-  const attend = async (profileId) => {
+  const register = async (formData: FormData) => {
     "use server";
-    console.log("hello");
     const cookieStoreAction = cookies();
     const supabaseAction = createClient(cookieStoreAction);
-    console.log("event.id: " + event.id);
-    console.log("profileId: " + profileId);
-    const { data: attendee } = await supabaseAction
+    const profileId = formData.get("profileId");
+    const eventId = formData.get("eventId");
+    const { data, error } = await supabaseAction
       .from("attendees")
-      .insert({ event_id: event.id, profileId: profileId })
+      .insert({ event_id: eventId, profile_id: profileId })
       .select()
       .single();
-    console.log("attendee:", attendee);
+    data && console.log("data:", data);
+    error && console.log("error:", error);
+    revalidatePath(`/imeachtai/${params.id}`)
   };
-  const updateAttendWithProfileId = attend.bind(null, profileId);
+
+  const cancel = async (formData: FormData) => {
+    "use server";
+    const cookieStoreAction = cookies();
+    const supabaseAction = createClient(cookieStoreAction)
+    const profileId = formData.get("profileId");
+    const eventId = formData.get("eventId");
+    const { data, error } = await supabaseAction
+      .from("attendees")
+      .delete()
+      .eq({ event_id: eventId, profile_id: profileId })
+    data && console.log("data:", data);
+    error && console.log("error:", error);
+    revalidatePath(`/imeachtai/${params.id}`)
+  };
 
   return event ? (
     <div className="w-full">
@@ -69,15 +90,30 @@ export default async function Page({ params }: { params: { id: string } }) {
         />
       </MarginTopContainer>
       <MarginTopContainer>
-        <div className="flex items-center w-full h-12">
-          {user ? (
-            <form action={updateAttendWithProfileId}>
-              <PrimaryButton text_ga="Attend" text_en="Attend" />
-            </form>
+        {/* <div className="flex items-center w-full h-12"> */}
+          {profile ? (
+            attendingThisEvent() ? (
+              <form action={cancel}>
+                <input type="hidden" name="attendeeId" value={event.id} />
+                <div className="border flex flex-row gap-4 items-center">
+                  <SmallText
+                    text_ga="tá tú ag freastal"
+                    text_en="you are attending"
+                  />
+                  <WarningButton text_ga="Ceal" text_en="Cancel" />
+                </div>
+              </form>
+            ) : (
+              <form action={register}>
+                <input type="hidden" name="profileId" value={profile.id} />
+                <input type="hidden" name="eventId" value={event.id} />
+                <PrimaryButton text_ga="Attend" text_en="Attend" />
+              </form>
+            )
           ) : (
             <SecondaryButton text_ga="Attend" text_en="Attend" />
           )}
-        </div>
+        {/* </div> */}
       </MarginTopContainer>
       <MarginTopContainer>
         <div className="md:flex md:flex-row my-1 md:my-3">

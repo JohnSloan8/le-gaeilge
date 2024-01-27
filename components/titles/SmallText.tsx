@@ -10,7 +10,7 @@ export default async function SmallText({
   centered = false,
 }: SmallTextProps) {
   return (
-    <div className={`${centered && "flex text-center"}`}>
+    <div className={`${centered && "text-center"}`}>
       <div className="inline text-sm md:text-base">{text_ga}</div>
       {text_en && <div className="inline english-text">{` ${text_en}`}</div>}
     </div>

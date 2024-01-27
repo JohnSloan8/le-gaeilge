@@ -10,6 +10,7 @@ import LinkButton from "./buttons/LinkButton";
 import AuthButton from "./buttons/AuthButton";
 import PrimaryButton from "./buttons/PrimaryButton";
 import SecondaryButton from "./buttons/SecondaryButton";
+import WarningButton from "./buttons/WarningButton";
 
 // datetime
 import EventDate from "./date-time/EventDate";
@@ -48,6 +49,7 @@ export {
   AuthButton,
   PrimaryButton,
   SecondaryButton,
+  WarningButton,
   EventDate,
   EventTime,
   DateAndTime,
