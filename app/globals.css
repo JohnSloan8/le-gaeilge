@@ -44,3 +44,7 @@
 .english-text {
   @apply inline text-sm font-light text-english;
 }
+
+.button {
+  @apply py-2 px-4 w-full md:max-w-[180px] rounded-md no-underline flex justify-center;
+}

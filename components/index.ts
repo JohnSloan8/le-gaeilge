@@ -9,6 +9,7 @@ import ProfileCard from "./cards/ProfileCard";
 import LinkButton from "./buttons/LinkButton";
 import AuthButton from "./buttons/AuthButton";
 import PrimaryButton from "./buttons/PrimaryButton";
+import SecondaryButton from "./buttons/SecondaryButton";
 
 // datetime
 import EventDate from "./date-time/EventDate";
@@ -46,6 +47,7 @@ export {
   LinkButton,
   AuthButton,
   PrimaryButton,
+  SecondaryButton,
   EventDate,
   EventTime,
   DateAndTime,

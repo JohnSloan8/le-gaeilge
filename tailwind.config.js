@@ -11,14 +11,6 @@ module.exports = {
       colors: {
         background: colors.gray,
         foreground: "#000",
-        btn: {
-          background: colors.green[500],
-          "background-hover": colors.green[600],
-        },
-        primary: {
-          main: colors.green[600],
-          light: colors.green[400],
-        },
       },
       textColor: {
         english: colors.blue[400],

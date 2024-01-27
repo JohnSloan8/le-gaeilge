@@ -11,6 +11,7 @@ import {
   CardLink,
   ProfileCard,
   PrimaryButton,
+  SecondaryButton,
 } from "@/components";
 import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
 import { createClient } from "@/utils/supabase/server";
@@ -19,7 +20,6 @@ import Link from "next/link";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
-
   const supabase = createClient(cookieStore);
   const { data: event } = await supabase
     .from("events")
@@ -31,31 +31,33 @@ export default async function Page({ params }: { params: { id: string } }) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  let profile_id: any;
+  let profileId: any;
   if (user) {
     const u_id = user.id;
     console.log("user_id", u_id);
-    const { data: profile_id } = await supabase.rpc("getprofileidfromuserid", {
+    const { data: profileId } = await supabase.rpc("getprofileidfromuserid", {
       u_id,
     });
-    console.log("profile_id:", profile_id);
+    console.log("profileId:", profileId);
+  } else {
+    console.log("user is null");
   }
 
-  // console.log("attendees:", event.attendees);
-  // console.log("user:", user);
-  // console.log("event:", event);
-
-  const attend = async () => {
+  const attend = async (profileId) => {
     "use server";
-    if (profile_id) {
-      const e_id = event.id;
-      const u_id = user!.id;
-      await supabase.rpc("attendevent", {
-        e_id,
-        u_id,
-      });
-    }
+    console.log("hello");
+    const cookieStoreAction = cookies();
+    const supabaseAction = createClient(cookieStoreAction);
+    console.log("event.id: " + event.id);
+    console.log("profileId: " + profileId);
+    const { data: attendee } = await supabaseAction
+      .from("attendees")
+      .insert({ event_id: event.id, profileId: profileId })
+      .select()
+      .single();
+    console.log("attendee:", attendee);
   };
+  const updateAttendWithProfileId = attend.bind(null, profileId);
 
   return event ? (
     <div className="w-full">
@@ -69,14 +71,11 @@ export default async function Page({ params }: { params: { id: string } }) {
       <MarginTopContainer>
         <div className="flex items-center w-full h-12">
           {user ? (
-            <form action={attend}>
+            <form action={updateAttendWithProfileId}>
               <PrimaryButton text_ga="Attend" text_en="Attend" />
-              {/* <button> attend</button> */}
             </form>
           ) : (
-            <Link href="/login">
-              <PrimaryButton text_ga="Attend" text_en="Attend" />
-            </Link>
+            <SecondaryButton text_ga="Attend" text_en="Attend" />
           )}
         </div>
       </MarginTopContainer>
