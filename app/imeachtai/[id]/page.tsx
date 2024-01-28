@@ -25,10 +25,10 @@ export default async function Page({ params }: { params: { id: string } }) {
   const supabase = createClient(cookieStore);
   const { data: event } = await supabase
     .from("events")
-    .select("*, location:locations(*), group:groups(*), attendees:profiles(*)")
+    .select("*, location:locations(*), group:groups(*), profiles:profiles(*)")
     .eq("id", params.id)
     .single();
-
+  
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -39,15 +39,17 @@ export default async function Page({ params }: { params: { id: string } }) {
     .select()
     .eq("user_id", userId)
     .single();
-
+   
   const attendingThisEvent = () => {
-    const attendeeIds = event.attendees.map((a: any) => a.id);
-    return attendeeIds.includes(profile.id);
+      const attendeeIds = event.profiles.map((a: any) => a.id);
+      return attendeeIds.includes(profile.id);
   };
 
-  const getAttendeeId = () => {
-    
-  }
+  const { data: attendees } = await supabase
+    .from("attendees")
+    .select()
+    .eq("event_id", event.id)
+  const attendeeId = attendees && attendingThisEvent() ? attendees.find((a:any) => a.profile_id === profile.id).id : undefined
 
   const register = async (formData: FormData) => {
     "use server";
@@ -55,9 +57,10 @@ export default async function Page({ params }: { params: { id: string } }) {
     const supabaseAction = createClient(cookieStoreAction);
     const profileId = formData.get("profileId");
     const eventId = formData.get("eventId");
+    const userId = formData.get("userId");
     const { data, error } = await supabaseAction
       .from("attendees")
-      .insert({ event_id: eventId, profile_id: profileId })
+      .insert({ event_id: eventId, profile_id: profileId, user_id: userId })
       .select()
       .single();
     data && console.log("data:", data);
@@ -67,14 +70,13 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const cancel = async (formData: FormData) => {
     "use server";
-    const cookieStoreAction = cookies();
-    const supabaseAction = createClient(cookieStoreAction)
-    const profileId = formData.get("profileId");
-    const eventId = formData.get("eventId");
-    const { data, error } = await supabaseAction
+    const cookieStoreCancelAction = cookies();
+    const supabaseCancelAction = createClient(cookieStoreCancelAction)
+    const attendeeId = formData.get("attendeeId");
+    const { data, error } = await supabaseCancelAction
       .from("attendees")
       .delete()
-      .eq({ event_id: eventId, profile_id: profileId })
+      .eq('id', attendeeId)
     data && console.log("data:", data);
     error && console.log("error:", error);
     revalidatePath(`/imeachtai/${params.id}`)
@@ -94,7 +96,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           {profile ? (
             attendingThisEvent() ? (
               <form action={cancel}>
-                <input type="hidden" name="attendeeId" value={event.id} />
+                <input type="hidden" name="attendeeId" value={attendeeId} />
                 <div className="border flex flex-row gap-4 items-center">
                   <SmallText
                     text_ga="tá tú ag freastal"
@@ -107,6 +109,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               <form action={register}>
                 <input type="hidden" name="profileId" value={profile.id} />
                 <input type="hidden" name="eventId" value={event.id} />
+                <input type="hidden" name="userId" value={user!.id} />
                 <PrimaryButton text_ga="Attend" text_en="Attend" />
               </form>
             )
@@ -166,7 +169,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <MarginTopContainer>
         <LargeTitle text_ga="Attendees" text_en="Attendees" />
         <div className="flex flex-wrap w-full justify-center">
-          {event.attendees?.map((profile: any, index: number) => (
+          {event.profiles?.map((profile: any, index: number) => (
             <div key={String(index)}>
               <CardLink href={`/proifili/${profile.id}`}>
                 <ProfileCard name={profile.name} image={profile.image} />

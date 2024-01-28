@@ -21,14 +21,16 @@ export default async function ProfilePage({
 }: {
   params: { id: string };
 }) {
+  console.log("params.id:", params.id);
   const cookieStore = cookies();
-
   const supabase = createClient(cookieStore);
   const { data: profile } = await supabase
     .from("profiles")
     .select("*, groups(*), events(*) ")
     .eq("id", params.id)
     .single();
+
+  console.log('profile', profile);
 
   return profile ? (
     <div className="w-full">
