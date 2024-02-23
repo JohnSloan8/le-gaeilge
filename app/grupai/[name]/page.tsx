@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
 import {
   LargeTitle,
@@ -27,7 +26,7 @@ export default async function GroupPage({ params }: PageProps) {
     .match({ URL: params!.name })
     .single();
 
-  return group ? (
+  return group !== null ? (
     <div className="w-full">
       <MarginTopContainer>
         <XLargeTitle
