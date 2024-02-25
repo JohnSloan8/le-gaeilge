@@ -5,7 +5,7 @@ import {
   GroupCard,
   XLargeTitle,
   SmallPaddingContainer,
-  CardLink,
+  SmallTopPaddingContainer,
 } from "@/components";
 
 export default async function GroupsPage() {
@@ -13,18 +13,16 @@ export default async function GroupsPage() {
   const supabase = createClient(cookieStore);
   const { data: groups } = await supabase
     .from("groups")
-    .select(`*, location:locations(*), members:profiles(*)`);
+    .select(`*, location:locations(*), members:members(*)`);
 
   return (
     <div className="w-full flex flex-col items-center">
-      <SmallPaddingContainer>
-        <XLargeTitle text_ga="Grupaí" text_en="Groups" />
-      </SmallPaddingContainer>
+      <XLargeTitle text_ga="Grupaí" text_en="Groups" />
       <div className="w-full">
         {groups?.map((group, index) => (
           <div key={index}>
-            <CardLink href={`/grupai/${group.URL}`}>
-              <SmallPaddingContainer>
+            <Link href={`/grupai/${group.URL}`}>
+              <SmallTopPaddingContainer>
                 <GroupCard
                   name_ga={group.name_ga}
                   name_en={group.name_en}
@@ -35,8 +33,8 @@ export default async function GroupsPage() {
                   image={group.image}
                   members={group.members}
                 />
-              </SmallPaddingContainer>
-            </CardLink>
+              </SmallTopPaddingContainer>
+            </Link>
           </div>
         ))}
       </div>

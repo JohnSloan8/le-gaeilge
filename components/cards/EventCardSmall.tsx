@@ -21,10 +21,10 @@ export default async function EventCardSmall({
   image,
 }: EventCardSmallProps) {
   return (
-    <div className="w-full flex flex-row">
+    <div className="w-full flex flex-row p-1 md:p-3 bg-white rounded-md shadow-md hover:shadow-lg">
       <div className="flex-grow">
         <div className="mb-2 mr-2">
-          {group_name_ga && (
+          {typeof group_name_ga === "string" && (
             <SmallText text_ga={group_name_ga} text_en={group_name_en} />
           )}
 
@@ -32,7 +32,7 @@ export default async function EventCardSmall({
           <DateAndTime start_date={start_date} start_time={start_time} />
         </div>
       </div>
-      {image && <GroupImage url={image} />}
+      {typeof image === "string" && <GroupImage url={image} />}
     </div>
   );
 }

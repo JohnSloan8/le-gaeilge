@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { ProfileImage, SmallText } from "@/components";
+import { ProfileImage, SmallText, SmallPaddingContainer } from "@/components";
 
 interface ProfileCardProps {
   name: string;
@@ -8,11 +7,15 @@ interface ProfileCardProps {
 
 export default async function ProfileCard({ name, image }: ProfileCardProps) {
   return (
-    <div className="w-[150px] p-1 md:p-3 flex flex-col rounded-md items-center h-[170px]">
-      <ProfileImage url={image} />
-      <div className="flex items-center p-1">
-        <SmallText text_ga={name} text_en={""} centered={true} />
-      </div>
+    <div className="w-[150px] h-[170px] bg-white rounded-md shadow-md hover:shadow-lg">
+      <SmallPaddingContainer>
+        <div className=" flex flex-col items-center">
+          <ProfileImage url={image} />
+          <div className="flex items-center p-1">
+            <SmallText text_ga={name} text_en={""} centered={true} />
+          </div>
+        </div>
+      </SmallPaddingContainer>
     </div>
   );
 }

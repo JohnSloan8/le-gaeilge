@@ -5,5 +5,5 @@ interface PaddingContainerProps {
 export default async function PaddingContainer({
   children,
 }: PaddingContainerProps) {
-  return <div className="border border-gray-200 m-2 md:m-5">{children}</div>;
+  return <div className="m-2 md:m-5">{children}</div>;
 }

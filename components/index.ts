@@ -28,8 +28,11 @@ import SmallText from "./titles/SmallText";
 
 // padding
 import SmallPaddingContainer from "./padding/SmallPaddingContainer";
+import SmallTopPaddingContainer from "./padding/SmallTopPaddingContainer";
 import PaddingContainer from "./padding/PaddingContainer";
+import WhitePaddingContainer from "./padding/WhitePaddingContainer";
 import MarginTopContainer from "./padding/MarginTopContainer";
+import SmallMarginContainer from "./padding/SmallMarginContainer";
 
 // images
 import ProfileImage from "./images/ProfileImage";
@@ -39,6 +42,9 @@ import GroupImageLarge from "./images/GroupImageLarge";
 
 // links
 import CardLink from "./links/CardLink";
+
+// composite
+import Profiles from "./composite/Profiles";
 
 export {
   GroupCard,
@@ -60,8 +66,11 @@ export {
   SmallCapitalisedTitle,
   SmallGrayText,
   SmallPaddingContainer,
+  SmallTopPaddingContainer,
   PaddingContainer,
+  WhitePaddingContainer,
   MarginTopContainer,
+  SmallMarginContainer,
   SmallText,
   ProfileCard,
   ProfileImage,
@@ -69,4 +78,5 @@ export {
   GroupImage,
   GroupImageLarge,
   CardLink,
+  Profiles,
 };

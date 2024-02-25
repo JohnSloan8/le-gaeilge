@@ -4,6 +4,7 @@ import {
   EventDate,
   XLargeTitle,
   SmallPaddingContainer,
+  SmallTopPaddingContainer,
 } from "@/components";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
@@ -17,7 +18,7 @@ export default async function EventsPage() {
   const todaysDate = dayjs().format("YYYY-MM-DD");
   const { data: events } = await supabase
     .from("events")
-    .select("*, location:locations(*), group:groups(*), attendees:profiles(*)")
+    .select("*, location:locations(*), group:groups(*), attendees(*)")
     .gte("start_date", todaysDate)
     .order("start_date", { ascending: true })
     .order("start_time", { ascending: true });
@@ -32,7 +33,7 @@ export default async function EventsPage() {
         <div key={index} className="w-full">
           {index === 0 && (
             <div className="mt-2 md:mt-5">
-              <EventDate start_date={event.start_date} />
+              <EventDate start_date={event.start_date} line={true} />
             </div>
           )}
           {index !== 0 && event.start_date !== events[index - 1].start_date && (
@@ -42,7 +43,7 @@ export default async function EventsPage() {
           )}
 
           <Link href={`/imeachtai/${event.id}`}>
-            <SmallPaddingContainer>
+            <SmallTopPaddingContainer>
               <EventCard
                 name_ga={event.name_ga}
                 name_en={event.name_en}
@@ -56,7 +57,7 @@ export default async function EventsPage() {
                 image={event.image}
                 attendees={event.attendees}
               />
-            </SmallPaddingContainer>
+            </SmallTopPaddingContainer>
           </Link>
         </div>
       ))}

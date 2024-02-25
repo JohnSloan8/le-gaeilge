@@ -13,5 +13,9 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": { "react/react-in-jsx-scope": "off" }
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/explicit-function-return-type": "off"
+  }
 }

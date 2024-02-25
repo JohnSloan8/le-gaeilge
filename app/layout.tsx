@@ -16,7 +16,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): React.ReactNode {
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background-100 text-foreground">
@@ -29,7 +29,7 @@ export default function RootLayout({
               <AuthButton />
             </div>
           </nav>
-          <div className="w-full flex flex-grow md:max-w-3xl bg-white p-2 md:p-5">
+          <div className="w-full flex flex-grow md:max-w-3xl m-2 md:m-5 p-2 md:p-5">
             {children}
           </div>
         </main>

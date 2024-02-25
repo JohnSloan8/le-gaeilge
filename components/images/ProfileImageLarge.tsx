@@ -11,7 +11,7 @@ export default async function ProfileImageLarge({
     <div className="relative h-[240px] w-[180px]">
       <Image
         src={
-          url
+          typeof url === "string"
             ? url
             : "https://soks.org.au/wp-content/plugins/give/assets/dist/images/anonymous-user.svg"
         }

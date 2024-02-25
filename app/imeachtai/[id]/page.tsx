@@ -8,81 +8,39 @@ import {
   EventDate,
   EventTime,
   SmallText,
-  CardLink,
-  ProfileCard,
+  // CardLink,
+  // ProfileCard,
   PrimaryButton,
   SecondaryButton,
   WarningButton,
+  Profiles,
 } from "@/components";
+import { cancelRegistrationForEvent, registerForEvent } from "@/actions";
 import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import Link from "next/link";
-import { revalidatePath } from 'next/cache'
+// import { revalidatePath } from "next/cache";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { data: event } = await supabase
     .from("events")
-    .select("*, location:locations(*), group:groups(*), profiles:profiles(*)")
+    .select("*, location:locations(*), group:groups(*), attendees:attendees(*)")
     .eq("id", params.id)
     .single();
-  
+
+  const attendeeIds = event.attendees.map((a: any) => a.user_id);
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const userId = user ? user.id : null;
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select()
-    .eq("user_id", userId)
-    .single();
-   
-  const attendingThisEvent = () => {
-      const attendeeIds = event.profiles.map((a: any) => a.id);
-      return attendeeIds.includes(profile.id);
+  const attendingThisEvent = (): boolean => {
+    return user !== null ? attendeeIds.includes(user.id) : false;
   };
 
-  const { data: attendees } = await supabase
-    .from("attendees")
-    .select()
-    .eq("event_id", event.id)
-  const attendeeId = attendees && attendingThisEvent() ? attendees.find((a:any) => a.profile_id === profile.id).id : undefined
-
-  const register = async (formData: FormData) => {
-    "use server";
-    const cookieStoreAction = cookies();
-    const supabaseAction = createClient(cookieStoreAction);
-    const profileId = formData.get("profileId");
-    const eventId = formData.get("eventId");
-    const userId = formData.get("userId");
-    const { data, error } = await supabaseAction
-      .from("attendees")
-      .insert({ event_id: eventId, profile_id: profileId, user_id: userId })
-      .select()
-      .single();
-    data && console.log("data:", data);
-    error && console.log("error:", error);
-    revalidatePath(`/imeachtai/${params.id}`)
-  };
-
-  const cancel = async (formData: FormData) => {
-    "use server";
-    const cookieStoreCancelAction = cookies();
-    const supabaseCancelAction = createClient(cookieStoreCancelAction)
-    const attendeeId = formData.get("attendeeId");
-    const { data, error } = await supabaseCancelAction
-      .from("attendees")
-      .delete()
-      .eq('id', attendeeId)
-    data && console.log("data:", data);
-    error && console.log("error:", error);
-    revalidatePath(`/imeachtai/${params.id}`)
-  };
-
-  return event ? (
+  return event !== null ? (
     <div className="w-full">
       <MarginTopContainer>
         <XLargeTitle
@@ -92,31 +50,35 @@ export default async function Page({ params }: { params: { id: string } }) {
         />
       </MarginTopContainer>
       <MarginTopContainer>
-        {/* <div className="flex items-center w-full h-12"> */}
-          {profile ? (
-            attendingThisEvent() ? (
-              <form action={cancel}>
-                <input type="hidden" name="attendeeId" value={attendeeId} />
-                <div className="border flex flex-row gap-4 items-center">
-                  <SmallText
-                    text_ga="tá tú ag freastal"
-                    text_en="you are attending"
-                  />
-                  <WarningButton text_ga="Ceal" text_en="Cancel" />
-                </div>
-              </form>
-            ) : (
-              <form action={register}>
-                <input type="hidden" name="profileId" value={profile.id} />
-                <input type="hidden" name="eventId" value={event.id} />
-                <input type="hidden" name="userId" value={user!.id} />
-                <PrimaryButton text_ga="Attend" text_en="Attend" />
-              </form>
-            )
+        {user !== null ? (
+          attendingThisEvent() ? (
+            <form action={cancelRegistrationForEvent}>
+              <input type="hidden" name="eventId" value={event.id} />
+              <input
+                type="hidden"
+                name="attendeeId"
+                value={
+                  event.attendees.find((a: any) => a.user_id === user.id).id
+                }
+              />
+              <div className="flex flex-row gap-4 items-center">
+                <SmallText
+                  text_ga="Tá tú ag freastal"
+                  text_en="You are attending"
+                />
+                <WarningButton text_ga="Ceal" text_en="Cancel" />
+              </div>
+            </form>
           ) : (
-            <SecondaryButton text_ga="Attend" text_en="Attend" />
-          )}
-        {/* </div> */}
+            <form action={registerForEvent}>
+              <input type="hidden" name="eventId" value={event.id} />
+              <input type="hidden" name="userId" value={user.id} />
+              <PrimaryButton text_ga="Attend" text_en="Attend" />
+            </form>
+          )
+        ) : (
+          <SecondaryButton text_ga="Attend" text_en="Attend" />
+        )}
       </MarginTopContainer>
       <MarginTopContainer>
         <div className="md:flex md:flex-row my-1 md:my-3">
@@ -168,15 +130,9 @@ export default async function Page({ params }: { params: { id: string } }) {
       </MarginTopContainer>
       <MarginTopContainer>
         <LargeTitle text_ga="Attendees" text_en="Attendees" />
-        <div className="flex flex-wrap w-full justify-center">
-          {event.profiles?.map((profile: any, index: number) => (
-            <div key={String(index)}>
-              <CardLink href={`/proifili/${profile.id}`}>
-                <ProfileCard name={profile.name} image={profile.image} />
-              </CardLink>
-            </div>
-          ))}
-        </div>
+        <MarginTopContainer>
+          <Profiles userIds={attendeeIds} />
+        </MarginTopContainer>
       </MarginTopContainer>
     </div>
   ) : null;

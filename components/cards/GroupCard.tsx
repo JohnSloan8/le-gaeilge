@@ -27,8 +27,8 @@ export default async function GroupCard({
   members,
 }: GroupCardProps) {
   return (
-    <div className="w-full p-1 md:p-3 flex flex-row">
-      {image && <GroupImage url={image} />}
+    <div className="min-h-[150px] w-full p-1 md:p-3 flex flex-row bg-white rounded-md shadow-md hover:shadow-lg">
+      {typeof image === "string" && <GroupImage url={image} />}
       <div className="flex-grow mx-2">
         <LargeTitle text_ga={name_ga} text_en={name_en} />
         <SmallCapitalisedTitle text_ga={location_ga} text_en={location_en} />
