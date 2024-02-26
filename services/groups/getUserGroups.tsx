@@ -8,7 +8,7 @@ const getUserGroups = async (userId: string) => {
 
   const { data: groups, error } = await supabase
     .from("members")
-    .select("*, groups(*)")
+    .select("*, group:groups(*)")
     .eq("user_id", userId);
 
   if (error === null) {
