@@ -1,35 +1,34 @@
-import {
-  XLargeTitle,
-  ProfileImageLarge,
-  GroupCardSmall,
-  EventCardSmall,
-  SmallPaddingContainer,
-  MarginTopContainer,
-  SmallMarginContainer,
-  MediumTitle,
-  SmallText,
-} from "@/components";
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
-import { getUserGroups } from "@/services";
-import Link from "next/link";
+import {} from // XLargeTitle,
+// ProfileImageLarge,
+// GroupCardSmall,
+// EventCardSmall,
+// SmallPaddingContainer,
+// MarginTopContainer,
+// SmallMarginContainer,
+// MediumTitle,
+// SmallText,
+"@/components";
+// import { createClient } from "@/utils/supabase/server";
+// import { cookies } from "next/headers";
+// import { getUserGroups } from "@/services";
+// import Link from "next/link";
 
 export default async function ProfilePage({
   params,
 }: {
   params: { id: string };
 }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select()
-    .eq("id", params.id)
-    .single();
+  // const cookieStore = cookies();
+  // const supabase = createClient(cookieStore);
+  // const { data: profile } = await supabase
+  //   .from("profiles")
+  //   .select()
+  //   .eq("id", params.id)
+  //   .single();
 
-  const groups = await getUserGroups(profile.user_id);
+  // const groups = await getUserGroups(profile.user_id);
 
-  console.log("user groups", groups);
+  // console.log("user groups", groups);
 
   // return profile !== undefined ? (
   //   <div className="w-full">

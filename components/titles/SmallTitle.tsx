@@ -16,7 +16,7 @@ export default async function SmallTitle({
       <div className="text-base md:text-lg inline font-bold">
         {capitalizeNonGrammatical(text_ga)}
       </div>
-      {text_en && (
+      {text_en !== undefined && (
         <div className="inline english-text">
           {"  " + capitalizeNonGrammatical(text_en)}
         </div>

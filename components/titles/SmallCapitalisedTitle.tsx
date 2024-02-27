@@ -1,5 +1,3 @@
-import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
-
 interface SmallCapitalisedTitleProps {
   text_ga: string;
   text_en: string;

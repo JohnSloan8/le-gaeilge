@@ -5,7 +5,6 @@ import {
   LargeTitle,
   XLargeTitle,
   SmallPaddingContainer,
-  SmallMarginContainer,
   MarginTopContainer,
   SmallCapitalisedTitle,
   SmallText,

@@ -17,10 +17,10 @@ export default async function EventDate({
   line = false,
 }: EventDateProps) {
   const eventDayJsObject = dayjs(start_date);
-  const dayOfWeek_ga = daysOfWeek["ga"][Number(eventDayJsObject.format("d"))];
-  const dayOfWeek_en = daysOfWeek["en"][Number(eventDayJsObject.format("d"))];
-  const month_ga = monthsOfYear["ga"][Number(eventDayJsObject.format("M")) - 1];
-  const month_en = monthsOfYear["en"][Number(eventDayJsObject.format("M")) - 1];
+  const dayOfWeek_ga = daysOfWeek.ga[Number(eventDayJsObject.format("d"))];
+  const dayOfWeek_en = daysOfWeek.en[Number(eventDayJsObject.format("d"))];
+  const month_ga = monthsOfYear.ga[Number(eventDayJsObject.format("M")) - 1];
+  const month_en = monthsOfYear.en[Number(eventDayJsObject.format("M")) - 1];
 
   const displayText_ga = eventDayJsObject.isToday()
     ? "Inniu"

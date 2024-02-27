@@ -12,7 +12,9 @@ export default async function SmallText({
   return (
     <div className={`${centered && "text-center"}`}>
       <div className="inline text-sm md:text-base">{text_ga}</div>
-      {text_en && <div className="inline english-text">{` ${text_en}`}</div>}
+      {text_en !== null && (
+        <div className="inline english-text">{` ${text_en}`}</div>
+      )}
     </div>
   );
 }
