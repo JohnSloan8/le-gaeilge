@@ -2,9 +2,10 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { LinkButton, AuthButton } from "@/components";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const defaultUrl =
+  process.env.VERCEL_URL !== null
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),

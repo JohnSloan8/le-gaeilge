@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import {
-  GroupCard,
-  XLargeTitle,
-  SmallPaddingContainer,
-  SmallTopPaddingContainer,
-} from "@/components";
+import { GroupCard, XLargeTitle, SmallTopPaddingContainer } from "@/components";
 
 export default async function GroupsPage() {
   const cookieStore = cookies();

@@ -5,7 +5,7 @@ import EventCard from "./cards/EventCard";
 import EventCardSmall from "./cards/EventCardSmall";
 import ProfileCard from "./cards/ProfileCard";
 
-//buttons
+// buttons
 import LinkButton from "./buttons/LinkButton";
 import AuthButton from "./buttons/AuthButton";
 import PrimaryButton from "./buttons/PrimaryButton";

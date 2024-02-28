@@ -9,7 +9,7 @@ export default async function ProfileImage({ url }: ProfileImageProps) {
     <div className="relative h-[100px] w-[100px]">
       <Image
         src={
-          url
+          typeof url === "string"
             ? url
             : "https://soks.org.au/wp-content/plugins/give/assets/dist/images/anonymous-user.svg"
         }

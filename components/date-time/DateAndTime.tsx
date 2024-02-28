@@ -16,10 +16,11 @@ export default async function DateAndTime({
   const startDayMonth_en = dayJsObject.format("ddd, MMM");
   const startDate = dayJsObject.format("DD");
   const startYear = dayJsObject.format("YYYY");
-  const day_ga = daysOfWeek["ga"][Number(dayJsObject.format("d"))].slice(3, 6);
-  const month_ga = monthsOfYear["ga"][
-    Number(dayJsObject.format("M")) - 1
-  ].slice(0, 3);
+  const day_ga = daysOfWeek.ga[Number(dayJsObject.format("d"))].slice(3, 6);
+  const month_ga = monthsOfYear.ga[Number(dayJsObject.format("M")) - 1].slice(
+    0,
+    3,
+  );
 
   const displayDate_en = `${startDayMonth_en} ${startDate}`;
   const displayDate_ga = `${day_ga}, ${month_ga} ${startDate}, ${startYear}, ${startTime}`;
