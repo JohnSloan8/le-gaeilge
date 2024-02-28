@@ -1,3 +1,3 @@
-import getUserGroups from "../services/groups/getUserGroups";
+import getMemberGroups from "./groups/getMemberGroups";
 
-export { getUserGroups };
+export { getMemberGroups };

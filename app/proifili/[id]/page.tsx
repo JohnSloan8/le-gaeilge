@@ -1,87 +1,83 @@
-// import {
-//   XLargeTitle,
-// ProfileImageLarge,
-// GroupCardSmall,
-// EventCardSmall,
-// SmallPaddingContainer,
-// MarginTopContainer,
-// SmallMarginContainer,
-// MediumTitle,
-// SmallText,
-// } from "@/components";
-// import { createClient } from "@/utils/supabase/server";
-// import { cookies } from "next/headers";
-// import { getUserGroups } from "@/services";
-// import Link from "next/link";
+import {
+  Groups,
+  XLargeTitle,
+  ProfileImageLarge,
+  GroupCardSmall,
+  EventCardSmall,
+  SmallPaddingContainer,
+  MarginTopContainer,
+  SmallMarginContainer,
+  MediumTitle,
+  SmallText,
+} from "@/components";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
+import { getMemberGroups } from "@/services";
+import Link from "next/link";
 
 export default async function ProfilePage({
   params,
 }: {
   params: { id: string };
 }) {
-  // const cookieStore = cookies();
-  // const supabase = createClient(cookieStore);
-  // const { data: profile } = await supabase
-  //   .from("profiles")
-  //   .select()
-  //   .eq("id", params.id)
-  //   .single();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select()
+    .eq("id", params.id)
+    .single();
 
-  // const groups = await getUserGroups(profile.user_id);
+  // const memberGroups = profile !== null ? await getMemberGroups(profile.user_id) : [];
 
-  // console.log("user groups", groups);
+  const { data: memberGroups } = await supabase
+    .from("members")
+    .select("*, group:groups(*)")
+    .eq("user_id", profile !== null ? profile.user_id : 0);
 
-  // return profile !== null ? (
-  //   <div className="w-full">
-  //     <XLargeTitle text_ga={profile.name} text_en="" />
-  //     <MarginTopContainer>
-  //       <div className="w-full flex md:flex-row flex-col items-center">
-  //         <ProfileImageLarge url={profile.image} />
+  return profile !== null ? (
+    //   <div className="w-full">
+    //     <XLargeTitle text_ga={profile.name} text_en="" />
+    //     <MarginTopContainer>
+    //       <div className="w-full flex md:flex-row flex-col items-center">
+    //         <ProfileImageLarge url={profile.image} />
 
-  //         <div className="flex flex-col">
-  //           <div className="flex flex-row">
-  //             <SmallPaddingContainer>
-  //               <SmallText text_ga={`leibhéal`} text_en="Irish level" />
-  //             </SmallPaddingContainer>
-  //             <SmallPaddingContainer>
-  //               <MediumTitle text_ga={`${profile.irish_level}`} text_en="" />
-  //             </SmallPaddingContainer>
-  //           </div>
-  //           <div className="flex">
-  //             <SmallPaddingContainer>
-  //               <SmallText text_ga={`grupaí`} text_en="groups" />
-  //             </SmallPaddingContainer>
-  //             <SmallPaddingContainer>
-  //               <MediumTitle text_ga={`${groups.length}`} text_en="" />
-  //             </SmallPaddingContainer>
-  //           </div>
-  //           <div className="flex">
-  //             <SmallPaddingContainer>
-  //               <SmallText text_ga={`imeachtaí`} text_en="events" />
-  //             </SmallPaddingContainer>
-  //             <SmallPaddingContainer>
-  //               <MediumTitle text_ga={`${profile.events.length}`} text_en="" />
-  //             </SmallPaddingContainer>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </MarginTopContainer>
+    //         <div className="flex flex-col">
+    //           <div className="flex flex-row">
+    //             <SmallPaddingContainer>
+    //               <SmallText text_ga={`leibhéal`} text_en="Irish level" />
+    //             </SmallPaddingContainer>
+    //             <SmallPaddingContainer>
+    //               <MediumTitle text_ga={`${profile.irish_level}`} text_en="" />
+    //             </SmallPaddingContainer>
+    //           </div>
+    //           <div className="flex">
+    //             <SmallPaddingContainer>
+    //               <SmallText text_ga={`grupaí`} text_en="groups" />
+    //             </SmallPaddingContainer>
+    //             <SmallPaddingContainer>
+    //               <MediumTitle text_ga={`${groups.length}`} text_en="" />
+    //             </SmallPaddingContainer>
+    //           </div>
+    //           <div className="flex">
+    //             <SmallPaddingContainer>
+    //               <SmallText text_ga={`imeachtaí`} text_en="events" />
+    //             </SmallPaddingContainer>
+    //             <SmallPaddingContainer>
+    //               <MediumTitle text_ga={`${profile.events.length}`} text_en="" />
+    //             </SmallPaddingContainer>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </MarginTopContainer>
 
-  //     <MarginTopContainer>
-  //        <MediumTitle text_ga="Groupaí" text_en="Groups" />
-  //        <div className="flex flex-wrap w-full justify-center">
-  //          {profile.groups.map((g: any, index: number) => (
-  //            <SmallMarginContainer key={String(index)}>
-  //              <Link href={`/grupai/${g.URL}`}>
-  //                <GroupCardSmall
-  //                  text_ga={`${g.name_ga}`}
-  //                  text_en={`${g.name_en}`}
-  //                  image={`${g.image}`}
-  //                />
-  //              </Link>
-  //            </SmallMarginContainer>
-  //          ))}
-  //        </div>
+    //     <MarginTopContainer>
+    //        <MediumTitle text_ga="Groupaí" text_en="Groups" />
+    //        <div className="flex flex-wrap w-full justify-center">
+    <Groups
+      groups={memberGroups !== null ? memberGroups.map((mG) => mG.group) : null}
+    />
+  ) : //        </div>
   //      </MarginTopContainer> */}
 
   //     <MarginTopContainer>
@@ -114,6 +110,5 @@ export default async function ProfilePage({
   //        </div>
   //      </MarginTopContainer>
   //   </div>
-  // ) : null;
-  return null;
+  null;
 }

@@ -1,16 +1,25 @@
-// import Link from "next/link";
-// import { ProfileCard, SmallMarginContainer } from "@/components";
+import Link from "next/link";
+import { GroupCardSmall, SmallMarginContainer } from "@/components";
+import type { GroupModel } from "@/types/models";
 
-// export default async function Groups({ groups }: GroupsModel[]) {
-//   return (
-//     <div className="flex flex-wrap w-full justify-center">
-//       {groups?.map((profile: any, index: number) => (
-//         <SmallMarginContainer key={String(index)}>
-//           <Link href={`/proifili/${profile.id}`}>
-//             <ProfileCard name={profile.name} image={profile.image} />
-//           </Link>
-//         </SmallMarginContainer>
-//       ))}
-//     </div>
-//   );
-// }
+interface GroupsProps {
+  groups: GroupModel[];
+}
+
+export default async function Groups({ groups }: GroupsProps) {
+  return (
+    <div className="flex flex-wrap w-full justify-center">
+      {groups.map((g: GroupModel, index: number) => (
+        <SmallMarginContainer key={String(index)}>
+          <Link href={`/grupai/${g.URL}`}>
+            <GroupCardSmall
+              text_ga={`${g.name_ga}`}
+              text_en={`${g.name_en}`}
+              image={`${g.image}`}
+            />
+          </Link>
+        </SmallMarginContainer>
+      ))}
+    </div>
+  );
+}
