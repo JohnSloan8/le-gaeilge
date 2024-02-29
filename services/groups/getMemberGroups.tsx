@@ -2,7 +2,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 
-const getUserGroups = async (userId: string) => {
+const getMemberGroups = async (userId: string) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -20,4 +20,4 @@ const getUserGroups = async (userId: string) => {
   return null;
 };
 
-export default getUserGroups;
+export default getMemberGroups;
