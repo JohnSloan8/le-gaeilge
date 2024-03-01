@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import { ProfileCard, SmallMarginContainer } from "@/components";
+import { ProfileCard, SmallNegativeMarginContainer } from "@/components";
 interface ProfilesProps {
   userIds: string[];
 }
@@ -18,11 +18,11 @@ export default async function Profiles({ userIds }: ProfilesProps) {
   return (
     <div className="flex flex-wrap w-full justify-center">
       {profiles?.map((profile: any, index: number) => (
-        <SmallMarginContainer key={String(index)}>
+        <SmallNegativeMarginContainer key={String(index)}>
           <Link href={`/proifili/${profile.id}`}>
             <ProfileCard name={profile.name} image={profile.image} />
           </Link>
-        </SmallMarginContainer>
+        </SmallNegativeMarginContainer>
       ))}
     </div>
   );

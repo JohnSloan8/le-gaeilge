@@ -33,6 +33,11 @@ import PaddingContainer from "./padding/PaddingContainer";
 import WhitePaddingContainer from "./padding/WhitePaddingContainer";
 import MarginTopContainer from "./padding/MarginTopContainer";
 import SmallMarginContainer from "./padding/SmallMarginContainer";
+import SmallNegativeMarginContainer from "./padding/SmallNegativeMarginContainer";
+import SmallMarginTopContainer from "./padding/SmallMarginTopContainer";
+
+// sections
+import ContentSection from "./sections/ContentSection";
 
 // images
 import ProfileImage from "./images/ProfileImage";
@@ -73,6 +78,9 @@ export {
   WhitePaddingContainer,
   MarginTopContainer,
   SmallMarginContainer,
+  SmallNegativeMarginContainer,
+  SmallMarginTopContainer,
+  ContentSection,
   SmallText,
   ProfileCard,
   ProfileImage,

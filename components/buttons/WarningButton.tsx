@@ -8,9 +8,9 @@ export default async function WarningButton({
   text_en,
 }: WarningButtonProps) {
   return (
-    <button className="button bg-red-400 hover:bg-red-500 w-[300px]">
-      <div className="inline text-white">{text_ga}</div>{" "}
-      <div className="inline text-white">{text_en}</div>
+    <button className="relative button bg-red-400 hover:bg-red-500 mb-5">
+      <div className="text-white text-base md:text-lg">{text_ga}</div>{" "}
+      <div className="absolute top-10 text-sm english-text">{text_en}</div>
     </button>
   );
 }

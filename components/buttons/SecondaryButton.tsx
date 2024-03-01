@@ -8,9 +8,9 @@ export default async function SecondaryButton({
   text_en,
 }: SecondaryButtonProps) {
   return (
-    <button className="button bg-blue-400 hover:bg-blue-500">
-      <div className="text-white">{text_ga}</div>{" "}
-      <div className="text-white">{text_en}</div>
+    <button className="relative button bg-blue-400 hover:bg-blue-500">
+      <div className="text-white text-base md:text-lg">{text_ga}</div>{" "}
+      <div className="absolute top-10 text-sm english-text">{text_en}</div>
     </button>
   );
 }

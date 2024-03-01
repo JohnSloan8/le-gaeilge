@@ -6,15 +6,16 @@ import {
   XLargeTitle,
   SmallPaddingContainer,
   MarginTopContainer,
+  SmallMarginTopContainer,
   SmallCapitalisedTitle,
   SmallText,
   GroupImageLarge,
-  MediumTitle,
   EventCardSmall,
   Profiles,
   PrimaryButton,
   SecondaryButton,
   WarningButton,
+  ContentSection,
 } from "@/components";
 import { cookies } from "next/headers";
 import { LocationIcon } from "@/icons";
@@ -57,86 +58,109 @@ export default async function GroupPage({ params }: PageProps) {
     return group !== null ? (
       <div className="w-full">
         <XLargeTitle text_ga={group.name_ga} text_en={group.name_en} />
-        <MarginTopContainer>
-          {user !== null ? (
-            memberOfThisGroup() ? (
-              <form action={leaveGroup}>
-                <input type="hidden" name="groupURL" value={group.URL} />
-                <input type="hidden" name="memberId" value={getMemberId()} />
-                <div className="border flex flex-row gap-4 items-center">
-                  <SmallText text_ga="Is ball thú" text_en="You are a member" />
-                  <WarningButton text_ga="Fág" text_en="Leave" />
-                </div>
-              </form>
-            ) : (
-              <form action={joinGroup}>
-                <input type="hidden" name="groupId" value={group.id} />
-                <input type="hidden" name="groupURL" value={group.URL} />
-                <input type="hidden" name="userId" value={user.id} />
-                <PrimaryButton text_ga="Join" text_en="Join" />
-              </form>
-            )
-          ) : (
-            <SecondaryButton text_ga="Join" text_en="Join" />
-          )}
-        </MarginTopContainer>
-        <MarginTopContainer>
-          <div className="md:flex md:flex-row">
-            <div className="md:w-1/2  flex justify-center">
-              <GroupImageLarge
-                url={group.image !== null ? group.image : ""} // Replace with the path to your image
-              />
-            </div>
-            <div className="md:w-1/2 ">
-              <SmallPaddingContainer>
-                <div className="flex">
-                  <div className="p-1">
-                    <LocationIcon />
-                  </div>
-                  <SmallCapitalisedTitle
-                    text_ga={
-                      group.location !== null ? group.location.name_ga : ""
-                    }
-                    text_en={
-                      group.location !== null ? group.location.name_en : ""
-                    }
-                  />
-                </div>
-              </SmallPaddingContainer>
-            </div>
-          </div>
-        </MarginTopContainer>
-        <MarginTopContainer>
-          <LargeTitle text_ga="Foai" text_en="About" />
 
-          <SmallText
-            text_ga={group.description_ga}
-            text_en={group.description_en}
-          />
+        <MarginTopContainer>
+          <ContentSection>
+            <div className="md:flex md:flex-row">
+              <div className="md:w-1/2  flex justify-center">
+                <GroupImageLarge
+                  url={group.image !== null ? group.image : ""} // Replace with the path to your image
+                />
+              </div>
+              <div className="md:w-1/2 ">
+                <SmallPaddingContainer>
+                  <div className="flex">
+                    <div className="p-1">
+                      <LocationIcon />
+                    </div>
+                    <SmallCapitalisedTitle
+                      text_ga={
+                        group.location !== null ? group.location.name_ga : ""
+                      }
+                      text_en={
+                        group.location !== null ? group.location.name_en : ""
+                      }
+                    />
+                  </div>
+                </SmallPaddingContainer>
+              </div>
+            </div>
+          </ContentSection>
         </MarginTopContainer>
         <MarginTopContainer>
-          <LargeTitle text_ga="Baill" text_en="Members" />
-          <Profiles userIds={memberIds} />
+          <ContentSection>
+            <LargeTitle text_ga="Foai" text_en="About" centered={true} />
+            <SmallText
+              text_ga={group.description_ga}
+              text_en={group.description_en}
+            />
+          </ContentSection>
         </MarginTopContainer>
         <MarginTopContainer>
-          <MediumTitle text_ga="Imeachtaí" text_en="Events" />
-          <div className="w-full">
-            {group.events.map((event: any, index: number) => (
-              <MarginTopContainer key={index}>
-                <Link href={`/imeachtai/${event.id}`}>
-                  <EventCardSmall
-                    name_ga={event.name_ga}
-                    name_en={event.name_en}
-                    group_name_ga={group.name_ga}
-                    group_name_en={group.name_en}
-                    start_date={event.start_date}
-                    start_time={event.start_time}
-                    image={event.image}
-                  />
-                </Link>
-              </MarginTopContainer>
-            ))}
-          </div>
+          <ContentSection>
+            <LargeTitle text_ga="Baill" text_en="Members" centered={true} />
+            <Profiles userIds={memberIds} />
+            <SmallMarginTopContainer>
+              {user !== null ? (
+                memberOfThisGroup() ? (
+                  <form action={leaveGroup}>
+                    <input type="hidden" name="groupURL" value={group.URL} />
+                    <input
+                      type="hidden"
+                      name="memberId"
+                      value={getMemberId()}
+                    />
+                    <div className="flex flex-col gap-2 items-center">
+                      <SmallText
+                        text_ga="Is ball thú"
+                        text_en="You are a member"
+                        centered={true}
+                      />
+                      <WarningButton text_ga="Fág" text_en="Leave" />
+                    </div>
+                  </form>
+                ) : (
+                  <form action={joinGroup}>
+                    <input type="hidden" name="groupId" value={group.id} />
+                    <input type="hidden" name="groupURL" value={group.URL} />
+                    <input type="hidden" name="userId" value={user.id} />
+                    <div className="flex flex-col gap-2 items-center">
+                      <SmallText
+                        text_ga="Ní ball thú"
+                        text_en="You are not a member"
+                        centered={true}
+                      />
+                      <PrimaryButton text_ga="Cláraigh" text_en="Join" />
+                    </div>
+                  </form>
+                )
+              ) : (
+                <SecondaryButton text_ga="Join" text_en="Join" />
+              )}
+            </SmallMarginTopContainer>
+          </ContentSection>
+        </MarginTopContainer>
+        <MarginTopContainer>
+          <ContentSection>
+            <LargeTitle text_ga="Imeachtaí" text_en="Events" centered={true} />
+            <div className="w-full">
+              {group.events.map((event: any, index: number) => (
+                <MarginTopContainer key={index}>
+                  <Link href={`/imeachtai/${event.id}`}>
+                    <EventCardSmall
+                      name_ga={event.name_ga}
+                      name_en={event.name_en}
+                      group_name_ga={group.name_ga}
+                      group_name_en={group.name_en}
+                      start_date={event.start_date}
+                      start_time={event.start_time}
+                      image={event.image}
+                    />
+                  </Link>
+                </MarginTopContainer>
+              ))}
+            </div>
+          </ContentSection>
         </MarginTopContainer>
       </div>
     ) : null;

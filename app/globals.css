@@ -42,9 +42,9 @@
 }
 
 .english-text {
-  @apply inline text-sm font-light text-english;
+  @apply text-xs md:text-sm mt-[-4px] md:mt-[-6px] font-light text-english;
 }
 
 .button {
-  @apply py-2 px-4 w-full md:max-w-[180px] rounded-md no-underline flex justify-center focus:ring-4;
+  @apply py-1 px-4 w-40 md:w-48 rounded-md no-underline flex justify-center focus:ring-2;
 }

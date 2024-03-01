@@ -13,10 +13,7 @@ module.exports = {
         foreground: "#000",
       },
       textColor: {
-        english: colors.blue[400],
-        dark: colors.gray[600],
-        medium: colors.gray[400],
-        light: colors.gray[200],
+        english: colors.gray[400],
       },
     },
   },

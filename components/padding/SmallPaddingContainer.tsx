@@ -5,5 +5,5 @@ interface SmallPaddingContainerProps {
 export default async function SmallPaddingContainer({
   children,
 }: SmallPaddingContainerProps) {
-  return <div className="p-1 md:p-3">{children}</div>;
+  return <div className="p-2 md:p-3">{children}</div>;
 }
