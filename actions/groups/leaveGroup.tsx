@@ -7,8 +7,8 @@ const leaveGroup = async (formData: FormData) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const memberId = formData.get("memberId");
-  const groupURL = formData.get("groupURL");
+  const memberId = Number(formData.get("memberId"));
+  const groupURL = String(formData.get("groupURL"));
 
   console.log("memberId", memberId);
 

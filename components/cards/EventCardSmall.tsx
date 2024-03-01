@@ -7,7 +7,6 @@ interface EventCardSmallProps {
   group_name_en?: string;
   start_date: string;
   start_time: string;
-  end: string;
   image: string;
 }
 

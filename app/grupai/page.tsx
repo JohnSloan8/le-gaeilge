@@ -21,11 +21,15 @@ export default async function GroupsPage() {
                 <GroupCard
                   name_ga={group.name_ga}
                   name_en={group.name_en}
-                  location_ga={group.location.name_ga}
-                  location_en={group.location.name_en}
+                  location_ga={
+                    group.location !== null ? group.location.name_ga : ""
+                  }
+                  location_en={
+                    group.location !== null ? group.location.name_en : ""
+                  }
                   description_ga={group.description_ga}
                   description_en={group.description_en}
-                  image={group.image}
+                  image={group.image !== null ? group.image : ""}
                   members={group.members}
                 />
               </SmallTopPaddingContainer>

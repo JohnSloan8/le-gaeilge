@@ -7,16 +7,20 @@ const registerForEvent = async (formData: FormData) => {
   const cookieStoreAction = cookies();
   const supabaseAction = createClient(cookieStoreAction);
 
-  const eventId = formData.get("eventId");
-  const userId = formData.get("userId");
+  console.log("formData:", formData);
 
-  const { data, error } = await supabaseAction
-    .from("attendees")
-    .insert({ event_id: eventId, user_id: userId });
+  const eventId = Number(formData.get("eventId"));
+  const userId = String(formData.get("userId"));
 
-  data !== null && console.log("data:", data);
-  error !== null && console.log("error:", error);
-  revalidatePath(`/imeachtai/${eventId}`);
+  if (eventId !== null && userId !== null) {
+    const { data, error } = await supabaseAction
+      .from("attendees")
+      .insert({ event_id: eventId, user_id: userId });
+
+    data !== null && console.log("data:", data);
+    error !== null && console.log("error:", error);
+    revalidatePath(`/imeachtai/${eventId}`);
+  }
 };
 
 export default registerForEvent;

@@ -47,14 +47,17 @@ export default async function EventsPage() {
               <EventCard
                 name_ga={event.name_ga}
                 name_en={event.name_en}
-                group_name_ga={event.group.name_ga}
-                group_name_en={event.group.name_en}
+                group_name_ga={event.group !== null ? event.group.name_ga : ""}
+                group_name_en={event.group !== null ? event.group.name_en : ""}
                 start_date={event.start_date}
                 start_time={event.start_time}
-                end={event.end}
-                location_ga={event.location.name_ga}
-                location_en={event.location.name_en}
-                image={event.image}
+                location_ga={
+                  event.location !== null ? event.location.name_ga : ""
+                }
+                location_en={
+                  event.location !== null ? event.location.name_en : ""
+                }
+                image={event.image !== null ? event.image : ""}
                 attendees={event.attendees}
               />
             </SmallTopPaddingContainer>

@@ -46,6 +46,7 @@ import CardLink from "./links/CardLink";
 // composite
 import Profiles from "./composite/Profiles";
 import Groups from "./composite/Groups";
+import Events from "./composite/Events";
 
 export {
   GroupCard,
@@ -81,4 +82,5 @@ export {
   CardLink,
   Profiles,
   Groups,
+  Events,
 };

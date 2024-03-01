@@ -6,7 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       attendees: {
@@ -58,42 +58,42 @@ export interface Database {
       events: {
         Row: {
           created_at: string;
-          description_en: string | null;
-          description_ga: string | null;
-          group_id: number | null;
+          description_en: string;
+          description_ga: string;
+          group_id: number;
           id: number;
           image: string | null;
-          location_id: number | null;
-          name_en: string | null;
-          name_ga: string | null;
-          start_date: string | null;
-          start_time: string | null;
+          location_id: number;
+          name_en: string;
+          name_ga: string;
+          start_date: string;
+          start_time: string;
         };
         Insert: {
           created_at?: string;
-          description_en?: string | null;
-          description_ga?: string | null;
-          group_id?: number | null;
+          description_en: string;
+          description_ga: string;
+          group_id: number;
           id?: number;
           image?: string | null;
-          location_id?: number | null;
-          name_en?: string | null;
-          name_ga?: string | null;
-          start_date?: string | null;
-          start_time?: string | null;
+          location_id: number;
+          name_en: string;
+          name_ga: string;
+          start_date: string;
+          start_time: string;
         };
         Update: {
           created_at?: string;
-          description_en?: string | null;
-          description_ga?: string | null;
-          group_id?: number | null;
+          description_en?: string;
+          description_ga?: string;
+          group_id?: number;
           id?: number;
           image?: string | null;
-          location_id?: number | null;
-          name_en?: string | null;
-          name_ga?: string | null;
-          start_date?: string | null;
-          start_time?: string | null;
+          location_id?: number;
+          name_en?: string;
+          name_ga?: string;
+          start_date?: string;
+          start_time?: string;
         };
         Relationships: [
           {
@@ -115,36 +115,36 @@ export interface Database {
       groups: {
         Row: {
           created_at: string;
-          description_en: string | null;
-          description_ga: string | null;
+          description_en: string;
+          description_ga: string;
           id: number;
           image: string | null;
-          location_id: number | null;
-          name_en: string | null;
+          location_id: number;
+          name_en: string;
           name_ga: string;
-          URL: string | null;
+          URL: string;
         };
         Insert: {
           created_at?: string;
-          description_en?: string | null;
-          description_ga?: string | null;
+          description_en: string;
+          description_ga: string;
           id?: number;
           image?: string | null;
-          location_id?: number | null;
-          name_en?: string | null;
+          location_id: number;
+          name_en: string;
           name_ga: string;
-          URL?: string | null;
+          URL: string;
         };
         Update: {
           created_at?: string;
-          description_en?: string | null;
-          description_ga?: string | null;
+          description_en?: string;
+          description_ga?: string;
           id?: number;
           image?: string | null;
-          location_id?: number | null;
-          name_en?: string | null;
+          location_id?: number;
+          name_en?: string;
           name_ga?: string;
-          URL?: string | null;
+          URL?: string;
         };
         Relationships: [
           {
@@ -160,20 +160,20 @@ export interface Database {
         Row: {
           created_at: string;
           id: number;
-          name_en: string | null;
-          name_ga: string | null;
+          name_en: string;
+          name_ga: string;
         };
         Insert: {
           created_at?: string;
           id?: number;
-          name_en?: string | null;
-          name_ga?: string | null;
+          name_en: string;
+          name_ga: string;
         };
         Update: {
           created_at?: string;
           id?: number;
-          name_en?: string | null;
-          name_ga?: string | null;
+          name_en?: string;
+          name_ga?: string;
         };
         Relationships: [];
       };
@@ -263,7 +263,40 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      get_user_events: {
+        Args: {
+          user_id_input: string;
+        };
+        Returns: {
+          created_at: string;
+          description_en: string;
+          description_ga: string;
+          group_id: number;
+          id: number;
+          image: string | null;
+          location_id: number;
+          name_en: string;
+          name_ga: string;
+          start_date: string;
+          start_time: string;
+        }[];
+      };
+      get_user_groups: {
+        Args: {
+          user_id_input: string;
+        };
+        Returns: {
+          created_at: string;
+          description_en: string;
+          description_ga: string;
+          id: number;
+          image: string | null;
+          location_id: number;
+          name_en: string;
+          name_ga: string;
+          URL: string;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -272,7 +305,7 @@ export interface Database {
       [_ in never]: never;
     };
   };
-}
+};
 
 export type Tables<
   PublicTableNameOrOptions extends

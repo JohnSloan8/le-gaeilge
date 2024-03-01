@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 interface ProfileImageLargeProps {
-  url: string;
+  url: string | null;
 }
 
 export default async function ProfileImageLarge({

@@ -7,8 +7,8 @@ const cancelRegistrationForEvent = async (formData: FormData) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const attendeeId = formData.get("attendeeId");
-  const eventId = formData.get("eventId");
+  const attendeeId = Number(formData.get("attendeeId"));
+  const eventId = Number(formData.get("eventId"));
 
   const { data, error } = await supabase
     .from("attendees")

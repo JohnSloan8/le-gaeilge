@@ -15,7 +15,6 @@ interface EventCardProps {
   location_en: string;
   start_date: string;
   start_time: string;
-  end: string;
   image: string;
   attendees: any[];
 }

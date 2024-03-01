@@ -4,14 +4,14 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
 const joinGroup = async (formData: FormData) => {
-  const cookieStoreAction = cookies();
-  const supabaseAction = createClient(cookieStoreAction);
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
 
-  const groupId = formData.get("groupId");
-  const groupURL = formData.get("groupURL");
-  const userId = formData.get("userId");
+  const groupId = Number(formData.get("groupId"));
+  const groupURL = String(formData.get("groupURL"));
+  const userId = String(formData.get("userId"));
 
-  const { data, error } = await supabaseAction
+  const { data, error } = await supabase
     .from("members")
     .insert({ group_id: groupId, user_id: userId });
 
