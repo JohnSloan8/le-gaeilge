@@ -63,7 +63,7 @@ export default async function GroupPage({ params }: PageProps) {
               <form action={leaveGroup}>
                 <input type="hidden" name="groupURL" value={group.URL} />
                 <input type="hidden" name="memberId" value={getMemberId()} />
-                <div className="flex flex-row gap-4 items-center">
+                <div className="border flex flex-row gap-4 items-center">
                   <SmallText text_ga="Is ball thú" text_en="You are a member" />
                   <WarningButton text_ga="Fág" text_en="Leave" />
                 </div>
@@ -127,12 +127,8 @@ export default async function GroupPage({ params }: PageProps) {
                   <EventCardSmall
                     name_ga={event.name_ga}
                     name_en={event.name_en}
-                    group_name_ga={
-                      event.find((g: any) => g.id === event.group_id).name_ga
-                    }
-                    group_name_en={
-                      event.find((g: any) => g.id === event.group_id).name_en
-                    }
+                    group_name_ga={group.name_ga}
+                    group_name_en={group.name_en}
                     start_date={event.start_date}
                     start_time={event.start_time}
                     image={event.image}
