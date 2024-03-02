@@ -16,7 +16,7 @@ export default async function EventTime({
 
   return (
     <div className="w-full">
-      <div className="text-base md:text-lg inline">{displayTime}</div>
+      <div className="text-base md:text-lg">{displayTime}</div>
     </div>
   );
 }

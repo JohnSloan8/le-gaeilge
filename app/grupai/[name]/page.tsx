@@ -12,7 +12,6 @@ import {
   GroupImageLarge,
   EventCardSmall,
   Profiles,
-  PrimaryButton,
   SecondaryButton,
   WarningButton,
   ContentSection,
@@ -60,32 +59,30 @@ export default async function GroupPage({ params }: PageProps) {
         <XLargeTitle text_ga={group.name_ga} text_en={group.name_en} />
 
         <MarginTopContainer>
-          <ContentSection>
-            <div className="md:flex md:flex-row">
-              <div className="md:w-1/2  flex justify-center">
-                <GroupImageLarge
-                  url={group.image !== null ? group.image : ""} // Replace with the path to your image
-                />
-              </div>
-              <div className="md:w-1/2 ">
-                <SmallPaddingContainer>
-                  <div className="flex">
-                    <div className="p-1">
-                      <LocationIcon />
-                    </div>
-                    <SmallCapitalisedTitle
-                      text_ga={
-                        group.location !== null ? group.location.name_ga : ""
-                      }
-                      text_en={
-                        group.location !== null ? group.location.name_en : ""
-                      }
-                    />
-                  </div>
-                </SmallPaddingContainer>
-              </div>
+          <div className="md:flex md:flex-row">
+            <div className="md:w-1/2  flex justify-center">
+              <GroupImageLarge
+                url={group.image !== null ? group.image : ""} // Replace with the path to your image
+              />
             </div>
-          </ContentSection>
+            <div className="md:w-1/2 ">
+              <SmallPaddingContainer>
+                <div className="flex">
+                  <div className="p-1">
+                    <LocationIcon />
+                  </div>
+                  <SmallCapitalisedTitle
+                    text_ga={
+                      group.location !== null ? group.location.name_ga : ""
+                    }
+                    text_en={
+                      group.location !== null ? group.location.name_en : ""
+                    }
+                  />
+                </div>
+              </SmallPaddingContainer>
+            </div>
+          </div>
         </MarginTopContainer>
         <MarginTopContainer>
           <ContentSection>
@@ -99,7 +96,9 @@ export default async function GroupPage({ params }: PageProps) {
         <MarginTopContainer>
           <ContentSection>
             <LargeTitle text_ga="Baill" text_en="Members" centered={true} />
-            <Profiles userIds={memberIds} />
+            <div className="margin-y-large">
+              <Profiles userIds={memberIds} />
+            </div>
             <SmallMarginTopContainer>
               {user !== null ? (
                 memberOfThisGroup() ? (
@@ -130,7 +129,7 @@ export default async function GroupPage({ params }: PageProps) {
                         text_en="You are not a member"
                         centered={true}
                       />
-                      <PrimaryButton text_ga="Cláraigh" text_en="Join" />
+                      <SecondaryButton text_ga="Cláraigh" text_en="Join" />
                     </div>
                   </form>
                 )

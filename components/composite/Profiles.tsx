@@ -16,14 +16,16 @@ export default async function Profiles({ userIds }: ProfilesProps) {
     .in("user_id", userIds);
 
   return (
-    <div className="flex flex-wrap w-full justify-center">
-      {profiles?.map((profile: any, index: number) => (
-        <SmallNegativeMarginContainer key={String(index)}>
-          <Link href={`/proifili/${profile.id}`}>
-            <ProfileCard name={profile.name} image={profile.image} />
-          </Link>
-        </SmallNegativeMarginContainer>
-      ))}
+    <div className="w-full py-4 px-4 overflow-x-scroll">
+      <div className="flex w-full ">
+        {profiles?.map((profile: any, index: number) => (
+          <SmallNegativeMarginContainer key={String(index)}>
+            <Link href={`/proifili/${profile.id}`}>
+              <ProfileCard name={profile.name} image={profile.image} />
+            </Link>
+          </SmallNegativeMarginContainer>
+        ))}
+      </div>
     </div>
   );
 }

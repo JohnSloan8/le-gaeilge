@@ -31,8 +31,8 @@ export default async function EventDate({
 
   return (
     <div className="w-full">
-      <div className="text-base md:text-lg inline">{displayText_ga}</div>
-      <div className="inline english-text">{" " + displayText_en}</div>
+      <div className="text-base md:text-lg">{displayText_ga}</div>
+      <div className="english-text">{" " + displayText_en}</div>
       {line && <hr></hr>}
     </div>
   );

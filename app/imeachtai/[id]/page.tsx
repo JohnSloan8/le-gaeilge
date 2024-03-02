@@ -2,7 +2,6 @@ import Image from "next/image";
 import {
   LargeTitle,
   XLargeTitle,
-  SmallPaddingContainer,
   MarginTopContainer,
   SmallCapitalisedTitle,
   EventDate,
@@ -12,6 +11,7 @@ import {
   SecondaryButton,
   WarningButton,
   Profiles,
+  ContentSection,
 } from "@/components";
 import { cancelRegistrationForEvent, registerForEvent } from "@/actions";
 import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
@@ -51,99 +51,110 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     return event !== null ? (
       <div className="w-full">
+        <XLargeTitle text_ga={event.name_ga} text_en={event.name_en} />
+
         <MarginTopContainer>
-          <XLargeTitle
-            text_ga={event.name_ga}
-            text_en={event.name_en}
-            centered={false}
-          />
-        </MarginTopContainer>
-        <MarginTopContainer>
-          {user !== null ? (
-            attendingThisEvent() ? (
-              <form action={cancelRegistrationForEvent}>
-                <input type="hidden" name="eventId" value={event.id} />
-                <input
-                  type="hidden"
-                  name="attendeeId"
-                  value={getAttendeeId()}
-                />
-                <div className="flex flex-row gap-4 items-center">
-                  <SmallText
-                    text_ga="Tá tú ag freastal"
-                    text_en="You are attending"
-                  />
-                  <WarningButton text_ga="Ceal" text_en="Cancel" />
-                </div>
-              </form>
-            ) : (
-              <form action={registerForEvent}>
-                <input type="hidden" name="eventId" value={event.id} />
-                <input type="hidden" name="userId" value={user.id} />
-                <PrimaryButton text_ga="Attend" text_en="Attend" />
-              </form>
-            )
-          ) : (
-            <SecondaryButton text_ga="Attend" text_en="Attend" />
-          )}
-        </MarginTopContainer>
-        <MarginTopContainer>
-          <div className="md:flex md:flex-row my-1 md:my-3">
-            <div className="md:w-1/2">
+          <div className="flex flex-col md:flex-row my-1 md:my-3">
+            <div className="w-full h-48 md:w-1/2 md:h-56 relative">
               <Image
                 src={event.image !== null ? event.image : ""} // Replace with the path to your image
                 alt={`image of ${event.name_en}`}
-                height={10}
-                width={10}
-                layout="responsive"
+                fill
+                style={{ objectFit: "cover" }}
               />
             </div>
             <div className="md:w-1/2 ">
-              <SmallPaddingContainer>
-                <div className="flex w-full">
-                  <div className="p-1">
-                    <CalendarIcon />
-                  </div>
-                  <EventDate start_date={event.start_date} />
+              <div className="flex w-full items-center margin-y-x-small">
+                <div className="p-2">
+                  <CalendarIcon />
                 </div>
-                <div className="flex w-full">
-                  <div className="p-1">
-                    <ClockIcon />
-                  </div>
-                  <EventTime
-                    start_date={event.start_date}
-                    start_time={event.start_time}
-                  />
+                <EventDate start_date={event.start_date} />
+              </div>
+              <div className="flex w-full items-center margin-y-x-small">
+                <div className="p-2">
+                  <ClockIcon />
                 </div>
-                <div className="flex">
-                  <div className="p-1">
-                    <LocationIcon />
-                  </div>
-                  <SmallCapitalisedTitle
-                    text_ga={
-                      event.location !== null ? event.location.name_ga : ""
-                    }
-                    text_en={
-                      event.location !== null ? event.location.name_en : ""
-                    }
-                  />
+                <EventTime
+                  start_date={event.start_date}
+                  start_time={event.start_time}
+                />
+              </div>
+              <div className="flex w-full items-center margin-y-x-small">
+                <div className="p-2">
+                  <LocationIcon />
                 </div>
-              </SmallPaddingContainer>
+
+                <SmallCapitalisedTitle
+                  text_ga={
+                    event.location !== null ? event.location.name_ga : ""
+                  }
+                  text_en={
+                    event.location !== null ? event.location.name_en : ""
+                  }
+                />
+              </div>
             </div>
           </div>
         </MarginTopContainer>
         <MarginTopContainer>
-          <LargeTitle text_ga="Sonraí" text_en="Details" />
-          <SmallText
-            text_ga={event.description_ga}
-            text_en={event.description_en}
-          />
+          <ContentSection>
+            <LargeTitle text_ga="Sonraí" text_en="Details" centered={true} />
+            <SmallText
+              text_ga={event.description_ga}
+              text_en={event.description_en}
+            />
+          </ContentSection>
         </MarginTopContainer>
         <MarginTopContainer>
-          <LargeTitle text_ga="Attendees" text_en="Attendees" />
-          <MarginTopContainer>
-            <Profiles userIds={attendeeIds} />
-          </MarginTopContainer>
+          <ContentSection>
+            <LargeTitle
+              text_ga="Attendees"
+              text_en="Attendees"
+              centered={true}
+            />
+            <MarginTopContainer>
+              {/* <div className="margin-y-large"> */}
+              <Profiles userIds={attendeeIds} />
+              {/* </div> */}
+            </MarginTopContainer>
+            <MarginTopContainer>
+              {user !== null ? (
+                attendingThisEvent() ? (
+                  <form action={cancelRegistrationForEvent}>
+                    <input type="hidden" name="eventId" value={event.id} />
+                    <input
+                      type="hidden"
+                      name="attendeeId"
+                      value={getAttendeeId()}
+                    />
+                    <div className="flex flex-col gap-2 items-center">
+                      <SmallText
+                        text_ga="Tá tú ag freastal"
+                        text_en="You are attending"
+                        centered={true}
+                      />
+                      <WarningButton text_ga="Ceal" text_en="Cancel" />
+                    </div>
+                  </form>
+                ) : (
+                  <form action={registerForEvent}>
+                    <input type="hidden" name="eventId" value={event.id} />
+                    <input type="hidden" name="userId" value={user.id} />
+                    <div className="flex flex-col gap-2 items-center">
+                      <SmallText
+                        text_ga="Níl tú ag freastal"
+                        text_en="You are not ateending"
+                        centered={true}
+                      />
+                      <PrimaryButton text_ga="Freastal" text_en="Attend" />
+                    </div>
+                  </form>
+                )
+              ) : (
+                <SecondaryButton text_ga="Freastal" text_en="Attend" />
+              )}
+            </MarginTopContainer>
+          </ContentSection>
         </MarginTopContainer>
       </div>
     ) : null;

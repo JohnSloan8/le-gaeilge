@@ -13,11 +13,11 @@ export default async function SmallTitle({
 }: SmallTitleProps) {
   return (
     <div className={`${centered && "flex text-center"}`}>
-      <div className="text-base md:text-lg inline font-bold">
+      <div className="text-base md:text-lg font-bold">
         {capitalizeNonGrammatical(text_ga)}
       </div>
       {text_en !== undefined && (
-        <div className="inline english-text">
+        <div className="english-text">
           {"  " + capitalizeNonGrammatical(text_en)}
         </div>
       )}
