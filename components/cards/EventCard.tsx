@@ -32,7 +32,7 @@ export default async function EventCard({
   attendees,
 }: EventCardProps) {
   return (
-    <div className="w-full flex flex-row p-1 md:p-3 bg-white rounded-md shadow-md hover:shadow-lg">
+    <div className="w-full flex flex-row p-1 md:p-3 bg-white rounded-md bg-white border-2 border-green-300 hover:border-green-300 hover:bg-green-50">
       <div className="flex-grow">
         <div className="mb-2 mr-2">
           <DateAndTime start_date={start_date} start_time={start_time} />

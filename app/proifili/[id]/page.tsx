@@ -33,7 +33,6 @@ export default async function ProfilePage({
         user_id_input: profile.user_id,
       },
     );
-    console.log("groups:", groups);
 
     if (groupsError !== null) {
       alert(groupsError.message);
@@ -45,7 +44,7 @@ export default async function ProfilePage({
         user_id_input: profile.user_id,
       },
     );
-    console.log("events:", events);
+
     if (eventsError !== null) {
       alert(eventsError.message);
     }

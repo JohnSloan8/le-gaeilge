@@ -20,7 +20,7 @@ export default async function EventCardSmall({
   image,
 }: EventCardSmallProps) {
   return (
-    <div className="w-full flex flex-row p-1 md:p-2 rounded-md border-2 border-green-300 hover:brightness-110">
+    <div className="w-full flex flex-row p-1 md:p-2 rounded-md bg-white border-2 border-green-300 hover:border-green-300 hover:bg-green-50">
       <div className="flex-grow">
         <div className="mr-2">
           <SmallTitle text_ga={name_ga} text_en={name_en} />

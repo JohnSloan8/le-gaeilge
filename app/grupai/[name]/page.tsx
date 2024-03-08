@@ -15,6 +15,7 @@ import {
   SecondaryButton,
   WarningButton,
   ContentSection,
+  Phrases,
 } from "@/components";
 import { cookies } from "next/headers";
 import { LocationIcon } from "@/icons";
@@ -28,7 +29,7 @@ export default async function GroupPage({ params }: PageProps) {
   const supabase = createClient(cookieStore);
   const { data: group } = await supabase
     .from("groups")
-    .select("*, location:locations(*), members(*), events(*)")
+    .select("*, location:locations(*), members(*), events(*), categories(*)")
     .match({ URL: params.name })
     .single();
 
@@ -37,6 +38,11 @@ export default async function GroupPage({ params }: PageProps) {
   } else {
     const memberIds =
       group !== null ? group.members.map((a: any) => a.user_id) : [];
+
+    const { data: phrases } = await supabase.rpc("get_categories_phrases", {
+      categories_input: group.categories.map((c) => c.id),
+    });
+    console.log("phrases:", phrases);
 
     const {
       data: { user },
@@ -159,6 +165,17 @@ export default async function GroupPage({ params }: PageProps) {
                 </MarginTopContainer>
               ))}
             </div>
+          </ContentSection>
+        </MarginTopContainer>
+        <MarginTopContainer>
+          <ContentSection>
+            <LargeTitle
+              text_ga="Foclóir"
+              text_en="Dictionary"
+              centered={true}
+            />
+
+            <Phrases phrases={phrases} />
           </ContentSection>
         </MarginTopContainer>
       </div>

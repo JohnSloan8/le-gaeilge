@@ -55,6 +55,24 @@ export type Database = {
           },
         ];
       };
+      categories: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+        };
+        Relationships: [];
+      };
       events: {
         Row: {
           created_at: string;
@@ -108,6 +126,42 @@ export type Database = {
             columns: ["location_id"];
             isOneToOne: false;
             referencedRelation: "locations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      group_category: {
+        Row: {
+          category_id: number;
+          created_at: string;
+          group_id: number;
+          id: number;
+        };
+        Insert: {
+          category_id: number;
+          created_at?: string;
+          group_id: number;
+          id?: number;
+        };
+        Update: {
+          category_id?: number;
+          created_at?: string;
+          group_id?: number;
+          id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_group_category_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "public_group_category_group_id_fkey";
+            columns: ["group_id"];
+            isOneToOne: false;
+            referencedRelation: "groups";
             referencedColumns: ["id"];
           },
         ];
@@ -223,6 +277,74 @@ export type Database = {
           },
         ];
       };
+      phrase_category: {
+        Row: {
+          category_id: number;
+          created_at: string;
+          id: number;
+          phrase_id: number;
+        };
+        Insert: {
+          category_id: number;
+          created_at?: string;
+          id?: number;
+          phrase_id: number;
+        };
+        Update: {
+          category_id?: number;
+          created_at?: string;
+          id?: number;
+          phrase_id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_phrase_category_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "public_phrase_category_dictionary_id_fkey";
+            columns: ["phrase_id"];
+            isOneToOne: false;
+            referencedRelation: "phrases";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      phrases: {
+        Row: {
+          author_id: string;
+          created_at: string;
+          entry_en: string;
+          entry_ga: string;
+          id: number;
+        };
+        Insert: {
+          author_id: string;
+          created_at?: string;
+          entry_en: string;
+          entry_ga: string;
+          id?: number;
+        };
+        Update: {
+          author_id?: string;
+          created_at?: string;
+          entry_en?: string;
+          entry_ga?: string;
+          id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_dictionary_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profiles: {
         Row: {
           created_at: string;
@@ -263,6 +385,18 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      get_categories_phrases: {
+        Args: {
+          categories_input: number[];
+        };
+        Returns: {
+          author_id: string;
+          created_at: string;
+          entry_en: string;
+          entry_ga: string;
+          id: number;
+        }[];
+      };
       get_user_events: {
         Args: {
           user_id_input: string;
