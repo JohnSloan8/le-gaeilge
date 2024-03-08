@@ -13,7 +13,7 @@ import {
   Profiles,
   ContentSection,
 } from "@/components";
-import { cancelRegistrationForEvent, registerForEvent } from "@/actions";
+import { cancelRegistrationForEvent, registerForEvent } from "@/app/actions";
 import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";

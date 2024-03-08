@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
-import { joinGroup, leaveGroup } from "@/actions";
+import { joinGroup, leaveGroup } from "@/app/actions";
 import Link from "next/link";
 import {
   LargeTitle,
@@ -39,8 +39,10 @@ export default async function GroupPage({ params }: PageProps) {
     const memberIds =
       group !== null ? group.members.map((a: any) => a.user_id) : [];
 
+    const groupCategories = group.categories.map((c) => c.id);
+
     const { data: phrases } = await supabase.rpc("get_categories_phrases", {
-      categories_input: group.categories.map((c) => c.id),
+      categories_input: groupCategories,
     });
     console.log("phrases:", phrases);
 
@@ -179,11 +181,9 @@ export default async function GroupPage({ params }: PageProps) {
             </MarginTopContainer>
             <MarginTopContainer>
               <div className="w-full flex justify-center">
-                {/* <Link
-                  href={`/focloir?categories=${group.categories.map((c) => c.id)}`}
-                > */}
-                <SecondaryButton text_ga="Féach gach rud" text_en="See all" />
-                {/* </Link> */}
+                <Link href={`/focloir?categories=${groupCategories}`}>
+                  <SecondaryButton text_ga="Féach gach rud" text_en="See all" />
+                </Link>
               </div>
             </MarginTopContainer>
           </ContentSection>
