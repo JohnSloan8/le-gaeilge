@@ -174,8 +174,18 @@ export default async function GroupPage({ params }: PageProps) {
               text_en="Dictionary"
               centered={true}
             />
-
-            <Phrases phrases={phrases} />
+            <MarginTopContainer>
+              <Phrases phrases={phrases !== null ? phrases : []} />
+            </MarginTopContainer>
+            <MarginTopContainer>
+              <div className="w-full flex justify-center">
+                {/* <Link
+                  href={`/focloir?categories=${group.categories.map((c) => c.id)}`}
+                > */}
+                <SecondaryButton text_ga="Féach gach rud" text_en="See all" />
+                {/* </Link> */}
+              </div>
+            </MarginTopContainer>
           </ContentSection>
         </MarginTopContainer>
       </div>
