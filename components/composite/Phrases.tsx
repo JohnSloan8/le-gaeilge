@@ -6,7 +6,7 @@ interface PhrasesProps {
   limit?: number;
 }
 
-export default async function Phrases({ phrases, limit = 4 }: PhrasesProps) {
+export default function Phrases({ phrases, limit = 4 }: PhrasesProps) {
   return (
     <div className="w-full">
       {phrases !== null
@@ -21,7 +21,7 @@ export default async function Phrases({ phrases, limit = 4 }: PhrasesProps) {
                     <SmallText text_ga={d.entry_ga} />
                   </div>
                   <div className="w-full">
-                    <SmallText text_en={d.entry_en} dictionary={true} />
+                    <SmallText text_en={d.entry_en} />
                   </div>
                 </div>
               ),

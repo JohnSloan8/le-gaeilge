@@ -4,7 +4,7 @@ interface SmallTextProps {
   centered?: boolean;
 }
 
-export default async function SmallText({
+export default function SmallText({
   text_ga,
   text_en,
   centered = false,

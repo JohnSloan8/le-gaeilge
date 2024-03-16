@@ -44,7 +44,6 @@ export default async function GroupPage({ params }: PageProps) {
     const { data: phrases } = await supabase.rpc("get_categories_phrases", {
       categories_input: groupCategories,
     });
-    console.log("phrases:", phrases);
 
     const {
       data: { user },
@@ -181,7 +180,7 @@ export default async function GroupPage({ params }: PageProps) {
             </MarginTopContainer>
             <MarginTopContainer>
               <div className="w-full flex justify-center">
-                <Link href={`/focloir?categories=${groupCategories}`}>
+                <Link href={`/focloir?categories=[${groupCategories}]`}>
                   <SecondaryButton text_ga="Féach gach rud" text_en="See all" />
                 </Link>
               </div>

@@ -3,7 +3,7 @@ interface SecondaryButtonProps {
   text_en: string;
 }
 
-export default async function SecondaryButton({
+export default function SecondaryButton({
   text_ga,
   text_en,
 }: SecondaryButtonProps) {

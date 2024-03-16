@@ -27,6 +27,7 @@ export default function RootLayout({
               <LinkButton path="proifilí" />
               <LinkButton path="imeachtaí" />
               <LinkButton path="grupaí" />
+              <LinkButton path="foclóir" />
               <AuthButton />
             </div>
           </nav>

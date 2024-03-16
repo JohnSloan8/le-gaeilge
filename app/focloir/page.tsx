@@ -2,8 +2,9 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { MarginTopContainer, XLargeTitle } from "@/components";
 import type { PhraseModel } from "@/types/models";
-import FocloirClientController from "./clientComponents/controller";
-// app/posts/page.ts
+import FocloirClientController from "./clientComponents/FocloirClientController";
+import { getTranslation } from "@/app/actions";
+
 interface Props {
   searchParams: { categories: string };
 }
@@ -12,11 +13,14 @@ export default async function PhrasesPage({ searchParams }: Props) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   const categories =
     searchParams.categories === undefined
       ? []
       : JSON.parse(searchParams.categories);
-
   let phrases: PhraseModel[] = [];
   if (categories.length > 0) {
     const { data: category_phrases } = await supabase.rpc(
@@ -39,7 +43,12 @@ export default async function PhrasesPage({ searchParams }: Props) {
       <XLargeTitle text_ga="Foclóir" text_en="Dictionary" />
 
       <MarginTopContainer>
-        <FocloirClientController phrases={phrases} />
+        <FocloirClientController
+          userId={user !== null ? user.id : undefined}
+          phrases={phrases}
+          categories={categories}
+          getTranslation={getTranslation}
+        />
       </MarginTopContainer>
     </div>
   );
