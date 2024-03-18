@@ -2,27 +2,24 @@
 
 import type { PhraseModel } from "@/types/models";
 import { MarginTopContainer, Phrases, SecondaryButton } from "@/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 
 interface FocloirClientControllerProps {
   phrases: PhraseModel[];
   getTranslation?: (data: FormData) => Promise<void>;
-  categories: string;
+  groupId?: number;
   userId?: string;
 }
 
 export default function FocloirClientController({
   phrases,
   getTranslation,
-  categories,
+  groupId,
   userId,
 }: FocloirClientControllerProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<PhraseModel[]>(phrases);
-
-  const categoriesList = JSON.parse(`[${categories}]`);
-  console.log("categoriesList:", categoriesList);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -38,12 +35,23 @@ export default function FocloirClientController({
     setSearchResults(filteredResults);
   };
 
+  useEffect(() => {
+    console.log("updating");
+    const filteredResults = phrases.filter((p) => {
+      const gaHit = p.entry_ga.toLowerCase().includes(searchTerm.toLowerCase());
+      const enHit = p.entry_en.toLowerCase().includes(searchTerm.toLowerCase());
+      return gaHit || enHit;
+    });
+
+    setSearchResults(filteredResults);
+  }, [phrases]);
+
   return (
     <div className="w-full">
       <div className="w-full flex justify-center">
         <div className="w-[400px]">
           <form action={getTranslation}>
-            <input type="hidden" name="categories" value={categories} />
+            <input type="hidden" name="groupId" value={groupId} />
             <input type="hidden" name="userId" value={userId} />
             <input
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -53,7 +61,7 @@ export default function FocloirClientController({
               value={searchTerm}
               onChange={handleSearch}
             />
-            {categoriesList.length === 1 &&
+            {groupId !== undefined &&
               searchResults.length === 0 &&
               userId !== undefined && (
                 <MarginTopContainer>
