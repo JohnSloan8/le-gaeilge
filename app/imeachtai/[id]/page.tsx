@@ -105,7 +105,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             />
           </ContentSection>
         </MarginTopContainer>
-        <MarginTopContainer>
+        {/* <MarginTopContainer>
           <ContentSection>
             <LargeTitle
               text_ga="Attendees"
@@ -113,9 +113,9 @@ export default async function Page({ params }: { params: { id: string } }) {
               centered={true}
             />
             <MarginTopContainer>
-              {/* <div className="margin-y-large"> */}
+         
               <Profiles userIds={attendeeIds} />
-              {/* </div> */}
+            
             </MarginTopContainer>
             <MarginTopContainer>
               {user !== null ? (
@@ -155,7 +155,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               )}
             </MarginTopContainer>
           </ContentSection>
-        </MarginTopContainer>
+        </MarginTopContainer> */}
       </div>
     ) : null;
   }

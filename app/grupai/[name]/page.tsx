@@ -100,7 +100,7 @@ export default async function GroupPage({ params }: PageProps) {
             />
           </ContentSection>
         </MarginTopContainer>
-        <MarginTopContainer>
+        {/* <MarginTopContainer>
           <ContentSection>
             <LargeTitle text_ga="Baill" text_en="Members" centered={true} />
             <div className="margin-y-large">
@@ -145,7 +145,7 @@ export default async function GroupPage({ params }: PageProps) {
               )}
             </SmallMarginTopContainer>
           </ContentSection>
-        </MarginTopContainer>
+        </MarginTopContainer> */}
         <MarginTopContainer>
           <ContentSection>
             <LargeTitle text_ga="Imeachtaí" text_en="Events" centered={true} />

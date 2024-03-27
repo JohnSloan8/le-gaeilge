@@ -23,7 +23,6 @@ import MediumTitle from "./titles/MediumTitle";
 import LargeTitle from "./titles/LargeTitle";
 import XLargeTitle from "./titles/XLargeTitle";
 import SmallCapitalisedTitle from "./titles/SmallCapitalisedTitle";
-import SmallGrayText from "./titles/SmallGrayText";
 import SmallText from "./titles/SmallText";
 
 // padding
@@ -72,7 +71,6 @@ export {
   LargeTitle,
   XLargeTitle,
   SmallCapitalisedTitle,
-  SmallGrayText,
   SmallPaddingContainer,
   SmallTopPaddingContainer,
   PaddingContainer,

@@ -13,7 +13,7 @@ interface GroupCardProps {
   description_ga: string;
   description_en: string;
   image: string;
-  members: any[];
+  // members: any[];
 }
 
 export default async function GroupCard({
@@ -24,7 +24,7 @@ export default async function GroupCard({
   description_ga,
   description_en,
   image,
-  members,
+  // members,
 }: GroupCardProps) {
   return (
     <div className="min-h-[150px] w-full p-1 md:p-3 flex flex-row bg-white rounded-md border-2 bg-white border-purple-300 hover:border-purple-400 hover:bg-purple-50">
@@ -34,10 +34,10 @@ export default async function GroupCard({
         <SmallCapitalisedTitle text_ga={location_ga} text_en={location_en} />
         <SmallGrayText text_ga={description_ga} text_en={description_en} />
 
-        <div className="text-md">
+        {/* <div className="text-md">
           {members.length + " "}baill
           <span className="english-text">{" members"}</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
