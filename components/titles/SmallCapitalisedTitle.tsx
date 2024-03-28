@@ -9,7 +9,7 @@ export default async function SmallCapitalisedTitle({
 }: SmallCapitalisedTitleProps) {
   return (
     <div>
-      <div className="text-sm md:text-base">{text_ga.toUpperCase()}</div>
+      <div className="text-sm">{text_ga.toUpperCase()}</div>
       <div className="english-text">{"  " + text_en}</div>
     </div>
   );

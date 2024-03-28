@@ -12,6 +12,10 @@ module.exports = {
         background: colors.gray,
         foreground: "#000",
       },
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+        robotoCondensed: ["Roboto Condensed", "sans-serif"],
+      },
       textColor: {
         english: colors.gray[400],
       },

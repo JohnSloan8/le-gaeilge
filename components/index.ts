@@ -14,6 +14,7 @@ import WarningButton from "./buttons/WarningButton";
 
 // datetime
 import EventDate from "./date-time/EventDate";
+import EventDateAbbr from "./date-time/EventDateAbbreviated";
 import EventTime from "./date-time/EventTime";
 import DateAndTime from "./date-time/DateAndTime";
 
@@ -64,6 +65,7 @@ export {
   SecondaryButton,
   WarningButton,
   EventDate,
+  EventDateAbbr,
   EventTime,
   DateAndTime,
   SmallTitle,

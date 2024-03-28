@@ -1,9 +1,10 @@
+import Image from "next/image";
+
 import {
   LargeTitle,
   SmallCapitalisedTitle,
-  EventDate,
+  EventDateAbbr,
   SmallText,
-  GroupImage,
 } from "@/components";
 import { CalendarIcon, LocationIcon, GroupIcon } from "@/icons";
 
@@ -33,39 +34,46 @@ export default async function EventCard({
   // attendees,
 }: EventCardProps) {
   return (
-    <div className="w-full flex flex-row p-2 md:p-3 rounded-md bg-white shadow-md hover:shadow-lg">
-      <div className="flex-grow">
-        <div className="mr-2">
-          <LargeTitle text_ga={name_ga} text_en={name_en} />
-          <div className="flex w-full items-center margin-y-x-small">
-            <div className="pr-4">
-              <GroupIcon />
-            </div>
-            <SmallText text_ga={group_name_ga} text_en={group_name_en} />
-          </div>
+    <div className="relative w-[266px] p-2 bg-white rounded-xl shadow-lg hover:shadow-xl">
+      <div className="absolute top-0 rounded-tl-xl rounded-br-xl left-0 p-0.5 px-2 bg-blue-800 text-white">
+        <EventDateAbbr start_date={start_date} />
+      </div>
+      <div className="h-[160px] w-full">
+        <Image
+          src={
+            typeof image === "string"
+              ? image
+              : "https://soks.org.au/wp-content/plugins/give/assets/dist/images/anonymous-user.svg"
+          }
+          alt={`image of ${image}`}
+          className="h-[160px] w-full object-cover object-center rounded-t-md"
+          width={180}
+          height={120}
+        />
+      </div>
+      <div className="pt-1.5 flex justify-center">
+        <LargeTitle text_ga={name_ga} text_en={name_en} centered={true} />
+      </div>
 
-          <div className="flex w-full items-center margin-y-x-small">
-            <div className="pr-4">
-              <CalendarIcon />
-            </div>
-            <EventDate start_date={start_date} />
+      <div className="flex w-full justify-center pt-1.5">
+        <div className="relative flex flex-col text-center">
+          <div className="px-1 absolute left-[-26px]">
+            <GroupIcon />
           </div>
-          <div className="flex w-full items-center margin-y-x-small">
-            <div className="pr-4">
-              <LocationIcon />
-            </div>
-            <SmallCapitalisedTitle
-              text_ga={location_ga}
-              text_en={location_en}
-            />
-          </div>
-          {/* <SmallGrayText
-            text_ga={attendees.length + " attendees"}
-            text_en="attendees"
-          /> */}
+          <div className="text-sm">{group_name_ga}</div>
+          <div className="english-text">{group_name_ga}</div>
         </div>
       </div>
-      {typeof image === "string" && <GroupImage url={image} />}
+
+      <div className="flex w-full justify-center pt-1.5">
+        <div className="relative flex flex-col text-center">
+          <div className="px-1 absolute left-[-26px]">
+            <LocationIcon />
+          </div>
+          <div className="text-sm">{location_ga.toUpperCase()}</div>
+          <div className="english-text">{"  " + location_en.toUpperCase()}</div>
+        </div>
+      </div>
     </div>
   );
 }

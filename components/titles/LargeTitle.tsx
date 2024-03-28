@@ -12,8 +12,8 @@ export default async function LargeTitle({
   centered = false,
 }: LargeTitleProps) {
   return (
-    <div className={`${centered ? "text-center" : ""} mb-1 md:mb-2`}>
-      <div className="text-xl md:text-2xl">
+    <div className={`${centered ? "text-center" : ""}`}>
+      <div className="text-lg font-bold">
         {capitalizeNonGrammatical(text_ga)}
       </div>
       <div className="english-text">

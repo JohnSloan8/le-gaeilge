@@ -14,6 +14,21 @@ const monthsOfYear = {
     "Nollaig",
   ],
 
+  gaAbbr: [
+    "Ean",
+    "Fea",
+    "Már",
+    "Aib",
+    "Bea",
+    "Mei",
+    "Iúi",
+    "Lún",
+    "MFó",
+    "DFó",
+    "Sam",
+    "Nol",
+  ],
+
   en: [
     "January",
     "February",
