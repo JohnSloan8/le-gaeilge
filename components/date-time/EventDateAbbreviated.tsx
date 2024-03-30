@@ -11,7 +11,7 @@ interface EventDateProps {
   line?: boolean;
 }
 
-export default async function EventDate({
+export default function EventDate({
   start_date,
   line = false,
 }: EventDateProps) {

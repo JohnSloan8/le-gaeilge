@@ -1,14 +1,8 @@
-import Link from "next/link";
-import {
-  EventCard,
-  EventDate,
-  XLargeTitle,
-  SmallPaddingContainer,
-  SmallTopPaddingContainer,
-} from "@/components";
+import { XLargeTitle, SmallPaddingContainer } from "@/components";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import dayjs from "dayjs";
+import EventsClient from "./EventsClient";
 
 export default async function EventsPage() {
   const cookieStore = cookies();
@@ -30,34 +24,7 @@ export default async function EventsPage() {
       </SmallPaddingContainer>
 
       <div className="justify-center flex flex-wrap gap-4">
-        {events?.map((event, index) => (
-          <div key={index} className="">
-            <Link href={`/imeachtai/${event.id}`}>
-              <SmallTopPaddingContainer>
-                <EventCard
-                  name_ga={event.name_ga}
-                  name_en={event.name_en}
-                  group_name_ga={
-                    event.group !== null ? event.group.name_ga : ""
-                  }
-                  group_name_en={
-                    event.group !== null ? event.group.name_en : ""
-                  }
-                  start_date={event.start_date}
-                  start_time={event.start_time}
-                  location_ga={
-                    event.location !== null ? event.location.name_ga : ""
-                  }
-                  location_en={
-                    event.location !== null ? event.location.name_en : ""
-                  }
-                  image={event.image !== null ? event.image : ""}
-                  // attendees={event.attendees}
-                />
-              </SmallTopPaddingContainer>
-            </Link>
-          </div>
-        ))}
+        <EventsClient eventsServer={events} />
       </div>
     </div>
   );

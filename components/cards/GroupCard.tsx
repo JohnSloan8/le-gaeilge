@@ -16,7 +16,7 @@ interface GroupCardProps {
   // members: any[];
 }
 
-export default async function GroupCard({
+export default function GroupCard({
   name_ga,
   name_en,
   location_ga,

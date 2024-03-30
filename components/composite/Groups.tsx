@@ -6,7 +6,7 @@ interface GroupsProps {
   groups: GroupModel[] | null;
 }
 
-export default async function Groups({ groups }: GroupsProps) {
+export default function Groups({ groups }: GroupsProps) {
   return (
     <div className="flex flex-wrap w-full justify-center">
       {groups !== null

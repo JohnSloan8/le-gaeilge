@@ -5,7 +5,7 @@ interface ProfileCardProps {
   image: string;
 }
 
-export default async function ProfileCard({ name, image }: ProfileCardProps) {
+export default function ProfileCard({ name, image }: ProfileCardProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="border-2 border-blue-300 rounded-[50%] hover:brightness-110 z-0 hover:z-50">

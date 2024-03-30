@@ -8,10 +8,7 @@ interface LeaveGroupProps {
   text_en: string;
 }
 
-export default async function LeaveGroup({
-  text_ga,
-  text_en,
-}: LeaveGroupProps) {
+export default function LeaveGroup({ text_ga, text_en }: LeaveGroupProps) {
   const [clicked, setClicked] = useState(false);
 
   const handleClick = () => {

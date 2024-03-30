@@ -5,10 +5,7 @@ interface MediumTitleProps {
   text_en: string;
 }
 
-export default async function MediumTitle({
-  text_ga,
-  text_en,
-}: MediumTitleProps) {
+export default function MediumTitle({ text_ga, text_en }: MediumTitleProps) {
   return (
     <div>
       <div className="text-lg md:text-xl inline font-bold">

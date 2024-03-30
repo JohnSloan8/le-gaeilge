@@ -4,7 +4,7 @@ interface GroupImageProps {
   url: string;
 }
 
-export default async function GroupImage({ url }: GroupImageProps) {
+export default function GroupImage({ url }: GroupImageProps) {
   return (
     <div className="relative h-[100px] w-[150px] min-w-[150px] min-h-[100px]">
       <Image

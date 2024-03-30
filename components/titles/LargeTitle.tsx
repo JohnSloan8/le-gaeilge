@@ -1,3 +1,5 @@
+import { EnglishText } from "@/components";
+
 import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
 
 interface LargeTitleProps {
@@ -6,7 +8,7 @@ interface LargeTitleProps {
   centered?: boolean;
 }
 
-export default async function LargeTitle({
+export default function LargeTitle({
   text_ga,
   text_en,
   centered = false,
@@ -16,9 +18,7 @@ export default async function LargeTitle({
       <div className="text-lg font-bold">
         {capitalizeNonGrammatical(text_ga)}
       </div>
-      <div className="english-text">
-        {"  " + capitalizeNonGrammatical(text_en)}
-      </div>
+      <EnglishText text_en={text_en} />
     </div>
   );
 }

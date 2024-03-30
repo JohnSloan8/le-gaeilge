@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.english-text {
-  @apply text-xs md:text-sm mt-[-3px] md:mt-[-4px] font-light text-english;
-}
-
 .button {
   @apply py-1 px-4 w-40 md:w-48 rounded-md no-underline flex justify-center focus:ring-2;
 }

@@ -1,4 +1,4 @@
-export default async function GroupIcon() {
+export default function GroupIcon() {
   return (
     <svg
       width="20px"

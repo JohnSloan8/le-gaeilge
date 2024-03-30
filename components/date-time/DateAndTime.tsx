@@ -7,7 +7,7 @@ interface DateAndTimeProps {
   start_time: string;
 }
 
-export default async function DateAndTime({
+export default function DateAndTime({
   start_date,
   start_time,
 }: DateAndTimeProps) {

@@ -20,7 +20,7 @@ interface EventCardProps {
   // attendees: any[];
 }
 
-export default async function EventCard({
+export default function EventCard({
   name_ga,
   name_en,
   group_name_ga,

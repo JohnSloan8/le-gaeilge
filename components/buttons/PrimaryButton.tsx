@@ -3,7 +3,7 @@ interface PrimaryButtonProps {
   text_en: string;
 }
 
-export default async function PrimaryButton({
+export default function PrimaryButton({
   text_ga,
   text_en,
 }: PrimaryButtonProps) {

@@ -1,4 +1,4 @@
-export default async function CalendarIcon() {
+export default function CalendarIcon() {
   return (
     <svg
       width="24px"

@@ -1,4 +1,4 @@
-export default async function LocationIcon() {
+export default function LocationIcon() {
   return (
     <svg
       width="20px"

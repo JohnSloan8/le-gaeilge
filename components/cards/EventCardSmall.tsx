@@ -10,7 +10,7 @@ interface EventCardSmallProps {
   image: string;
 }
 
-export default async function EventCardSmall({
+export default function EventCardSmall({
   name_ga,
   name_en,
   group_name_ga,

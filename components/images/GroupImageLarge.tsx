@@ -4,7 +4,7 @@ interface GroupImageLargeProps {
   url: string;
 }
 
-export default async function GroupImageLarge({ url }: GroupImageLargeProps) {
+export default function GroupImageLarge({ url }: GroupImageLargeProps) {
   return (
     <div className="relative h-[200px] w-full min-w-[150px] max-w-[360px] min-h-[100px]">
       <Image

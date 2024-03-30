@@ -4,7 +4,7 @@ interface LinkButtonProps {
   path: string;
 }
 
-export default async function LinkButton({ path }: LinkButtonProps) {
+export default function LinkButton({ path }: LinkButtonProps) {
   return (
     <Link
       href={"/" + removeAccentsAndReplaceSpaces(path)}

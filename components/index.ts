@@ -25,6 +25,7 @@ import LargeTitle from "./titles/LargeTitle";
 import XLargeTitle from "./titles/XLargeTitle";
 import SmallCapitalisedTitle from "./titles/SmallCapitalisedTitle";
 import SmallText from "./titles/SmallText";
+import EnglishText from "./titles/EnglishText";
 
 // padding
 import SmallPaddingContainer from "./padding/SmallPaddingContainer";
@@ -83,6 +84,7 @@ export {
   SmallMarginTopContainer,
   ContentSection,
   SmallText,
+  EnglishText,
   ProfileCard,
   ProfileImage,
   ProfileImageLarge,

@@ -3,7 +3,7 @@ interface WarningButtonProps {
   text_en: string;
 }
 
-export default async function WarningButton({
+export default function WarningButton({
   text_ga,
   text_en,
 }: WarningButtonProps) {

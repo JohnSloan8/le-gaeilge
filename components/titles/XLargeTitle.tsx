@@ -1,4 +1,5 @@
 import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
+import { EnglishText } from "@/components";
 
 interface XLargeTitleProps {
   text_ga: string;
@@ -6,7 +7,7 @@ interface XLargeTitleProps {
   centered?: boolean;
 }
 
-export default async function XLargeTitle({
+export default function XLargeTitle({
   text_ga,
   text_en,
   centered = true,
@@ -16,7 +17,7 @@ export default async function XLargeTitle({
       <div className="text-2xl md:text-4xl">
         {capitalizeNonGrammatical(text_ga)}
       </div>
-      <div className="english-text">{capitalizeNonGrammatical(text_en)}</div>
+      <EnglishText text_en={capitalizeNonGrammatical(text_en)} />
     </div>
   );
 }

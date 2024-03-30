@@ -6,7 +6,7 @@ interface GroupCardSmallProps {
   image: string;
 }
 
-export default async function GroupCardSmall({
+export default function GroupCardSmall({
   text_ga,
   text_en,
   image,

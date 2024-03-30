@@ -7,7 +7,7 @@ interface EventsProps {
   groups: GroupModel[] | null;
 }
 
-export default async function events({ events, groups }: EventsProps) {
+export default function Events({ events, groups }: EventsProps) {
   return (
     <div className="w-full">
       {events !== null

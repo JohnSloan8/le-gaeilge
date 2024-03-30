@@ -6,7 +6,7 @@ interface SmallTitleProps {
   centered?: boolean;
 }
 
-export default async function SmallTitle({
+export default function SmallTitle({
   text_ga,
   text_en = undefined,
   centered = false,

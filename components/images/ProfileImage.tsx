@@ -4,7 +4,7 @@ interface ProfileImageProps {
   url: string;
 }
 
-export default async function ProfileImage({ url }: ProfileImageProps) {
+export default function ProfileImage({ url }: ProfileImageProps) {
   return (
     <div className="relative h-[75px] md:h-[100px] w-[75px] md:w-[100px]">
       <Image

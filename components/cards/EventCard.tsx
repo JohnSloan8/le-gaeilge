@@ -1,12 +1,7 @@
 import Image from "next/image";
 
-import {
-  LargeTitle,
-  SmallCapitalisedTitle,
-  EventDateAbbr,
-  SmallText,
-} from "@/components";
-import { CalendarIcon, LocationIcon, GroupIcon } from "@/icons";
+import { LargeTitle, EventDateAbbr, SmallText } from "@/components";
+import { LocationIcon, GroupIcon } from "@/icons";
 
 interface EventCardProps {
   name_ga: string;
@@ -21,7 +16,7 @@ interface EventCardProps {
   // attendees: any[];
 }
 
-export default async function EventCard({
+export default function EventCard({
   name_ga,
   name_en,
   group_name_ga,
@@ -35,10 +30,10 @@ export default async function EventCard({
 }: EventCardProps) {
   return (
     <div className="relative w-[266px] p-2 bg-white rounded-xl shadow-lg hover:shadow-xl">
-      <div className="absolute top-0 rounded-tl-xl rounded-br-xl left-0 p-0.5 px-2 bg-blue-800 text-white">
-        <EventDateAbbr start_date={start_date} />
-      </div>
-      <div className="h-[160px] w-full">
+      <div className="relative h-[160px] w-full">
+        <div className="absolute top-0 left-0 rounded-tl-md rounded-br-md left-0 p-0.5 px-2 bg-blue-500 text-white">
+          <EventDateAbbr start_date={start_date} />
+        </div>
         <Image
           src={
             typeof image === "string"
@@ -60,8 +55,7 @@ export default async function EventCard({
           <div className="px-1 absolute left-[-26px]">
             <GroupIcon />
           </div>
-          <div className="text-sm">{group_name_ga}</div>
-          <div className="english-text">{group_name_ga}</div>
+          <SmallText text_ga={group_name_ga} text_en={group_name_en} />
         </div>
       </div>
 
@@ -70,8 +64,10 @@ export default async function EventCard({
           <div className="px-1 absolute left-[-26px]">
             <LocationIcon />
           </div>
-          <div className="text-sm">{location_ga.toUpperCase()}</div>
-          <div className="english-text">{"  " + location_en.toUpperCase()}</div>
+          <SmallText
+            text_ga={location_ga.toUpperCase()}
+            text_en={location_en.toUpperCase()}
+          />
         </div>
       </div>
     </div>

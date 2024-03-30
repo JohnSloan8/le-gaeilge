@@ -1,4 +1,4 @@
-export default async function ClockIcon() {
+export default function ClockIcon() {
   return (
     <svg
       width="24px"

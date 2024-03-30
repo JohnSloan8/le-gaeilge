@@ -3,7 +3,7 @@ interface SmallCapitalisedTitleProps {
   text_en: string;
 }
 
-export default async function SmallCapitalisedTitle({
+export default function SmallCapitalisedTitle({
   text_ga,
   text_en,
 }: SmallCapitalisedTitleProps) {

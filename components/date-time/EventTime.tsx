@@ -7,10 +7,7 @@ interface EventTimeProps {
   start_time: string;
 }
 
-export default async function EventTime({
-  start_date,
-  start_time,
-}: EventTimeProps) {
+export default function EventTime({ start_date, start_time }: EventTimeProps) {
   const dayJsObject = dayjs(start_date + start_time);
   const displayTime = dayJsObject.format("hh:mm A");
 

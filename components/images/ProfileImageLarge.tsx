@@ -4,9 +4,7 @@ interface ProfileImageLargeProps {
   url: string | null;
 }
 
-export default async function ProfileImageLarge({
-  url,
-}: ProfileImageLargeProps) {
+export default function ProfileImageLarge({ url }: ProfileImageLargeProps) {
   return (
     <div className="relative h-[240px] w-[180px]">
       <Image
