@@ -27,17 +27,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={`background-image text-foreground ${roboto.className}`}>
         <main className="min-h-screen flex flex-col items-center w-full">
-          <nav className="w-full flex justify-center bg-white border-b border-b-foreground/10 h-16">
-            <div className="w-full flex  md:max-w-3xl justify-center items-center p-3 text-sm">
+          <nav className="w-full flex justify-center bg-white h-16 shadow-md z-10">
+            <div className="w-full flex md:max-w-3xl justify-center items-center p-3 text-sm">
               <LinkButton path="imeachtaí" />
               <LinkButton path="grupaí" />
               <LinkButton path="foclóir" />
               <AuthButton />
             </div>
           </nav>
-          <div className="w-full flex flex-grow max-w-6xl m-2 md:m-5 p-2 md:p-5">
-            {children}
-          </div>
+          <div className="w-full flex flex-grow">{children}</div>
         </main>
       </body>
     </html>

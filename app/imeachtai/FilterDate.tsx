@@ -1,3 +1,4 @@
+import { SmallTitle } from "@/components";
 import { type Dispatch, type SetStateAction } from "react";
 
 interface FilterDateProps {
@@ -10,18 +11,25 @@ export default function FilterDate({
   setDateFilter,
 }: FilterDateProps) {
   return (
-    <div>
-      <h2>Event Filter</h2>
+    <div className="flex w-fit">
+      <div className="p-1 w-24">
+        <SmallTitle text_en="date" text_ga="dáta" inline={true} />
+      </div>
       <select
+        className="h-8 w-64"
         value={dateFilter}
         onChange={(e) => {
           setDateFilter(e.target.value);
         }}
       >
-        <option value="all">All</option>
-        <option value="today">Today</option>
-        <option value="thisWeek">This Week</option>
-        <option value="next30Days">This Month</option>
+        <option value="past">roimhe seo (past)</option>
+        <option value="today">inniu (today)</option>
+        <option value="this week">an tseachtain seo (this week)</option>
+        <option value="next 30 days">
+          30 lá ina dhiaidh sin (next 30 days)
+        </option>
+        <option value="all upcoming">go léir le teacht (all upcoming)</option>
+        <option value="all">go léir (all)</option>
       </select>
     </div>
   );

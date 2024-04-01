@@ -1,5 +1,6 @@
 import { type Dispatch, type SetStateAction } from "react";
 import type { GroupModel } from "@/types/models";
+import { SmallTitle } from "@/components";
 
 interface FilterGroupProps {
   groups: GroupModel[];
@@ -13,18 +14,21 @@ export default function FilterGroup({
   setGroupFilter,
 }: FilterGroupProps) {
   return (
-    <div>
-      <h2>Group Filter</h2>
+    <div className="flex w-fit">
+      <div className="p-1 w-24">
+        <SmallTitle text_en="group" text_ga="grúpa" inline={true} />
+      </div>
       <select
+        className="h-8 w-64"
         value={groupFilter}
         onChange={(e) => {
           setGroupFilter(e.target.value);
         }}
       >
-        <option value="all">All</option>
+        <option value="all">go leir (all)</option>
         {groups.map((group, i) => (
           <option key={i} value={group.name_ga}>
-            {group.name_ga}
+            {`${group.name_ga} (${group.name_en})`}
           </option>
         ))}
       </select>

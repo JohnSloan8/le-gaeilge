@@ -1,26 +1,24 @@
-import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
+import EnglishText from "./EnglishText";
 
 interface SmallTitleProps {
   text_ga: string;
-  text_en?: string;
+  text_en: string;
   centered?: boolean;
+  inline?: boolean;
 }
 
 export default function SmallTitle({
   text_ga,
-  text_en = undefined,
+  text_en,
   centered = false,
+  inline = false,
 }: SmallTitleProps) {
   return (
-    <div className={`${centered && "flex text-center"}`}>
-      <div className="text-base md:text-lg font-bold">
-        {capitalizeNonGrammatical(text_ga)}
-      </div>
-      {text_en !== undefined && (
-        <div className="english-text">
-          {"  " + capitalizeNonGrammatical(text_en)}
-        </div>
-      )}
+    <div
+      className={`${centered && "flex text-center"} ${inline && "flex flex-row"}`}
+    >
+      <div className="text-lg">{text_ga}</div>
+      <EnglishText text_en={text_en} inline={inline} />
     </div>
   );
 }

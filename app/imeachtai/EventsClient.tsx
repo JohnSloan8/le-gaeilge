@@ -4,6 +4,7 @@ import Events from "./Events";
 import FilterDate from "./FilterDate";
 import FilterGroup from "./FilterGroup";
 import type { ExtendedEventModel, GroupModel } from "@/types/models";
+import getUniqueGroups from "@/utils/general/getUniqueGroups";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 
@@ -17,43 +18,53 @@ export default function EventsClient({ eventsServer }: EventsClientProps) {
   const [groupFilter, setGroupFilter] = useState("all");
 
   const groups = eventsServer?.map((event) => event.group);
-  const uniqueGroups: GroupModel[] = [];
-  const uniqueGroupIds: number[] = [];
+  const groupsNotNull: GroupModel[] = [];
 
-  groups?.forEach((group) => {
-    if (group !== null && !uniqueGroupIds.includes(group.id)) {
-      uniqueGroups.push(group);
-      uniqueGroupIds.push(group.id);
-    }
-  });
+  let uniqueGroups: GroupModel[] = [];
+  if (groups !== undefined) {
+    groups.forEach((group) => {
+      if (group !== null) {
+        groupsNotNull.push(group);
+      }
+    });
+    uniqueGroups = getUniqueGroups(groupsNotNull);
+  }
 
   const now = dayjs();
-  const endOfWeek = dayjs().endOf("week");
-  const next30Days = now.add(30, "day");
+  const today = now.startOf("day");
+  const endOfWeek = dayjs().endOf("week").add(1, "day");
+  const startOfWeek = dayjs().startOf("week").add(1, "day");
+  const next30Days = today.add(30, "day");
 
   const filterEvents = () => {
     const dateFilteredEvents = eventsServer?.filter((event) => {
       const dayJsObject = dayjs(event.start_date + event.start_time);
+
       switch (dateFilter) {
+        case "past":
+          return dayJsObject <= today;
         case "today":
-          return now.isSame(dayJsObject);
-        case "thisWeek":
-          return dayJsObject >= now && dayJsObject <= endOfWeek;
-        case "next30Days":
-          return dayJsObject >= now && dayJsObject <= next30Days;
+          return isSameDay(today, dayJsObject);
+        case "this week":
+          return dayJsObject >= startOfWeek && dayJsObject <= endOfWeek;
+        case "next 30 days":
+          return dayJsObject >= today && dayJsObject <= next30Days;
+        case "all upcoming":
+          return dayJsObject >= today && dayJsObject <= next30Days;
         default:
           return true;
       }
     });
 
-    if (dateFilteredEvents !== undefined) {
-      const groupFilteredEvents = dateFilteredEvents?.filter(
+    let groupFilteredEvents = dateFilteredEvents;
+    if (groupFilter !== "all") {
+      groupFilteredEvents = dateFilteredEvents?.filter(
         (event) => event.group !== null && event.group.name_ga === groupFilter,
       );
-
-      groupFilteredEvents !== undefined &&
-        setFilteredEvents(groupFilteredEvents);
     }
+    groupFilteredEvents !== undefined
+      ? setFilteredEvents(groupFilteredEvents)
+      : setFilteredEvents([]);
   };
 
   useEffect(() => {
@@ -62,14 +73,34 @@ export default function EventsClient({ eventsServer }: EventsClientProps) {
 
   return (
     <div>
-      <FilterDate dateFilter={dateFilter} setDateFilter={setDateFilter} />
-      <FilterGroup
-        groups={uniqueGroups}
-        groupFilter={groupFilter}
-        setGroupFilter={setGroupFilter}
-      />
-      <Events events={filteredEvents} />
+      <div className="w-[100vw] bg-teal-500 flex justify-center">
+        <div className="max-w-6xl w-full p-2 pt-3 flex md:flex-row flex-col items-center">
+          <div className="md:pl-2 w-fit">
+            <FilterDate dateFilter={dateFilter} setDateFilter={setDateFilter} />
+          </div>
+          <div className="md:pl-8 w-fit">
+            <FilterGroup
+              groups={uniqueGroups}
+              groupFilter={groupFilter}
+              setGroupFilter={setGroupFilter}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="flex w-[100vw] justify-center">
+        <div className="max-w-6xl w-full p-2">
+          <Events events={filteredEvents} />
+        </div>
+      </div>
     </div>
+  );
+}
+
+function isSameDay(date1: dayjs.Dayjs, date2: dayjs.Dayjs) {
+  return (
+    date1.year() === date2.year() &&
+    date1.month() === date2.month() &&
+    date1.date() === date2.date()
   );
 }
 

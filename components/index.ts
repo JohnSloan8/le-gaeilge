@@ -28,6 +28,8 @@ import SmallText from "./titles/SmallText";
 import EnglishText from "./titles/EnglishText";
 
 // padding
+import MainTitleContainer from "./padding/MainTitleContainer";
+
 import SmallPaddingContainer from "./padding/SmallPaddingContainer";
 import SmallTopPaddingContainer from "./padding/SmallTopPaddingContainer";
 import PaddingContainer from "./padding/PaddingContainer";
@@ -74,6 +76,7 @@ export {
   LargeTitle,
   XLargeTitle,
   SmallCapitalisedTitle,
+  MainTitleContainer,
   SmallPaddingContainer,
   SmallTopPaddingContainer,
   PaddingContainer,

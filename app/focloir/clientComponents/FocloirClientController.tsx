@@ -48,6 +48,20 @@ export default function FocloirClientController({
 
   return (
     <div className="w-full">
+      <div className="w-[100vw] bg-cyan-500 flex justify-center">
+        <div className="max-w-6xl w-full p-2 pt-3 flex md:flex-row flex-col items-center">
+          <div className="md:pl-2 w-fit">
+            <FilterDate dateFilter={dateFilter} setDateFilter={setDateFilter} />
+          </div>
+          <div className="md:pl-8 w-fit">
+            <FilterGroup
+              groups={uniqueGroups}
+              groupFilter={groupFilter}
+              setGroupFilter={setGroupFilter}
+            />
+          </div>
+        </div>
+      </div>
       <div className="w-full flex justify-center">
         <div className="w-[400px]">
           <form action={getTranslation}>
@@ -73,9 +87,6 @@ export default function FocloirClientController({
           </form>
         </div>
       </div>
-      <MarginTopContainer>
-        <div className="w-full flex justify-center"></div>
-      </MarginTopContainer>
       <MarginTopContainer>
         <Phrases phrases={searchResults} limit={1000} />
       </MarginTopContainer>

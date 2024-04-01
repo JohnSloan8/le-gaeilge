@@ -1,7 +1,6 @@
-import { XLargeTitle, SmallPaddingContainer } from "@/components";
+import { XLargeTitle, MainTitleContainer } from "@/components";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import dayjs from "dayjs";
 import EventsClient from "./EventsClient";
 
 export default async function EventsPage() {
@@ -9,19 +8,18 @@ export default async function EventsPage() {
 
   const supabase = createClient(cookieStore);
 
-  const todaysDate = dayjs().format("YYYY-MM-DD");
+  // const todaysDate = dayjs().format("YYYY-MM-DD");
   const { data: events } = await supabase
     .from("events")
     .select("*, location:locations(*), group:groups(*), attendees(*)")
-    .gte("start_date", todaysDate)
     .order("start_date", { ascending: true })
     .order("start_time", { ascending: true });
 
   return (
     <div className="w-full flex flex-col items-center">
-      <SmallPaddingContainer>
+      <MainTitleContainer>
         <XLargeTitle text_ga="Imeachtaí" text_en="Events" />
-      </SmallPaddingContainer>
+      </MainTitleContainer>
 
       <div className="justify-center flex flex-wrap gap-4">
         <EventsClient eventsServer={events} />

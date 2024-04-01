@@ -36,7 +36,7 @@ export default function EventCard({
         </div>
         <Image
           src={
-            typeof image === "string"
+            image !== ""
               ? image
               : "https://soks.org.au/wp-content/plugins/give/assets/dist/images/anonymous-user.svg"
           }
