@@ -1,14 +1,16 @@
 import { XLargeTitle, MainTitleContainer } from "@/components";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import EventsClient from "./EventsClient";
+import EventsClient from "./clientComponents/EventsClient";
 
-export default async function EventsPage() {
+interface Props {
+  searchParams: { groupURL: string };
+}
+
+export default async function EventsPage({ searchParams }: Props) {
   const cookieStore = cookies();
-
   const supabase = createClient(cookieStore);
 
-  // const todaysDate = dayjs().format("YYYY-MM-DD");
   const { data: events } = await supabase
     .from("events")
     .select("*, location:locations(*), group:groups(*), attendees(*)")
@@ -22,19 +24,12 @@ export default async function EventsPage() {
       </MainTitleContainer>
 
       <div className="justify-center flex flex-wrap gap-4">
-        <EventsClient eventsServer={events} />
+        {events === null ? (
+          <h1>No Events</h1>
+        ) : (
+          <EventsClient events={events} groupURL={searchParams.groupURL} />
+        )}
       </div>
     </div>
   );
 }
-
-//   {index === 0 && (
-//     <div className="mt-2 md:mt-5">
-//       <EventDate start_date={event.start_date} line={true} />
-//     </div>
-//   )}
-//   {index !== 0 && event.start_date !== events[index - 1].start_date && (
-//     <div className="mt-2 md:mt-5">
-//       <EventDate start_date={event.start_date} line={true} />
-//     </div>
-//   )}

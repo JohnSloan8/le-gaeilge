@@ -5,9 +5,9 @@ import {
   MarginTopContainer,
   XLargeTitle,
 } from "@/components";
-import FocloirClientController from "./clientComponents/FocloirClientController";
+import FocloirClient from "./clientComponents/FocloirClient";
 import { getTranslation } from "@/app/actions";
-import type { PhraseModel, GroupModel } from "@/types/models";
+import getUniqueGroups from "@/utils/general/getUniqueGroups";
 
 interface Props {
   searchParams: { group: string };
@@ -17,38 +17,37 @@ export default async function PhrasesPage({ searchParams }: Props) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: phrases } = await supabase
+    .from("phrases")
+    .select("*, group:groups(*)")
+    .order("created_at", { ascending: true });
 
-  let phrases: any = [];
-  let groups: any = [];
-
-  if (searchParams.group !== undefined) {
-    const { data: groupPhrases } = await supabase
-      .from("phrases")
-      .select("*, group:groups(*)")
-      .eq("group.URL", searchParams.group);
-    phrases = groupPhrases !== undefined && groupPhrases;
+  if (phrases === null) {
+    return <h1>No Phrases</h1>;
   } else {
-    const { data: allPhrases } = await supabase
-      .from("phrases")
-      .select("*, group:groups(*)");
-    phrases = allPhrases !== undefined && allPhrases;
-  }
+    const groups = phrases.map((phrase) => phrase.group);
+    const uniqueGroups = getUniqueGroups(groups);
 
-  return (
-    <div className="w-full">
-      <MainTitleContainer color="bg-cyan-100">
-        <XLargeTitle text_ga="Foclóir" text_en="Dictionary" />
-      </MainTitleContainer>
-      <MarginTopContainer>
-        <FocloirClientController
-          userId={user !== null ? user.id : undefined}
+    let thisGroup;
+    if (searchParams.group !== undefined) {
+      thisGroup = uniqueGroups.find(
+        (group) => group.URL === searchParams.group,
+      );
+    }
+
+    return (
+      <div className="w-full">
+        <MainTitleContainer color="bg-cyan-100">
+          <XLargeTitle text_ga="Foclóir" text_en="Dictionary" />
+        </MainTitleContainer>
+
+        <FocloirClient
           phrases={phrases}
+          uniqueGroups={uniqueGroups}
           getTranslation={getTranslation}
+          thisGroup={thisGroup === undefined ? null : thisGroup}
         />
-      </MarginTopContainer>
-    </div>
-  );
+      </div>
+    );
+  }
 }

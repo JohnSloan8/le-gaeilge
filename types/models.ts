@@ -11,3 +11,7 @@ export interface ExtendedEventModel extends EventModel {
   group: GroupModel | null;
   attendees: AttendeeModel[] | null;
 }
+
+export interface ExtendedPhraseModel extends PhraseModel {
+  group: GroupModel | null;
+}
