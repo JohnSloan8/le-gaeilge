@@ -1,6 +1,6 @@
 const detectLanguage = async (textForDetection: string) => {
   const detectedLanguage = await fetch(
-    `${process.env.NEXT_PUBLIC_GOOGLE_API_BASE_URL}/detect?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+    `${process.env.GOOGLE_API_BASE_URL}/detect?key=${process.env.GOOGLE_API_KEY}`,
     {
       method: "POST",
       headers: {

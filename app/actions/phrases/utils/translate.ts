@@ -7,11 +7,11 @@ const translate = async (
     q: text,
     source: languageFrom,
     target: languageTo,
-    key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+    key: process.env.GOOGLE_API_KEY,
   };
 
   const translation = await fetch(
-    `${process.env.NEXT_PUBLIC_GOOGLE_API_BASE_URL}?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+    `${process.env.GOOGLE_API_BASE_URL}?key=${process.env.GOOGLE_API_KEY}`,
     {
       method: "POST",
       headers: {
