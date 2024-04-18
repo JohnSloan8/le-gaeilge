@@ -1,10 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import {
-  MainTitleContainer,
-  MarginTopContainer,
-  XLargeTitle,
-} from "@/components";
+import { MainTitleContainer, XLargeTitle } from "@/components";
 import FocloirClient from "./clientComponents/FocloirClient";
 import { getTranslation } from "@/app/actions";
 import getUniqueGroups from "@/utils/general/getUniqueGroups";
@@ -20,7 +16,9 @@ export default async function PhrasesPage({ searchParams }: Props) {
   const { data: phrases } = await supabase
     .from("phrases")
     .select("*, group:groups(*)")
-    .order("created_at", { ascending: true });
+    .order("created_at", { ascending: false });
+
+  // console.log("phrases:", phrases);
 
   if (phrases === null) {
     return <h1>No Phrases</h1>;

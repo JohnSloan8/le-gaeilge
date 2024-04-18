@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.select-container {
+  @apply h-8 w-64 bg-gray-100 px-2 text-gray-600;
+}
+
 .button {
   @apply py-1 px-4 w-40 md:w-48 rounded-md no-underline flex justify-center focus:ring-2;
 }

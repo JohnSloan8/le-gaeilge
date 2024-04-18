@@ -1,4 +1,5 @@
-import { SmallText } from "@/components";
+import { PlayAudioButton, SmallText } from "@/components";
+import { PencilIcon } from "@/icons";
 import type { PhraseModel } from "@/types/models";
 
 interface PhrasesProps {
@@ -8,20 +9,23 @@ interface PhrasesProps {
 
 export default function Phrases({ phrases, limit = 4 }: PhrasesProps) {
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col items-center">
       {phrases !== null
         ? phrases.map(
-            (d: PhraseModel, index: number) =>
+            (p: PhraseModel, index: number) =>
               index < limit && (
                 <div
-                  className="w-full border flex flex-row p-1 md:p-2"
+                  className="w-full justify-center flex max-w-lg rounded-xl bg-white p-1 md:p-2 mb-1 md:mb-2 shadow-md"
                   key={String(index)}
                 >
-                  <div className="w-full">
-                    <SmallText text_ga={d.entry_ga} />
+                  <div className="grow">
+                    <SmallText text_ga={p.entry_ga} text_en={p.entry_en} />
                   </div>
-                  <div className="w-full">
-                    <SmallText text_en={d.entry_en} />
+                  <div className="flex items-center flex-row px-2">
+                    <button className="mx-2 p-2">
+                      <PencilIcon />
+                    </button>
+                    <PlayAudioButton src={p.audio_url} />
                   </div>
                 </div>
               ),

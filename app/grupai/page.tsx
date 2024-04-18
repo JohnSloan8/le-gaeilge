@@ -30,7 +30,7 @@ export default async function GroupsPage() {
                   description_ga={group.description_ga}
                   description_en={group.description_en}
                   image={group.image !== null ? group.image : ""}
-                  members={group.members}
+                  // members={group.members}
                 />
               </SmallTopPaddingContainer>
             </Link>

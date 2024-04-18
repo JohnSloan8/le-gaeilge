@@ -1,19 +1,19 @@
 import { createClient } from "@/utils/supabase/server";
-import { joinGroup, leaveGroup } from "@/app/actions";
+// import { joinGroup, leaveGroup } from "@/app/actions";
 import Link from "next/link";
 import {
   LargeTitle,
   XLargeTitle,
   SmallPaddingContainer,
   MarginTopContainer,
-  SmallMarginTopContainer,
+  // SmallMarginTopContainer,
   SmallCapitalisedTitle,
   SmallText,
   GroupImageLarge,
   EventCardSmall,
-  Profiles,
+  // Profiles,
   SecondaryButton,
-  WarningButton,
+  // WarningButton,
   ContentSection,
   Phrases,
 } from "@/components";
@@ -36,8 +36,8 @@ export default async function GroupPage({ params }: PageProps) {
   if (group === null) {
     return <h1>No Group</h1>;
   } else {
-    const memberIds =
-      group !== null ? group.members.map((a: any) => a.user_id) : [];
+    // const memberIds =
+    //   group !== null ? group.members.map((a: any) => a.user_id) : [];
 
     const groupCategories = group.categories.map((c) => c.id);
 
@@ -45,21 +45,21 @@ export default async function GroupPage({ params }: PageProps) {
       categories_input: groupCategories,
     });
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    // const {
+    //   data: { user },
+    // } = await supabase.auth.getUser();
 
-    const memberOfThisGroup = (): boolean => {
-      return user !== null ? memberIds.includes(user.id) : false;
-    };
+    // const memberOfThisGroup = (): boolean => {
+    //   return user !== null ? memberIds.includes(user.id) : false;
+    // };
 
-    const getMemberId = (): number | undefined => {
-      if (user !== null && memberIds.includes(user.id)) {
-        const member = group.members.find((a) => a.user_id === user.id);
-        return member !== undefined ? member.id : undefined;
-      }
-      return undefined;
-    };
+    // const getMemberId = (): number | undefined => {
+    //   if (user !== null && memberIds.includes(user.id)) {
+    //     const member = group.members.find((a) => a.user_id === user.id);
+    //     return member !== undefined ? member.id : undefined;
+    //   }
+    //   return undefined;
+    // };
 
     return group !== null ? (
       <div className="w-full">

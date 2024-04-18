@@ -8,7 +8,7 @@ interface SmallTextProps {
 export default function SmallText({ text_ga, text_en }: SmallTextProps) {
   return (
     <div>
-      <div className="text-sm">{text_ga}</div>
+      <div className="text-sm mb-1">{text_ga}</div>
       <EnglishText text_en={text_en} />
     </div>
   );

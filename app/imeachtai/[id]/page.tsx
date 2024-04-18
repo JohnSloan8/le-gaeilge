@@ -7,13 +7,13 @@ import {
   EventDate,
   EventTime,
   SmallText,
-  PrimaryButton,
-  SecondaryButton,
-  WarningButton,
-  Profiles,
+  // PrimaryButton,
+  // SecondaryButton,
+  // WarningButton,
+  // Profiles,
   ContentSection,
 } from "@/components";
-import { cancelRegistrationForEvent, registerForEvent } from "@/app/actions";
+// import { cancelRegistrationForEvent, registerForEvent } from "@/app/actions";
 import { CalendarIcon, ClockIcon, LocationIcon } from "@/icons";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
@@ -31,23 +31,23 @@ export default async function Page({ params }: { params: { id: string } }) {
   if (event === null) {
     return <h1>No Event</h1>;
   } else {
-    const attendeeIds = event.attendees.map((a: any) => a.user_id);
+    // const attendeeIds = event.attendees.map((a: any) => a.user_id);
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    // const {
+    //   data: { user },
+    // } = await supabase.auth.getUser();
 
-    const attendingThisEvent = (): boolean => {
-      return user !== null ? attendeeIds.includes(user.id) : false;
-    };
+    // const attendingThisEvent = (): boolean => {
+    //   return user !== null ? attendeeIds.includes(user.id) : false;
+    // };
 
-    const getAttendeeId = (): number | undefined => {
-      if (user !== null && attendeeIds.includes(user.id)) {
-        const attendee = event.attendees.find((a) => a.user_id === user.id);
-        return attendee !== undefined ? attendee.id : undefined;
-      }
-      return undefined;
-    };
+    // const getAttendeeId = (): number | undefined => {
+    //   if (user !== null && attendeeIds.includes(user.id)) {
+    //     const attendee = event.attendees.find((a) => a.user_id === user.id);
+    //     return attendee !== undefined ? attendee.id : undefined;
+    //   }
+    //   return undefined;
+    // };
 
     return event !== null ? (
       <div className="w-full">

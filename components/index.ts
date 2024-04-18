@@ -11,6 +11,7 @@ import AuthButton from "./buttons/AuthButton";
 import PrimaryButton from "./buttons/PrimaryButton";
 import SecondaryButton from "./buttons/SecondaryButton";
 import WarningButton from "./buttons/WarningButton";
+import PlayAudioButton from "./buttons/PlayAudioButton";
 
 // datetime
 import EventDate from "./date-time/EventDate";
@@ -67,6 +68,7 @@ export {
   PrimaryButton,
   SecondaryButton,
   WarningButton,
+  PlayAudioButton,
   EventDate,
   EventDateAbbr,
   EventTime,

@@ -12,7 +12,7 @@ export default function ProfileCard({ name, image }: ProfileCardProps) {
         <ProfileImage url={image} />
       </div>
       <div className="flex items-center p-1">
-        <SmallText text_ga={name.split(" ")[0]} text_en={""} centered={true} />
+        <SmallText text_ga={name.split(" ")[0]} text_en={""} />
       </div>
     </div>
   );

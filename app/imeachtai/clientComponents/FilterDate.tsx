@@ -12,11 +12,11 @@ export default function FilterDate({
 }: FilterDateProps) {
   return (
     <div className="flex w-fit">
-      <div className="p-1 w-24">
-        <SmallTitle text_en="date" text_ga="dáta" inline={true} />
+      <div className="p-1 w-16">
+        <SmallTitle text_en="date" text_ga="dáta" dark={true} />
       </div>
       <select
-        className="h-8 w-64"
+        className="select-container"
         value={dateFilter}
         onChange={(e) => {
           setDateFilter(e.target.value);

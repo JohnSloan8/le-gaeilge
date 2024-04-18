@@ -15,11 +15,11 @@ export default function FilterGroup({
 }: FilterGroupProps) {
   return (
     <div className="flex w-fit">
-      <div className="p-1 w-24">
-        <SmallTitle text_en="group" text_ga="grúpa" inline={true} />
+      <div className="p-1 w-16">
+        <SmallTitle text_en="group" text_ga="grúpa" dark={true} />
       </div>
       <select
-        className="h-8 w-64"
+        className="select-container"
         value={groupFilter}
         onChange={(e) => {
           setGroupFilter(e.target.value);
