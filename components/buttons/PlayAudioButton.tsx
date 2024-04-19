@@ -27,7 +27,10 @@ export default function PlayAudioButton({ src }: PlayAudioButtonProps) {
       <button className="p-2" onClick={playAudio}>
         <PlayIcon />
       </button>
-      <audio src={src !== null ? src : ""} ref={audioRef} />
+      <audio
+        src={src !== null ? `data:audio/wav;base64,${src}` : ""}
+        ref={audioRef}
+      />
     </div>
   );
 }

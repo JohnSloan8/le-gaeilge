@@ -315,7 +315,7 @@ export type Database = {
       };
       phrases: {
         Row: {
-          audio_url: string | null;
+          audio_data: string | null;
           author_id: string;
           created_at: string;
           entry_en: string;
@@ -324,7 +324,7 @@ export type Database = {
           id: number;
         };
         Insert: {
-          audio_url?: string | null;
+          audio_data?: string | null;
           author_id: string;
           created_at?: string;
           entry_en: string;
@@ -333,7 +333,7 @@ export type Database = {
           id?: number;
         };
         Update: {
-          audio_url?: string | null;
+          audio_data?: string | null;
           author_id?: string;
           created_at?: string;
           entry_en?: string;
@@ -403,7 +403,7 @@ export type Database = {
           categories_input: number[];
         };
         Returns: {
-          audio_url: string | null;
+          audio_data: string | null;
           author_id: string;
           created_at: string;
           entry_en: string;

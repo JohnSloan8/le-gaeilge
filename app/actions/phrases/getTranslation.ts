@@ -4,8 +4,11 @@ import { cookies } from "next/headers";
 import { detectLanguage, languageToTranslateTo, translate } from "./utils";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import getSynthesisAudio from "./getSynthesisAudio";
 
-const getTranslation = async (formData: FormData) => {
+const getTranslation = async (
+  formData: FormData,
+): Promise<undefined | false> => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -29,6 +32,8 @@ const getTranslation = async (formData: FormData) => {
   );
 
   // console.log("translation:", translation);
+  const textToSynthesise = detectedLanguage === "ga" ? text : translation;
+  const audioData = await getSynthesisAudio(textToSynthesise);
 
   const { data, error } = await supabase
     .from("phrases")
@@ -37,56 +42,13 @@ const getTranslation = async (formData: FormData) => {
       entry_ga: detectedLanguage === "ga" ? text : translation,
       entry_en: detectedLanguage === "en" ? text : translation,
       group_id: groupId,
+      audio_data: audioData,
     })
     .select();
 
   if (data !== null) {
-    // get synthesis
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        synthinput: {
-          text: detectedLanguage === "ga" ? text : translation,
-          ssml: "string",
-        },
-        voiceparams: {
-          languageCode: "ga-IE",
-          name: "ga_UL_anb_nemo",
-
-          ssmlGender: "UNSPECIFIED",
-        },
-        audioconfig: {
-          audioEncoding: "LINEAR16",
-          speakingRate: 1,
-          pitch: 1,
-          volumeGainDb: 1,
-          htsParams: "string",
-          sampleRateHertz: 0,
-          effectsProfileId: [],
-        },
-        outputType: "JSON",
-      }),
-      timeout: 10000,
-    };
-
-    try {
-      const response = await fetch(
-        "https://api.abair.ie/v3/synthesis/metadata",
-        requestOptions,
-      );
-      const data = await response.json();
-
-      console.log("data;", data);
-
-      revalidatePath(`/focloir`);
-      redirect(`/focloir`);
-    } catch (error) {
-      console.log("errror:", error);
-      return false;
-    }
+    revalidatePath(`/focloir`);
+    redirect(`/focloir`);
   }
 
   error !== null && console.log("error:", error);
@@ -94,6 +56,7 @@ const getTranslation = async (formData: FormData) => {
   // .catch((error) => {
   //   console.error("Error:", error);
   // });
+  return false;
 };
 
 export default getTranslation;

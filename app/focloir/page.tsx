@@ -18,8 +18,6 @@ export default async function PhrasesPage({ searchParams }: Props) {
     .select("*, group:groups(*)")
     .order("created_at", { ascending: false });
 
-  // console.log("phrases:", phrases);
-
   if (phrases === null) {
     return <h1>No Phrases</h1>;
   } else {

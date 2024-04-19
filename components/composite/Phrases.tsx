@@ -25,7 +25,7 @@ export default function Phrases({ phrases, limit = 4 }: PhrasesProps) {
                     <button className="mx-2 p-2">
                       <PencilIcon />
                     </button>
-                    <PlayAudioButton src={p.audio_url} />
+                    <PlayAudioButton src={p.audio_data} />
                   </div>
                 </div>
               ),
