@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.className}`}>
         <main className="flex flex-col items-center w-full">
-          <div className="w-full max-w-sm flex flex-col h-screen">
+          <div className="w-full max-w-md flex flex-col h-full max-h-screen">
             <div className="background-image flex-grow">{children}</div>
             <Navbar />
           </div>
