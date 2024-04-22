@@ -1,9 +1,14 @@
-const PlayIcon = () => {
+interface PlayIconProps {
+  color: string;
+  size: number;
+}
+
+const PlayIcon = ({ color, size }: PlayIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20px"
-      height="20px"
+      width={size}
+      height={size}
       viewBox="0 0 55.127 61.182"
     >
       <g id="Group_38215" data-name="Group 38215" transform="translate(30 35)">
@@ -11,7 +16,7 @@ const PlayIcon = () => {
           id="play-button-arrowhead_1_"
           data-name="play-button-arrowhead (1)"
           transform="translate(-30 -35)"
-          fill="#0891b2"
+          fill={color}
         >
           <path
             id="Path_18"

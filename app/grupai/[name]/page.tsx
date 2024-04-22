@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import {
   LargeTitle,
-  XLargeTitle,
+  XLargeText,
   SmallPaddingContainer,
   MarginTopContainer,
   // SmallMarginTopContainer,
@@ -12,10 +12,10 @@ import {
   GroupImageLarge,
   EventCardSmall,
   // Profiles,
-  SecondaryButton,
+  // SecondaryButton,
   // WarningButton,
   ContentSection,
-  Phrases,
+  // Phrases,
 } from "@/components";
 import { cookies } from "next/headers";
 import { LocationIcon } from "@/icons";
@@ -39,11 +39,11 @@ export default async function GroupPage({ params }: PageProps) {
     // const memberIds =
     //   group !== null ? group.members.map((a: any) => a.user_id) : [];
 
-    const groupCategories = group.categories.map((c) => c.id);
+    // const groupCategories = group.categories.map((c) => c.id);
 
-    const { data: phrases } = await supabase.rpc("get_categories_phrases", {
-      categories_input: groupCategories,
-    });
+    // const { data: phrases } = await supabase.rpc("get_categories_phrases", {
+    //   categories_input: groupCategories,
+    // });
 
     // const {
     //   data: { user },
@@ -63,7 +63,7 @@ export default async function GroupPage({ params }: PageProps) {
 
     return group !== null ? (
       <div className="w-full">
-        <XLargeTitle text_ga={group.name_ga} text_en={group.name_en} />
+        <XLargeText text_ga={group.name_ga} text_en={group.name_en} />
 
         <MarginTopContainer>
           <div className="md:flex md:flex-row">
@@ -168,7 +168,7 @@ export default async function GroupPage({ params }: PageProps) {
             </div>
           </ContentSection>
         </MarginTopContainer>
-        <MarginTopContainer>
+        {/* <MarginTopContainer>
           <ContentSection>
             <LargeTitle
               text_ga="Foclóir"
@@ -186,7 +186,7 @@ export default async function GroupPage({ params }: PageProps) {
               </div>
             </MarginTopContainer>
           </ContentSection>
-        </MarginTopContainer>
+        </MarginTopContainer> */}
       </div>
     ) : null;
   }

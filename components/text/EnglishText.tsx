@@ -9,16 +9,18 @@ interface EnglishTextProps {
   text_en: string;
   inline?: boolean;
   dark?: boolean;
+  xsmall?: boolean;
 }
 
 export default function EnglishText({
   text_en,
   inline = false,
   dark = false,
+  xsmall = false,
 }: EnglishTextProps) {
   return (
     <div
-      className={`text-sm ${dark ? "text-gray-100" : "text-gray-400"} ${!inline ? "mt-[-4px]" : "m-1"} ${robotoCondensed.className}`}
+      className={`${xsmall ? "text-xs" : "text-sm"} ${dark ? "text-gray-100" : "text-gray-400"} ${!inline ? "mt-[-4px]" : "m-1"} ${robotoCondensed.className}`}
     >
       {text_en}
     </div>

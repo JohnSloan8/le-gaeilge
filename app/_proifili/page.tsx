@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import {
   ProfileCard,
   SmallMarginContainer,
-  XLargeTitle,
+  XLargeText,
   SmallPaddingContainer,
 } from "@/components";
 import Link from "next/link";
@@ -16,7 +16,7 @@ export default async function ProfilesPage() {
   return (
     <div className="w-full flex flex-col items-center">
       <SmallPaddingContainer>
-        <XLargeTitle text_ga="Proifilí" text_en="profiles" />
+        <XLargeText text_ga="Proifilí" text_en="profiles" />
       </SmallPaddingContainer>
       <div className="flex flex-wrap w-full justify-center">
         {profiles?.map((profile: any, index: number) => (

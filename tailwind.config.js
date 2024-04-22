@@ -9,8 +9,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: colors.gray,
-        foreground: "#000",
+        background: {
+          light: colors.gray[100],
+          medium: colors.gray[400],
+          dark: colors.gray[800],
+        },
+        activeArea: {
+          light: "#59d4f3",
+          main: "#0d91b2",
+          dark: "#074d5f",
+        },
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
@@ -18,6 +26,8 @@ module.exports = {
       },
       textColor: {
         english: colors.gray[400],
+        dark: colors.gray[800],
+        light: colors.gray[100],
       },
     },
   },

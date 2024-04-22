@@ -1,9 +1,14 @@
-export default function PencilIcon() {
+interface PencilIconProps {
+  color: string;
+  size: number;
+}
+
+const PencilIcon = ({ color, size }: PencilIconProps) => {
   return (
     <svg
-      fill="#0891b2"
-      width="20px"
-      height="20px"
+      fill={color}
+      width={size}
+      height={size}
       viewBox="0 0 32 32"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -20,4 +25,6 @@ export default function PencilIcon() {
       </g>
     </svg>
   );
-}
+};
+
+export default PencilIcon;

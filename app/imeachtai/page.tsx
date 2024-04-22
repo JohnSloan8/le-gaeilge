@@ -1,4 +1,4 @@
-import { XLargeTitle, MainTitleContainer } from "@/components";
+import { XLargeText, MainTitleContainer } from "@/components";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import EventsClient from "./clientComponents/EventsClient";
@@ -20,7 +20,7 @@ export default async function EventsPage({ searchParams }: Props) {
   return (
     <div className="w-full flex flex-col items-center">
       <MainTitleContainer>
-        <XLargeTitle text_ga="Imeachtaí" text_en="Events" />
+        <XLargeText text_ga="Imeachtaí" text_en="Events" />
       </MainTitleContainer>
 
       <div className="justify-center flex flex-wrap gap-4">

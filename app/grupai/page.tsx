@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { GroupCard, XLargeTitle, SmallTopPaddingContainer } from "@/components";
+import { GroupCard, XLargeText, SmallTopPaddingContainer } from "@/components";
 
 export default async function GroupsPage() {
   const cookieStore = cookies();
@@ -12,7 +12,7 @@ export default async function GroupsPage() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <XLargeTitle text_ga="Grupaí" text_en="Groups" />
+      <XLargeText text_ga="Grupaí" text_en="Groups" />
       <div className="w-full">
         {groups?.map((group, index) => (
           <div key={index}>

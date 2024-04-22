@@ -21,9 +21,12 @@ export default function Phrases({ phrases, limit = 4 }: PhrasesProps) {
                   <div className="grow">
                     <SmallText text_ga={p.entry_ga} text_en={p.entry_en} />
                   </div>
-                  <div className="flex items-center flex-row px-2">
-                    <button className="mx-2 p-2">
-                      <PencilIcon />
+                  <div className="flex items-center flex-row">
+                    {/* <button className="">
+                      <HeartIcon color="#0d91b2" size={24} />
+                    </button> */}
+                    <button className="mx-3">
+                      <PencilIcon color="#0d91b2" size={20} />
                     </button>
                     <PlayAudioButton src={p.audio_data} />
                   </div>

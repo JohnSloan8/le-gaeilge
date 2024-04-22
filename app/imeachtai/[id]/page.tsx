@@ -1,7 +1,7 @@
 import Image from "next/image";
 import {
   LargeTitle,
-  XLargeTitle,
+  XLargeText,
   MarginTopContainer,
   SmallCapitalisedTitle,
   EventDate,
@@ -51,7 +51,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     return event !== null ? (
       <div className="w-full">
-        <XLargeTitle text_ga={event.name_ga} text_en={event.name_en} />
+        <XLargeText text_ga={event.name_ga} text_en={event.name_en} />
 
         <MarginTopContainer>
           <div className="flex flex-col md:flex-row my-1 md:my-3">

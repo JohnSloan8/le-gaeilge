@@ -39,7 +39,7 @@ export default function EventCard({
           <LargeTitle text_ga={name_ga} text_en={name_en} />
           <div className="flex w-full items-center margin-y-x-small">
             <div className="pr-4">
-              <GroupIcon />
+              <GroupIcon size={32} color="#000" />
             </div>
             <SmallText text_ga={group_name_ga} text_en={group_name_en} />
           </div>

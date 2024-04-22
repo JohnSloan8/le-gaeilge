@@ -1,22 +1,20 @@
 import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
 import { EnglishText } from "@/components";
 
-interface XLargeTitleProps {
+interface XLargeTextProps {
   text_ga: string;
   text_en: string;
   centered?: boolean;
 }
 
-export default function XLargeTitle({
+export default function XLargeText({
   text_ga,
   text_en,
   centered = true,
-}: XLargeTitleProps) {
+}: XLargeTextProps) {
   return (
-    <div className={`flex flex-col ${centered && "items-center"}`}>
-      <div className="text-2xl md:text-4xl">
-        {capitalizeNonGrammatical(text_ga)}
-      </div>
+    <div className={`flex flex-col p-2 ${centered && "items-center"}`}>
+      <div className="text-2xl">{capitalizeNonGrammatical(text_ga)}</div>
       <EnglishText text_en={capitalizeNonGrammatical(text_en)} />
     </div>
   );

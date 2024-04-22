@@ -5,6 +5,11 @@ import GroupIcon from "./Group";
 import PlayIcon from "./Play";
 import SearchIcon from "./Search";
 import PencilIcon from "./Pencil";
+import HomeIcon from "./Home";
+import ProfileIcon from "./Profile";
+import EventsIcon from "./Events";
+import HeartIcon from "./Heart";
+import TranslateIcon from "./Translate";
 
 export {
   CalendarIcon,
@@ -14,4 +19,9 @@ export {
   PlayIcon,
   SearchIcon,
   PencilIcon,
+  HomeIcon,
+  ProfileIcon,
+  EventsIcon,
+  HeartIcon,
+  TranslateIcon,
 };

@@ -1,7 +1,7 @@
 import {
   Groups,
-  Events,
-  XLargeTitle,
+  // Events,
+  XLargeText,
   ProfileImageLarge,
   SmallPaddingContainer,
   MarginTopContainer,
@@ -51,7 +51,7 @@ export default async function ProfilePage({
 
     return (
       <div className="w-full">
-        <XLargeTitle text_ga={profile.name} text_en="" />
+        <XLargeText text_ga={profile.name} text_en="" />
         <MarginTopContainer>
           <div className="w-full flex md:flex-row flex-col items-center">
             <ProfileImageLarge url={profile.image} />
@@ -101,7 +101,7 @@ export default async function ProfilePage({
         <MarginTopContainer>
           <MediumTitle text_ga="Imeachtaí" text_en="Events" />
           <div className="flex flex-wrap w-full justify-center">
-            <Events events={events} groups={groups} />
+            {/* <Events events={events} groups={groups} /> */}
           </div>
         </MarginTopContainer>
       </div>

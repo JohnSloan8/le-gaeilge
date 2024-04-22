@@ -1,6 +1,6 @@
 import "./globals.css";
-import { LinkButton, AuthButton } from "@/components";
 import { Roboto } from "next/font/google";
+import { Navbar } from "@/components";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -15,7 +15,7 @@ const defaultUrl =
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "le Gaeilge",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  description: "A community for Irish speakers",
 };
 
 export default function RootLayout({
@@ -25,17 +25,12 @@ export default function RootLayout({
 }): React.ReactNode {
   return (
     <html lang="en">
-      <body className={`background-image text-foreground ${roboto.className}`}>
-        <main className="min-h-screen flex flex-col items-center w-full">
-          <nav className="w-full flex justify-center bg-white h-16 shadow-md z-10">
-            <div className="w-full flex md:max-w-3xl justify-center items-center p-3 text-sm">
-              <LinkButton path="imeachtaí" />
-              <LinkButton path="grupaí" />
-              <LinkButton path="foclóir" />
-              <AuthButton />
-            </div>
-          </nav>
-          <div className="w-full flex flex-grow">{children}</div>
+      <body className={`${roboto.className}`}>
+        <main className="flex flex-col items-center w-full">
+          <div className="w-full max-w-sm flex flex-col h-screen">
+            <div className="background-image flex-grow">{children}</div>
+            <Navbar />
+          </div>
         </main>
       </body>
     </html>

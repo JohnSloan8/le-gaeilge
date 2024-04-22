@@ -23,10 +23,13 @@ import DateAndTime from "./date-time/DateAndTime";
 import SmallTitle from "./titles/SmallTitle";
 import MediumTitle from "./titles/MediumTitle";
 import LargeTitle from "./titles/LargeTitle";
-import XLargeTitle from "./titles/XLargeTitle";
 import SmallCapitalisedTitle from "./titles/SmallCapitalisedTitle";
-import SmallText from "./titles/SmallText";
-import EnglishText from "./titles/EnglishText";
+
+// text
+import XLargeText from "./text/XLargeText";
+import SmallText from "./text/SmallText";
+import XSmallText from "./text/XSmallText";
+import EnglishText from "./text/EnglishText";
 
 // padding
 import MainTitleContainer from "./padding/MainTitleContainer";
@@ -58,6 +61,9 @@ import Groups from "./composite/Groups";
 import Events from "./composite/Events";
 import Phrases from "./composite/Phrases";
 
+// navbar
+import Navbar from "./navbar/Navbar";
+
 export {
   GroupCard,
   GroupCardSmall,
@@ -76,7 +82,8 @@ export {
   SmallTitle,
   MediumTitle,
   LargeTitle,
-  XLargeTitle,
+  XLargeText,
+  XSmallText,
   SmallCapitalisedTitle,
   MainTitleContainer,
   SmallPaddingContainer,
@@ -100,4 +107,5 @@ export {
   Groups,
   Events,
   Phrases,
+  Navbar,
 };

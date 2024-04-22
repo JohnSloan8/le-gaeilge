@@ -53,7 +53,7 @@ export default function EventCard({
       <div className="flex w-full justify-center pt-1.5">
         <div className="relative flex flex-col text-center">
           <div className="px-1 absolute left-[-26px]">
-            <GroupIcon />
+            <GroupIcon size={32} color="#000" />
           </div>
           <SmallText text_ga={group_name_ga} text_en={group_name_en} />
         </div>

@@ -1,4 +1,4 @@
-import EnglishText from "./EnglishText";
+import EnglishText from "../text/EnglishText";
 
 interface SmallTitleProps {
   text_ga: string;

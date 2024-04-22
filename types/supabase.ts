@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 export type Json =
   | string
   | number
@@ -33,45 +34,27 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "attendees_event_id_fkey";
+            foreignKeyName: "public_attendees_event_id_fkey";
             columns: ["event_id"];
             isOneToOne: false;
             referencedRelation: "events";
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "attendees_profile_id_fkey";
+            foreignKeyName: "public_attendees_profile_id_fkey";
             columns: ["profile_id"];
             isOneToOne: false;
             referencedRelation: "profiles";
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "attendees_user_id_fkey";
+            foreignKeyName: "public_attendees_user_id_fkey";
             columns: ["user_id"];
             isOneToOne: false;
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
         ];
-      };
-      categories: {
-        Row: {
-          created_at: string;
-          id: number;
-          name: string;
-        };
-        Insert: {
-          created_at?: string;
-          id?: number;
-          name: string;
-        };
-        Update: {
-          created_at?: string;
-          id?: number;
-          name?: string;
-        };
-        Relationships: [];
       };
       events: {
         Row: {
@@ -115,53 +98,17 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "events_group_id_fkey";
+            foreignKeyName: "public_events_group_id_fkey";
             columns: ["group_id"];
             isOneToOne: false;
             referencedRelation: "groups";
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "events_location_id_fkey";
+            foreignKeyName: "public_events_location_id_fkey";
             columns: ["location_id"];
             isOneToOne: false;
             referencedRelation: "locations";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      group_category: {
-        Row: {
-          category_id: number;
-          created_at: string;
-          group_id: number;
-          id: number;
-        };
-        Insert: {
-          category_id: number;
-          created_at?: string;
-          group_id: number;
-          id?: number;
-        };
-        Update: {
-          category_id?: number;
-          created_at?: string;
-          group_id?: number;
-          id?: number;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "public_group_category_category_id_fkey";
-            columns: ["category_id"];
-            isOneToOne: false;
-            referencedRelation: "categories";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "public_group_category_group_id_fkey";
-            columns: ["group_id"];
-            isOneToOne: false;
-            referencedRelation: "groups";
             referencedColumns: ["id"];
           },
         ];
@@ -255,13 +202,6 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "members_group_id_fkey";
-            columns: ["group_id"];
-            isOneToOne: false;
-            referencedRelation: "groups";
-            referencedColumns: ["id"];
-          },
-          {
             foreignKeyName: "members_profile_id_fkey";
             columns: ["profile_id"];
             isOneToOne: false;
@@ -275,40 +215,11 @@ export type Database = {
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
-        ];
-      };
-      phrase_category: {
-        Row: {
-          category_id: number;
-          created_at: string;
-          id: number;
-          phrase_id: number;
-        };
-        Insert: {
-          category_id: number;
-          created_at?: string;
-          id?: number;
-          phrase_id: number;
-        };
-        Update: {
-          category_id?: number;
-          created_at?: string;
-          id?: number;
-          phrase_id?: number;
-        };
-        Relationships: [
           {
-            foreignKeyName: "public_phrase_category_category_id_fkey";
-            columns: ["category_id"];
+            foreignKeyName: "public_members_group_id_fkey";
+            columns: ["group_id"];
             isOneToOne: false;
-            referencedRelation: "categories";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "public_phrase_category_dictionary_id_fkey";
-            columns: ["phrase_id"];
-            isOneToOne: false;
-            referencedRelation: "phrases";
+            referencedRelation: "groups";
             referencedColumns: ["id"];
           },
         ];
@@ -412,24 +323,53 @@ export type Database = {
           id: number;
         }[];
       };
-      get_user_events: {
+      get_phrases_for_group_by_group_id: {
         Args: {
-          user_id_input: string;
+          group_id_input: number;
         };
         Returns: {
+          audio_data: string | null;
+          author_id: string;
           created_at: string;
-          description_en: string;
-          description_ga: string;
-          group_id: number;
+          entry_en: string;
+          entry_ga: string;
+          group_id: number | null;
           id: number;
-          image: string | null;
-          location_id: number;
-          name_en: string;
-          name_ga: string;
-          start_date: string;
-          start_time: string;
         }[];
       };
+      get_user_events:
+        | {
+            Args: {
+              group_url_input: string;
+            };
+            Returns: {
+              audio_data: string | null;
+              author_id: string;
+              created_at: string;
+              entry_en: string;
+              entry_ga: string;
+              group_id: number | null;
+              id: number;
+            }[];
+          }
+        | {
+            Args: {
+              user_id_input: string;
+            };
+            Returns: {
+              created_at: string;
+              description_en: string;
+              description_ga: string;
+              group_id: number;
+              id: number;
+              image: string | null;
+              location_id: number;
+              name_en: string;
+              name_ga: string;
+              start_date: string;
+              start_time: string;
+            }[];
+          };
       get_user_groups: {
         Args: {
           user_id_input: string;

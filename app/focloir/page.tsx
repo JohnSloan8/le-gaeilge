@@ -1,49 +1,36 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { MainTitleContainer, XLargeTitle } from "@/components";
-import FocloirClient from "./clientComponents/FocloirClient";
-import { getTranslation } from "@/app/actions";
-import getUniqueGroups from "@/utils/general/getUniqueGroups";
+import { XLargeText } from "@/components";
+import Controller from "./client/Controller";
+// import { getTranslation } from "@/app/actions";
 
 interface Props {
-  searchParams: { group: string };
+  searchParams: { groupId: string };
 }
 
 export default async function PhrasesPage({ searchParams }: Props) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data: phrases } = await supabase
-    .from("phrases")
-    .select("*, group:groups(*)")
-    .order("created_at", { ascending: false });
+  const { data: phrases, error: phrasesError } = await supabase.rpc(
+    "get_phrases_for_group_by_group_id",
+    {
+      group_id_input: Number(searchParams.groupId),
+    },
+  );
 
-  if (phrases === null) {
-    return <h1>No Phrases</h1>;
-  } else {
-    const groups = phrases.map((phrase) => phrase.group);
-    const uniqueGroups = getUniqueGroups(groups);
+  // console.log("phrases:", phrases);
+  console.log("searchParams.groupId:", searchParams.groupId);
 
-    let thisGroup;
-    if (searchParams.group !== undefined) {
-      thisGroup = uniqueGroups.find(
-        (group) => group.URL === searchParams.group,
-      );
-    }
-
-    return (
-      <div className="w-full">
-        <MainTitleContainer color="bg-cyan-100">
-          <XLargeTitle text_ga="Foclóir" text_en="Dictionary" />
-        </MainTitleContainer>
-
-        <FocloirClient
-          phrases={phrases}
-          uniqueGroups={uniqueGroups}
-          getTranslation={getTranslation}
-          thisGroup={thisGroup === undefined ? null : thisGroup}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="w-full h-full flex flex-col">
+      <XLargeText text_ga="Foclóir" text_en="Dictionary" />
+      {phrases === null || phrases.length === 0 || phrasesError !== null ? (
+        <h1>No Phrases</h1>
+      ) : (
+        // <Controller phrases={phrases} getTranslation={getTranslation} />
+        <Controller phrases={phrases} groupId={searchParams.groupId} />
+      )}
+    </div>
+  );
 }

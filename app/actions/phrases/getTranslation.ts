@@ -48,7 +48,7 @@ const getTranslation = async (
 
   if (data !== null) {
     revalidatePath(`/focloir`);
-    redirect(`/focloir`);
+    redirect(`/focloir?groupId=${groupId}`);
   }
 
   error !== null && console.log("error:", error);

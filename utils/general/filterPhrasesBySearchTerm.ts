@@ -1,7 +1,7 @@
-import type { ExtendedPhraseModel } from "@/types/models";
+import type { PhraseModel } from "@/types/models";
 
 const filterPhrasesBySearchTerm = (
-  phrases: ExtendedPhraseModel[] | null,
+  phrases: PhraseModel[] | null,
   searchTerm: string,
 ) => {
   if (phrases === null) return null;
