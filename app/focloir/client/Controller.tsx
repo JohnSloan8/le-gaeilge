@@ -40,14 +40,14 @@ export default function Controller({ phrases, groupId }: ControllerProps) {
 
   return (
     <div className="w-full flex flex-grow flex-col">
-      <div className="flex flex-col flex-grow p-1">
-        <Phrases phrases={displayPhrases} limit={1000} />
-      </div>
       <Search
         searchTerm={searchTerm}
         handleSearch={handleSearch}
         groupId={groupId}
       />
+      <div className="flex flex-col flex-grow p-1">
+        <Phrases phrases={displayPhrases} limit={1000} />
+      </div>
     </div>
   );
 }
