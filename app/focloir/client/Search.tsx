@@ -15,7 +15,7 @@ export default function Search({
   groupId,
 }: SearchProps) {
   return (
-    <div className="flex h-14 w-full bg-activeArea-main justify-center p-2 border-b border-background-light">
+    <div className="flex h-14 w-full justify-center p-2">
       <form action={getTranslation} className="flex gap-2 w-full h-10">
         <input type="hidden" name="groupId" value={groupId} />
         <div className="flex flex-grow border border-gray-300 bg-white rounded-2xl py-2 px-3">

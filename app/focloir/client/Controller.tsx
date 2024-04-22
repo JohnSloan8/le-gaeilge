@@ -45,7 +45,7 @@ export default function Controller({ phrases, groupId }: ControllerProps) {
         handleSearch={handleSearch}
         groupId={groupId}
       />
-      <div className="flex flex-col flex-grow p-1">
+      <div className="flex flex-col flex-grow p-2">
         <Phrases phrases={displayPhrases} limit={1000} />
       </div>
     </div>
