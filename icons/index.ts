@@ -10,6 +10,8 @@ import ProfileIcon from "./Profile";
 import EventsIcon from "./Events";
 import HeartIcon from "./Heart";
 import TranslateIcon from "./Translate";
+import BurgerMenuIcon from "./BurgerMenu";
+import XIcon from "./X";
 
 export {
   CalendarIcon,
@@ -24,4 +26,6 @@ export {
   EventsIcon,
   HeartIcon,
   TranslateIcon,
+  BurgerMenuIcon,
+  XIcon,
 };

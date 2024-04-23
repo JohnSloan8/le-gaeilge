@@ -20,10 +20,10 @@ export default async function PhrasesPage({ searchParams }: Props) {
   );
 
   // console.log("phrases:", phrases);
-  console.log("searchParams.groupId:", searchParams.groupId);
+  // console.log("searchParams.groupId:", searchParams.groupId);
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-full flex flex-col overflow-y-scroll">
       <XLargeText text_ga="Foclóir" text_en="Dictionary" />
       {phrases === null || phrases.length === 0 || phrasesError !== null ? (
         <h1>No Phrases</h1>
