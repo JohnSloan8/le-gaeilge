@@ -12,6 +12,10 @@ import HeartIcon from "./Heart";
 import TranslateIcon from "./Translate";
 import BurgerMenuIcon from "./BurgerMenu";
 import XIcon from "./X";
+import BookIcon from "./Book";
+import UpDownArrowsIcon from "./UpDownArrows";
+import AddIcon from "./Add";
+import SignInIcon from "./SignIn";
 
 export {
   CalendarIcon,
@@ -28,4 +32,8 @@ export {
   TranslateIcon,
   BurgerMenuIcon,
   XIcon,
+  BookIcon,
+  UpDownArrowsIcon,
+  AddIcon,
+  SignInIcon,
 };

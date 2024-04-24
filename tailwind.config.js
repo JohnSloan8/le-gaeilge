@@ -1,25 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 import colors from "tailwindcss/colors";
+import { themeColors } from "./theme";
 
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./theme/**/*.{js,ts,jsx,tsx,mdx}",
+    "./icons/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      colors: {
-        background: {
-          light: colors.gray[100],
-          medium: colors.gray[400],
-          dark: colors.gray[800],
-        },
-        activeArea: {
-          light: "#59d4f3",
-          main: "#0d91b2",
-          dark: "#074d5f",
-        },
-      },
+      colors: themeColors,
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
         robotoCondensed: ["Roboto Condensed", "sans-serif"],

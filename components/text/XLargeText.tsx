@@ -13,7 +13,9 @@ export default function XLargeText({
   centered = true,
 }: XLargeTextProps) {
   return (
-    <div className={`flex flex-col p-2 ${centered && "items-center"}`}>
+    <div
+      className={`bg-primary-100 flex flex-col p-1 ${centered && "items-center"}`}
+    >
       <div className="text-2xl">{capitalizeNonGrammatical(text_ga)}</div>
       <EnglishText text_en={capitalizeNonGrammatical(text_en)} />
     </div>

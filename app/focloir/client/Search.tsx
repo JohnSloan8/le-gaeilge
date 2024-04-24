@@ -2,6 +2,7 @@ import { SearchIcon, TranslateIcon } from "@/icons";
 import type { ChangeEvent } from "react";
 import { getTranslation } from "@/app/actions";
 import { XSmallText } from "@/components";
+import { themeColors } from "@/theme";
 
 interface SearchProps {
   searchTerm: string;
@@ -31,17 +32,13 @@ export default function Search({
             onChange={handleSearch}
           />
         </div>
-        {/* {searchTerm !== "" && ( */}
-        <button
-          disabled={searchTerm === ""}
-          className={`w-24 rounded-lg bg-activeArea-dark flex items-center ${searchTerm === "" && "opacity-40"}`}
-        >
-          <div className="w-[36px] h-[36px] p-1.5 flex items-center justify-center">
-            <TranslateIcon />
+
+        <button className="p-0 flex flex-row gap-1 items-center justify-center">
+          <div className=" mr-1 flex items-center justify-center">
+            <TranslateIcon color={themeColors.primary[100]} size={26} />
           </div>
-          <XSmallText text_ga="Aistrigh" text_en="Translate" dark={true} />
+          <XSmallText text_ga="aistrigh" text_en="translate" dark={true} />
         </button>
-        {/* )} */}
       </form>
     </div>
   );

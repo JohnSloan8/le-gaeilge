@@ -62,9 +62,6 @@ import Groups from "./composite/Groups";
 import Events from "./composite/Events";
 import Phrases from "./composite/Phrases";
 
-// navbar
-import Navbar from "./navbar/Navbar";
-
 export {
   GroupCard,
   GroupCardSmall,
@@ -109,5 +106,4 @@ export {
   Groups,
   Events,
   Phrases,
-  Navbar,
 };

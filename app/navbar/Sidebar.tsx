@@ -6,8 +6,8 @@ interface SidebarProps {
 
 const Sidebar = ({ children }: SidebarProps) => {
   return (
-    <div id="sidebarContainer" className="w-48">
-      <div className="w-full h-screen shadow-md bg-black opacity-60">
+    <div id="sidebarContainer" className="w-56">
+      <div className="w-full h-screen shadow-md bg-primary-800">
         <ul className="pt-12 ">{children}</ul>
       </div>
     </div>
