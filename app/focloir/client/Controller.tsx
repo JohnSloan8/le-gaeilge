@@ -26,7 +26,7 @@ export default function Controller({
     useState<PhraseModelWithFavourites[]>(phrases);
 
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [editPhrase, setEditPhrase] = useState<number | null>(80);
+  const [editPhrase, setEditPhrase] = useState<number | null>(null);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
