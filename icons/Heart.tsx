@@ -1,15 +1,20 @@
 interface HeartIconProps {
   color: string;
   size: number;
+  filled?: boolean;
 }
 
-export default function HeartIcon({ color, size }: HeartIconProps) {
+export default function HeartIcon({
+  color,
+  size,
+  filled = false,
+}: HeartIconProps) {
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24.00 24.00"
-      fill="none"
+      fill={filled ? color : "none"}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

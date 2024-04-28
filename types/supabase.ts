@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
 export type Json =
   | string
   | number
@@ -110,6 +109,42 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "locations";
             referencedColumns: ["id"];
+          },
+        ];
+      };
+      favourite_phrases: {
+        Row: {
+          created_at: string;
+          id: number;
+          phrase_id: number;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          phrase_id: number;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          phrase_id?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "favourite_phrases_phrase_id_fkey";
+            columns: ["phrase_id"];
+            isOneToOne: false;
+            referencedRelation: "phrases";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "favourite_phrases_user_id_fkey1";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["user_id"];
           },
         ];
       };
@@ -229,6 +264,7 @@ export type Database = {
           audio_data: string | null;
           author_id: string;
           created_at: string;
+          edited: boolean | null;
           entry_en: string;
           entry_ga: string;
           group_id: number | null;
@@ -238,6 +274,7 @@ export type Database = {
           audio_data?: string | null;
           author_id: string;
           created_at?: string;
+          edited?: boolean | null;
           entry_en: string;
           entry_ga: string;
           group_id?: number | null;
@@ -247,6 +284,7 @@ export type Database = {
           audio_data?: string | null;
           author_id?: string;
           created_at?: string;
+          edited?: boolean | null;
           entry_en?: string;
           entry_ga?: string;
           group_id?: number | null;
@@ -298,7 +336,7 @@ export type Database = {
           {
             foreignKeyName: "profiles_user_id_fkey";
             columns: ["user_id"];
-            isOneToOne: false;
+            isOneToOne: true;
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
@@ -309,6 +347,13 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      delete_favourite_phrase: {
+        Args: {
+          phrase_id_input: number;
+          user_id_input: string;
+        };
+        Returns: undefined;
+      };
       get_categories_phrases: {
         Args: {
           categories_input: number[];
@@ -317,6 +362,7 @@ export type Database = {
           audio_data: string | null;
           author_id: string;
           created_at: string;
+          edited: boolean | null;
           entry_en: string;
           entry_ga: string;
           group_id: number | null;
@@ -331,6 +377,72 @@ export type Database = {
           audio_data: string | null;
           author_id: string;
           created_at: string;
+          edited: boolean | null;
+          entry_en: string;
+          entry_ga: string;
+          group_id: number | null;
+          id: number;
+        }[];
+      };
+      get_phrases_for_group_by_group_id_and_user_id: {
+        Args: {
+          group_id_input: number;
+          user_id_input: string;
+        };
+        Returns: {
+          audio_data: string | null;
+          author_id: string;
+          created_at: string;
+          edited: boolean | null;
+          entry_en: string;
+          entry_ga: string;
+          group_id: number | null;
+          id: number;
+        }[];
+      };
+      get_phrases_for_group_by_group_id_with_favourites: {
+        Args: {
+          group_id_input?: number;
+          user_id_input?: string;
+        };
+        Returns: {
+          phrase_id: number;
+          phrase_created_at: string;
+          phrase_entry_ga: string;
+          phrase_entry_en: string;
+          phrase_author_id: string;
+          phrase_group_id: number;
+          phrase_audio_data: string;
+          phrase_edited: boolean;
+          phrase_is_favourited: boolean;
+        }[];
+      };
+      get_phrases_for_group_by_group_id_with_favouritessss: {
+        Args: {
+          group_id_input?: number;
+          user_id_input?: string;
+        };
+        Returns: {
+          phrase_id: number;
+          phrase_created_at: string;
+          phrase_entry_ga: string;
+          phrase_entry_en: string;
+          phrase_author_id: string;
+          phrase_group_id: number;
+          phrase_audio_data: string;
+          phrase_edited: boolean;
+          phrase_is_favourited: boolean;
+        }[];
+      };
+      get_phrases_users_by_group: {
+        Args: {
+          group_id_input: number;
+        };
+        Returns: {
+          audio_data: string | null;
+          author_id: string;
+          created_at: string;
+          edited: boolean | null;
           entry_en: string;
           entry_ga: string;
           group_id: number | null;
@@ -346,6 +458,7 @@ export type Database = {
               audio_data: string | null;
               author_id: string;
               created_at: string;
+              edited: boolean | null;
               entry_en: string;
               entry_ga: string;
               group_id: number | null;

@@ -2,7 +2,7 @@ import CalendarIcon from "./Calendar";
 import ClockIcon from "./Clock";
 import LocationIcon from "./Location";
 import GroupIcon from "./Group";
-import PlayIcon from "./Play";
+import PlayIcon from "./PlayNew";
 import SearchIcon from "./Search";
 import PencilIcon from "./Pencil";
 import HomeIcon from "./Home";
@@ -16,6 +16,7 @@ import BookIcon from "./Book";
 import UpDownArrowsIcon from "./UpDownArrows";
 import AddIcon from "./Add";
 import SignInIcon from "./SignIn";
+import StopIcon from "./Stop";
 
 export {
   CalendarIcon,
@@ -36,4 +37,5 @@ export {
   UpDownArrowsIcon,
   AddIcon,
   SignInIcon,
+  StopIcon,
 };

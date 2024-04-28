@@ -1,24 +1,30 @@
-import type { ExtendedPhraseModel } from "@/types/models";
+import type { PhraseModelWithFavourites } from "@/types/models";
 import dayjs from "dayjs";
 
-function sortOldest(a: ExtendedPhraseModel, b: ExtendedPhraseModel) {
-  return dayjs(b.created_at).diff(dayjs(a.created_at));
+function sortOldest(
+  a: PhraseModelWithFavourites,
+  b: PhraseModelWithFavourites,
+) {
+  return dayjs(b.phrase_created_at).diff(dayjs(a.phrase_created_at));
 }
 
-function sortRecent(a: ExtendedPhraseModel, b: ExtendedPhraseModel) {
-  return dayjs(a.created_at).diff(dayjs(b.created_at));
+function sortRecent(
+  a: PhraseModelWithFavourites,
+  b: PhraseModelWithFavourites,
+) {
+  return dayjs(a.phrase_created_at).diff(dayjs(b.phrase_created_at));
 }
 
-// function sortByEntryGaAZ(a: ExtendedPhraseModel, b: ExtendedPhraseModel) {
+// function sortByEntryGaAZ(a: PhraseModelWithFavourites, b: PhraseModelWithFavourites) {
 //   return b.entry_ga.toLowerCase().localeCompare(a.entry_ga.toLowerCase());
 // }
 
-// function sortByEntryGaZA(a: ExtendedPhraseModel, b: ExtendedPhraseModel) {
+// function sortByEntryGaZA(a: PhraseModelWithFavourites, b: PhraseModelWithFavourites) {
 //   return a.entry_ga.toLowerCase().localeCompare(b.entry_ga.toLowerCase());
 // }
 
 const orderPhrases = (
-  phrases: ExtendedPhraseModel[] | null,
+  phrases: PhraseModelWithFavourites[] | null,
   filter: string,
 ) => {
   if (phrases === null) return null;

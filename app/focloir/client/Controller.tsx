@@ -1,25 +1,32 @@
 "use client";
 
-import type { PhraseModel } from "@/types/models";
-import { Phrases, XSmallText } from "@/components";
+import type { PhraseModelWithFavourites } from "@/types/models";
 import { useEffect, useState } from "react";
 import Search from "./Search";
 import type { ChangeEvent } from "react";
 import filterPhrasesBySearchTerm from "@/utils/general/filterPhrasesBySearchTerm";
-import { themeColors } from "@/theme";
-import { HeartIcon, UpDownArrowsIcon, AddIcon } from "@/icons";
+
+import type { Session } from "@supabase/supabase-js";
+import SortAndFilter from "./SortAndFilter";
+import EditPhrase from "./EditPhrase";
+import Phrases from "./Phrases";
 
 interface ControllerProps {
-  phrases: PhraseModel[];
+  phrases: PhraseModelWithFavourites[];
   groupId: string;
-  // getTranslation?: (data: FormData) => Promise<false | undefined>;
+  session: Session | null;
 }
 
-export default function Controller({ phrases, groupId }: ControllerProps) {
-  console.log("groupId:", groupId);
-  const [displayPhrases, setDisplayPhrases] = useState<PhraseModel[]>(phrases);
+export default function Controller({
+  phrases,
+  groupId,
+  session,
+}: ControllerProps) {
+  const [displayPhrases, setDisplayPhrases] =
+    useState<PhraseModelWithFavourites[]>(phrases);
 
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [editPhrase, setEditPhrase] = useState<number | null>(80);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -41,31 +48,27 @@ export default function Controller({ phrases, groupId }: ControllerProps) {
   }, [searchTerm, phrases]);
 
   return (
-    <div className="w-full flex flex-grow flex-col">
+    <div className="relative w-full flex flex-grow flex-col">
+      {editPhrase !== null && (
+        <EditPhrase
+          phrase={phrases.find((p) => p.phrase_id === editPhrase)}
+          setEditPhrase={setEditPhrase}
+        />
+      )}
       <div className="bg-primary-600">
         <Search
           searchTerm={searchTerm}
           handleSearch={handleSearch}
           groupId={groupId}
         />
-        <div className="h-12 pb-2 pt-2 border-t border-primary-100 flex flex-row justify-around">
-          <button className="p-1 flex flex-row gap-1 items-center justify-center">
-            <HeartIcon color={themeColors.primary[100]} size={28} />
-            <XSmallText text_ga="ceanáin" text_en="favourites" dark={true} />
-          </button>
-
-          <button className="p-1 flex flex-row gap-1 items-center justify-center">
-            <UpDownArrowsIcon color={themeColors.primary[100]} size={28} />
-            <XSmallText text_ga="sórtáil" text_en="sort" dark={true} />
-          </button>
-          <button className="p-1 flex flex-row gap-1 items-center justify-center">
-            <AddIcon color={themeColors.primary[100]} size={28} />
-            <XSmallText text_ga="cuir" text_en="add" dark={true} />
-          </button>
-        </div>
+        <SortAndFilter />
       </div>
       <div className="flex flex-col flex-grow p-2">
-        <Phrases phrases={displayPhrases} limit={1000} />
+        <Phrases
+          phrases={displayPhrases}
+          session={session}
+          setEditPhrase={setEditPhrase}
+        />
       </div>
     </div>
   );

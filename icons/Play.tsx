@@ -1,9 +1,10 @@
 interface PlayIconProps {
   color: string;
   size: number;
+  filled?: boolean;
 }
 
-const PlayIcon = ({ color, size }: PlayIconProps) => {
+const PlayIcon = ({ color, size, filled = false }: PlayIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +17,7 @@ const PlayIcon = ({ color, size }: PlayIconProps) => {
           id="play-button-arrowhead_1_"
           data-name="play-button-arrowhead (1)"
           transform="translate(-30 -35)"
-          fill={color}
+          fill={filled ? color : "none"}
         >
           <path
             id="Path_18"

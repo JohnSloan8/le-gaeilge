@@ -7,6 +7,7 @@ import ProfileCard from "./cards/ProfileCard";
 
 // buttons
 import LinkButton from "./buttons/LinkButton";
+import SubmitButton from "./buttons/SubmitButton";
 import AuthButton from "./buttons/AuthButton";
 import PrimaryButton from "./buttons/PrimaryButton";
 import SecondaryButton from "./buttons/SecondaryButton";
@@ -60,7 +61,9 @@ import CardLink from "./links/CardLink";
 import Profiles from "./composite/Profiles";
 import Groups from "./composite/Groups";
 import Events from "./composite/Events";
-import Phrases from "./composite/Phrases";
+
+// loading
+import LoadingSpinner from "./loading/Spinner";
 
 export {
   GroupCard,
@@ -74,6 +77,7 @@ export {
   WarningButton,
   PlayAudioButton,
   RoundMobileButton,
+  SubmitButton,
   EventDate,
   EventDateAbbr,
   EventTime,
@@ -105,5 +109,5 @@ export {
   Profiles,
   Groups,
   Events,
-  Phrases,
+  LoadingSpinner,
 };

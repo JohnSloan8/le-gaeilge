@@ -35,8 +35,6 @@ const getSynthesisAudio = async (inputText: string) => {
       requestOptions,
     );
     const data = await response.json();
-
-    console.log("data;", data);
     return data.audioContent;
   } catch (error) {
     console.log("error in getTranslation:", error);

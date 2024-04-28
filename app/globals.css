@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  margin: 0;
+  line-height: 0;
+}
+
 .select-container {
   @apply h-8 w-64 bg-gray-100 px-2 text-gray-600;
 }
@@ -47,4 +52,20 @@
   height: 100%; /* Set the height of the container */
   background-image: url("../public/irish-background.jpg"); /* Set the SVG image as the background */
   background-repeat: repeat; /* Make the background image repeat */
+}
+
+.spinner-light {
+  @apply border-primary-100;
+}
+
+.spinner-dark {
+  @apply border-primary-700;
+}
+
+.spinner-large {
+  @apply h-6 w-6;
+}
+
+.spinner-small {
+  @apply h-4 w-4;
 }

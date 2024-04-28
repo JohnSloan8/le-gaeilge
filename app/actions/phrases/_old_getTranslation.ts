@@ -1,10 +1,15 @@
+/* This was in use before 'getIrishTranslation' to avoid step of checking language, and then the call to synthesis was separated to speed it up. 
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { detectLanguage, languageToTranslateTo, translate } from "./utils";
+import {
+  detectLanguage,
+  languageToTranslateTo,
+  translate,
+  getSynthesisAudio,
+} from "./utils";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import getSynthesisAudio from "./getSynthesisAudio";
 
 const getTranslation = async (
   formData: FormData,
@@ -60,3 +65,4 @@ const getTranslation = async (
 };
 
 export default getTranslation;
+*/
