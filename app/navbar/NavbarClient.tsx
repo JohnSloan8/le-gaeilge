@@ -76,12 +76,12 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
         <Sidebar>
           <Link href="/">
             <div
-              className="p-2 flex w-full my-2"
+              className="p-2 flex w-full my-2 items-center"
               onClick={() => {
                 setShowSidebar(false);
               }}
             >
-              <div className="mx-2">
+              <div className="mx-2 flex">
                 <HomeIcon color={themeColors.primary[100]} size={24} />
               </div>
               <div className="text-primary-100">bhaile</div>
@@ -89,7 +89,7 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
           </Link>
           <Link href="/grupai">
             <div
-              className="p-2 flex w-full my-2"
+              className="p-2 flex w-full my-2 items-center"
               onClick={() => {
                 setShowSidebar(false);
               }}
@@ -102,7 +102,7 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
           </Link>
           <Link href="/imeachtai">
             <div
-              className="p-2 flex w-full my-2"
+              className="p-2 flex w-full my-2 items-center"
               onClick={() => {
                 setShowSidebar(false);
               }}
@@ -115,7 +115,7 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
           </Link>
           <Link href="/focloir">
             <div
-              className="p-2 flex w-full my-2"
+              className="p-2 flex w-full my-2 items-center"
               onClick={() => {
                 setShowSidebar(false);
               }}

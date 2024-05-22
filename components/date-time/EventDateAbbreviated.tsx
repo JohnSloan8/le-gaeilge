@@ -7,7 +7,7 @@ dayjs.extend(isToday);
 dayjs.extend(weekday);
 
 interface EventDateProps {
-  start_date: string;
+  start_date: string | null;
   line?: boolean;
 }
 

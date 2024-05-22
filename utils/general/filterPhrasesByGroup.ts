@@ -8,8 +8,8 @@ const filterPhrasesByGroup = (
   if (filter === "all") return phrases;
 
   return phrases?.filter(
-    // (phrase) => phrase.phrase_group_id !== null && phrase.phrase_group.URL === filter,
-    (phrase) => phrase.phrase_group_id !== null,
+    // (phrase) => phrase.p_group_id !== null && phrase.p_group.URL === filter,
+    (phrase) => phrase.p_group_id !== null,
   );
 };
 

@@ -5,14 +5,14 @@ function sortOldest(
   a: PhraseModelWithFavourites,
   b: PhraseModelWithFavourites,
 ) {
-  return dayjs(b.phrase_created_at).diff(dayjs(a.phrase_created_at));
+  return dayjs(b.p_created_at).diff(dayjs(a.p_created_at));
 }
 
 function sortRecent(
   a: PhraseModelWithFavourites,
   b: PhraseModelWithFavourites,
 ) {
-  return dayjs(a.phrase_created_at).diff(dayjs(b.phrase_created_at));
+  return dayjs(a.p_created_at).diff(dayjs(b.p_created_at));
 }
 
 // function sortByEntryGaAZ(a: PhraseModelWithFavourites, b: PhraseModelWithFavourites) {

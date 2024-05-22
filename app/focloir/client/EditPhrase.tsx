@@ -1,7 +1,5 @@
 import editPhrase from "@/app/actions/phrases/edit";
 import { SmallText, SubmitButton } from "@/components";
-import { XIcon } from "@/icons";
-import { themeColors } from "@/theme";
 import type { PhraseModelWithFavourites } from "@/types/models";
 import { useEffect, useState } from "react";
 import type { ChangeEvent, Dispatch, SetStateAction } from "react";
@@ -16,8 +14,8 @@ export default function EditPhrase({ phrase, setEditPhrase }: EditPhraseProps) {
     return null;
   }
 
-  const [entryGa, setEntryGa] = useState(phrase.phrase_entry_ga);
-  const [entryEn, setEntryEn] = useState(phrase.phrase_entry_en);
+  const [entryGa, setEntryGa] = useState(phrase.p_entry_ga);
+  const [entryEn, setEntryEn] = useState(phrase.p_entry_en);
   const [changed, setChanged] = useState(false);
 
   const handleEditGa = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,9 +30,7 @@ export default function EditPhrase({ phrase, setEditPhrase }: EditPhraseProps) {
 
   const checkIfChange = () => {
     setChanged(
-      !(
-        entryGa === phrase.phrase_entry_ga && entryEn === phrase.phrase_entry_en
-      ),
+      !(entryGa === phrase.p_entry_ga && entryEn === phrase.p_entry_en),
     );
   };
 
@@ -42,21 +38,10 @@ export default function EditPhrase({ phrase, setEditPhrase }: EditPhraseProps) {
     checkIfChange();
   }, [entryEn, entryGa]);
 
-  const close = () => {
-    setEditPhrase(null);
-  };
-
   return (
-    <div className="w-full h-full bg-white absolute border border-blue-700">
-      <div className="w-full flex justify-end">
-        <button onClick={close} className="p-2">
-          <XIcon color={themeColors.primary[700]} size={22} />
-        </button>
-      </div>
-
+    <div>
       <form action={editPhrase} className="p-1 flex flex-col">
-        <input type="hidden" name="phraseId" value={phrase.phrase_id} />
-
+        <input type="hidden" name="phraseId" value={phrase.p_id} />
         <div className="flex gap-1 py-2">
           <label htmlFor="entryGa" className="w-16">
             <SmallText text_ga="Gaeilge" text_en="Irish" dark={false} />
@@ -84,15 +69,19 @@ export default function EditPhrase({ phrase, setEditPhrase }: EditPhraseProps) {
             value={entryEn}
           />
         </div>
-        {changed && (
-          <div className="w-full flex justify-center pt-4">
-            <SubmitButton>
-              <div className="w-64 border rounded-md bg-primary-600">
-                <SmallText text_ga="nuashonrú" text_en="update" dark={true} />
-              </div>
-            </SubmitButton>
-          </div>
-        )}
+
+        <div className="w-full flex justify-center pt-4">
+          <SubmitButton
+            disabled={!changed}
+            // onSubmitted={() => {
+            //   setEditPhrase(null);
+            // }}
+          >
+            <div className="w-64 border rounded-md bg-primary-600">
+              <SmallText text_ga="nuashonrú" text_en="update" dark={true} />
+            </div>
+          </SubmitButton>
+        </div>
       </form>
     </div>
   );

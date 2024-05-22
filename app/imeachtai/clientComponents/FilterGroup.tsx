@@ -27,7 +27,7 @@ export default function FilterGroup({
       >
         <option value="all">go leir (all)</option>
         {groups.map((group, i) => (
-          <option key={i} value={group.URL}>
+          <option key={i} value={group.URL !== null ? group.URL : ""}>
             {`${group.name_ga} (${group.name_en})`}
           </option>
         ))}

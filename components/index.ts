@@ -65,6 +65,9 @@ import Events from "./composite/Events";
 // loading
 import LoadingSpinner from "./loading/Spinner";
 
+// overlay
+import Popup from "./overlay/Popup";
+
 export {
   GroupCard,
   GroupCardSmall,
@@ -110,4 +113,5 @@ export {
   Groups,
   Events,
   LoadingSpinner,
+  Popup,
 };

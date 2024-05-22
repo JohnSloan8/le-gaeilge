@@ -23,10 +23,10 @@ export default function Phrase({
 }: PhraseProps) {
   useEffect(() => {
     const updateSynthesis = async () => {
-      await getSynthesis(phrase.phrase_entry_ga, phrase.phrase_id);
+      await getSynthesis(phrase.p_entry_ga, phrase.p_id);
     };
 
-    if (phrase.phrase_audio_data === null) {
+    if (phrase.p_audio_data === null) {
       void updateSynthesis();
     }
   }, []);
@@ -35,10 +35,7 @@ export default function Phrase({
     <div className="rounded-xl bg-white p-2 mb-2 shadow-lg w-full">
       <div className="w-full justify-center flex ">
         <div className="grow">
-          <SmallText
-            text_ga={phrase.phrase_entry_ga}
-            text_en={phrase.phrase_entry_en}
-          />
+          <SmallText text_ga={phrase.p_entry_ga} text_en={phrase.p_entry_en} />
         </div>
         <div className="flex items-center flex-row">
           <form action={session === null ? () => null : favourite}>
@@ -46,12 +43,7 @@ export default function Phrase({
               type="submit"
               className="w-7 h-7 border flex justify-center items-center"
             >
-              <input
-                type="hidden"
-                name="groupId"
-                value={phrase.phrase_group_id}
-              />
-              <input type="hidden" name="phraseId" value={phrase.phrase_id} />
+              <input type="hidden" name="phraseId" value={phrase.p_id} />
               <input
                 type="hidden"
                 name="userId"
@@ -60,33 +52,33 @@ export default function Phrase({
               <input
                 type="hidden"
                 name="isFavourited"
-                value={String(phrase.phrase_is_favourited)}
+                value={String(phrase.p_is_favourited)}
               />
               <HeartIcon
                 color={themeColors.primary[700]}
                 size={24}
-                filled={phrase.phrase_is_favourited}
+                filled={phrase.p_is_favourited}
               />
             </button>
           </form>
           <button
             className="w-7 h-7 border flex justify-center items-center"
             onClick={() => {
-              setEditPhrase(phrase.phrase_id);
+              setEditPhrase(phrase.p_id);
             }}
           >
             <PencilIcon
               color={themeColors.primary[700]}
               size={24}
-              filled={phrase.phrase_edited}
+              filled={phrase.p_edited}
             />
           </button>
-          {phrase.phrase_audio_data === null ? (
+          {phrase.p_audio_data === null ? (
             <button className="w-7 h-7 border flex justify-center items-center">
               <LoadingSpinner color={"dark"} size={"small"} />
             </button>
           ) : (
-            <PlayAudioButton src={phrase.phrase_audio_data} />
+            <PlayAudioButton src={phrase.p_audio_data} />
           )}
         </div>
       </div>

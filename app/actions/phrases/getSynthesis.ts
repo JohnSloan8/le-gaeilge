@@ -21,7 +21,7 @@ const getSynthesis = async (text: string, phraseId: number) => {
 
   if (data !== null) {
     revalidateTag(`phrases`);
-    console.log("still here");
+    // console.log("still here");
   }
   error !== null && console.log("error:", error);
 

@@ -6,7 +6,7 @@ const robotoCondensed = Roboto_Condensed({
 });
 
 interface EnglishTextProps {
-  text_en: string;
+  text_en: string | null;
   inline?: boolean;
   dark?: boolean;
   xsmall?: boolean;
@@ -22,7 +22,7 @@ export default function EnglishText({
     <div
       className={`${xsmall ? "text-xs" : "text-sm"} ${dark ? "text-gray-100" : "text-gray-400"} ${!inline ? "mt-[-4px]" : "m-1"} ${robotoCondensed.className}`}
     >
-      {text_en}
+      {text_en !== null ? text_en : ""}
     </div>
   );
 }

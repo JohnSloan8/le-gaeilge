@@ -17,6 +17,7 @@ import UpDownArrowsIcon from "./UpDownArrows";
 import AddIcon from "./Add";
 import SignInIcon from "./SignIn";
 import StopIcon from "./Stop";
+import RefreshIcon from "./Refresh";
 
 export {
   CalendarIcon,
@@ -38,4 +39,5 @@ export {
   AddIcon,
   SignInIcon,
   StopIcon,
+  RefreshIcon,
 };

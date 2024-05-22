@@ -19,7 +19,7 @@ export default function EventsClient({ events, groupURL }: EventsClientProps) {
   const [dateFilter, setDateFilter] = useState("all");
   const [groupFilter, setGroupFilter] = useState("all");
 
-  console.log("groupURL:", groupURL);
+  // console.log("groupURL:", groupURL);
 
   const groups = events.map((event) => event.group);
 

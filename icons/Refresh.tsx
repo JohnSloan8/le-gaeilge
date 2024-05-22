@@ -1,9 +1,9 @@
-interface SearchIconProps {
+interface RefreshIconProps {
   color: string;
   size: number;
 }
 
-export default function SearchIcon({ color, size }: SearchIconProps) {
+export default function RefreshIcon({ color, size }: RefreshIconProps) {
   return (
     <svg
       width={size}
@@ -21,7 +21,7 @@ export default function SearchIcon({ color, size }: SearchIconProps) {
       <g id="SVGRepo_iconCarrier">
         {" "}
         <path
-          d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+          d="M3 3V8M3 8H8M3 8L6 5.29168C7.59227 3.86656 9.69494 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.71683 21 4.13247 18.008 3.22302 14"
           stroke={color}
           strokeWidth="2"
           strokeLinecap="round"

@@ -10,7 +10,7 @@ const getIrishTranslation = async (
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  // const userId: string = String(formData.get("userId"));
+  const userId: string = String(formData.get("userId"));
   const text: string = String(formData.get("text"));
   const groupIdFromForm = formData.get("groupId"); // only one category for now
   const groupId = groupIdFromForm === "null" ? null : Number(groupIdFromForm);
@@ -20,7 +20,7 @@ const getIrishTranslation = async (
   const { data: phrase, error } = await supabase
     .from("phrases")
     .insert({
-      author_id: "1025c075-68b8-43c0-9a04-734041659499",
+      author_id: userId.length > 0 ? userId : null,
       entry_ga: translation,
       entry_en: text,
       group_id: groupId,
@@ -31,6 +31,7 @@ const getIrishTranslation = async (
 
   if (phrase !== null) {
     revalidateTag(`phrases`);
+    console.log("new phrase:", phrase);
   }
 
   error !== null && console.log("error:", error);

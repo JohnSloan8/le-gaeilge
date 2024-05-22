@@ -22,21 +22,24 @@ const filterEventsByDate = (
   const next30Days = today.add(30, "day");
 
   return events.filter((event) => {
-    const dayJsObject = dayjs(event.start_date + event.start_time);
-
-    switch (filter) {
-      case "past":
-        return dayJsObject <= today;
-      case "today":
-        return isSameDay(today, dayJsObject);
-      case "this week":
-        return dayJsObject >= startOfWeek && dayJsObject <= endOfWeek;
-      case "next 30 days":
-        return dayJsObject >= today && dayJsObject <= next30Days;
-      case "all upcoming":
-        return dayJsObject >= today && dayJsObject <= next30Days;
-      default:
-        return true;
+    if (event.start_date === null || event.start_time === null) {
+      return false;
+    } else {
+      const dayJsObject = dayjs(event.start_date + event.start_time);
+      switch (filter) {
+        case "past":
+          return dayJsObject <= today;
+        case "today":
+          return isSameDay(today, dayJsObject);
+        case "this week":
+          return dayJsObject >= startOfWeek && dayJsObject <= endOfWeek;
+        case "next 30 days":
+          return dayJsObject >= today && dayJsObject <= next30Days;
+        case "all upcoming":
+          return dayJsObject >= today && dayJsObject <= next30Days;
+        default:
+          return true;
+      }
     }
   });
 };

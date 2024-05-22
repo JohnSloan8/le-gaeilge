@@ -4,15 +4,15 @@ import { LargeTitle, EventDateAbbr, SmallText } from "@/components";
 import { LocationIcon, GroupIcon } from "@/icons";
 
 interface EventCardProps {
-  name_ga: string;
-  name_en: string;
-  group_name_ga: string;
-  group_name_en: string;
-  location_ga: string;
-  location_en: string;
-  start_date: string;
-  start_time: string;
-  image: string;
+  name_ga: string | null;
+  name_en: string | null;
+  group_name_ga: string | null;
+  group_name_en: string | null;
+  location_ga: string | null;
+  location_en: string | null;
+  start_date: string | null;
+  start_time: string | null;
+  image: string | null;
   // attendees: any[];
 }
 
@@ -36,7 +36,7 @@ export default function EventCard({
         </div>
         <Image
           src={
-            image !== ""
+            image !== null
               ? image
               : "https://soks.org.au/wp-content/plugins/give/assets/dist/images/anonymous-user.svg"
           }
@@ -64,10 +64,7 @@ export default function EventCard({
           <div className="px-1 absolute left-[-26px]">
             <LocationIcon />
           </div>
-          <SmallText
-            text_ga={location_ga.toUpperCase()}
-            text_en={location_en.toUpperCase()}
-          />
+          <SmallText text_ga={location_ga} text_en={location_en} />
         </div>
       </div>
     </div>

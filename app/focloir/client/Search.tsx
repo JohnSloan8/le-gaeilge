@@ -1,36 +1,62 @@
-import { SearchIcon, TranslateIcon } from "@/icons";
-import type { ChangeEvent } from "react";
+import { SearchIcon, TranslateIcon, RefreshIcon } from "@/icons";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { getIrishTranslation } from "@/app/actions";
 import { XSmallText, SubmitButton } from "@/components";
 import { themeColors } from "@/theme";
 
 interface SearchProps {
   searchTerm: string;
+  setSearchTerm: Dispatch<SetStateAction<string>>;
   handleSearch: (e: ChangeEvent<HTMLInputElement>) => void;
-  groupId: string;
+  groupId: number | null;
+  userId?: string;
 }
 
 export default function Search({
   searchTerm,
+  setSearchTerm,
   handleSearch,
   groupId,
+  userId,
 }: SearchProps) {
   return (
     <div className="flex h-14 w-full justify-center p-2">
       <form action={getIrishTranslation} className="flex gap-2 w-full h-10">
-        <input type="hidden" name="groupId" value={groupId} />
-        <div className="flex flex-grow border border-gray-300 bg-white rounded-2xl py-2 px-3">
-          <div className="pr-2">
-            <SearchIcon />
+        <input
+          type="hidden"
+          name="groupId"
+          value={groupId === null ? "null" : groupId}
+        />
+        <input
+          type="hidden"
+          name="userId"
+          value={userId === undefined ? "" : userId}
+        />
+        <div className="flex flex-grow border border-gray-300 bg-white rounded-2xl py-2 px-2">
+          <div className="pr-1 flex-none">
+            <SearchIcon size={20} color={themeColors.primary[300]} />
           </div>
-          <input
-            className="appearance-none text-gray-700 leading-tight w-full focus:outline-none focus:shadow-outline"
-            type="text"
-            name="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
+          <div className="flex">
+            <input
+              className="appearance-none text-gray-700 leading-tight w-full focus:outline-none focus:shadow-outline"
+              type="text"
+              name="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </div>
+          {searchTerm !== "" && (
+            <div className="pl-1 flex-none">
+              <button
+                onClick={() => {
+                  setSearchTerm("");
+                }}
+              >
+                <RefreshIcon size={20} color={themeColors.primary[300]} />
+              </button>
+            </div>
+          )}
         </div>
 
         <SubmitButton>

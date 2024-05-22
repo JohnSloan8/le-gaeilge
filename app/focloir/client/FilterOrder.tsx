@@ -1,5 +1,5 @@
 import { SmallTitle } from "@/components";
-import { type Dispatch, type SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 interface FilterOrderProps {
   orderFilter: string;
@@ -24,8 +24,6 @@ export default function FilterOrder({
       >
         <option value="recent">is déanaí (most recent)</option>
         <option value="oldest">is sine (oldest)</option>
-        {/* <option value="alphabetical">aibítre A-Z (alphabetical)</option>
-        <option value="reverse alphabetical">aibítre Z-A (alphabetical)</option> */}
       </select>
     </div>
   );
