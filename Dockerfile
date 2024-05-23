@@ -39,8 +39,8 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV Production
-ENV GOOGLE_API_KEY "AIzaSyB0idzg22HjPlhFIYlh0vNvgFLfpBUrCkI"
-ENV GOOGLE_API_BASE_URL "https://translation.googleapis.com/language/translate/v2"
+ENV GOOGLE_API_KEY ${GOOGLE_API_KEY}
+ENV GOOGLE_API_BASE_URL ${GOOGLE_API_BASE_URL}
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
