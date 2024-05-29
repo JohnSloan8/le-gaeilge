@@ -1,8 +1,8 @@
 import type { Dispatch, SetStateAction, ChangeEvent } from "react";
 
 interface SortProps {
-  order: string;
-  setOrder: Dispatch<SetStateAction<string>>;
+  order: "newest" | "oldest";
+  setOrder: Dispatch<SetStateAction<"newest" | "oldest">>;
 }
 
 export default function Sort({ order, setOrder }: SortProps) {

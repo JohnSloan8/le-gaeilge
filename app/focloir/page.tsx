@@ -4,7 +4,7 @@ import { XLargeText } from "@/components";
 import Controller from "./client/Controller";
 
 interface Props {
-  searchParams: { groupId: string };
+  searchParams: { groupId: string; favourite: string; sort: string };
 }
 
 export default async function PhrasesPage({ searchParams }: Props) {
@@ -26,7 +26,9 @@ export default async function PhrasesPage({ searchParams }: Props) {
     },
   );
 
-  console.log("phrases:", phrases);
+  const { data: groups, error: groupsError } = await supabase
+    .from("groups")
+    .select();
 
   return (
     <div className="w-full h-full flex flex-col overflow-y-scroll">
@@ -36,12 +38,19 @@ export default async function PhrasesPage({ searchParams }: Props) {
       ) : (
         <Controller
           phrases={phrases}
+          groups={groups}
           groupId={
             searchParams.groupId === undefined
               ? null
               : Number(searchParams.groupId)
           }
           session={session}
+          favourite={
+            searchParams.favourite !== undefined
+              ? searchParams.favourite === "true"
+              : false
+          }
+          sort={searchParams.sort !== undefined ? searchParams.sort : null}
         />
       )}
     </div>

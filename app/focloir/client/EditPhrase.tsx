@@ -2,11 +2,11 @@ import editPhrase from "@/app/actions/phrases/edit";
 import { SmallText, SubmitButton } from "@/components";
 import type { PhraseModelWithFavourites } from "@/types/models";
 import { useEffect, useState } from "react";
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import type { ChangeEvent } from "react";
 
 interface EditPhraseProps {
   phrase?: PhraseModelWithFavourites;
-  setEditPhrase: Dispatch<SetStateAction<number | null>>;
+  setEditPhrase: (id: number | null) => void;
 }
 
 export default function EditPhrase({ phrase, setEditPhrase }: EditPhraseProps) {
@@ -73,9 +73,9 @@ export default function EditPhrase({ phrase, setEditPhrase }: EditPhraseProps) {
         <div className="w-full flex justify-center pt-4">
           <SubmitButton
             disabled={!changed}
-            // onSubmitted={() => {
-            //   setEditPhrase(null);
-            // }}
+            onSubmitted={() => {
+              setEditPhrase(null);
+            }}
           >
             <div className="w-64 border rounded-md bg-primary-600">
               <SmallText text_ga="nuashonrú" text_en="update" dark={true} />
