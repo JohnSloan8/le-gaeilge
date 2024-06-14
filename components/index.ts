@@ -30,6 +30,7 @@ import SmallCapitalisedTitle from "./titles/SmallCapitalisedTitle";
 // text
 import XLargeText from "./text/XLargeText";
 import SmallText from "./text/SmallText";
+import Text from "./text/Text";
 import XSmallText from "./text/XSmallText";
 import EnglishText from "./text/EnglishText";
 
@@ -89,6 +90,7 @@ export {
   MediumTitle,
   LargeTitle,
   XLargeText,
+  Text,
   XSmallText,
   SmallCapitalisedTitle,
   MainTitleContainer,

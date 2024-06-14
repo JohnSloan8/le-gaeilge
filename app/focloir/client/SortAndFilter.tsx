@@ -7,6 +7,7 @@ import type { Dispatch, SetStateAction } from "react";
 interface SortAndFilterProps {
   setSortPopupOpen: Dispatch<SetStateAction<boolean>>;
   setGroupPopupOpen: Dispatch<SetStateAction<boolean>>;
+  setAddPhrasePopupOpen: Dispatch<SetStateAction<boolean>>;
   showFavourites: boolean;
   setShowFavourites: Dispatch<SetStateAction<boolean>>;
 }
@@ -14,6 +15,7 @@ interface SortAndFilterProps {
 export default function SortAndFilter({
   setSortPopupOpen,
   setGroupPopupOpen,
+  setAddPhrasePopupOpen,
   showFavourites,
   setShowFavourites,
 }: SortAndFilterProps) {
@@ -50,7 +52,12 @@ export default function SortAndFilter({
         <UpDownArrowsIcon color={themeColors.primary[100]} size={28} />
         <XSmallText text_ga="sórtáil" text_en="sort" dark={true} />
       </button>
-      <button className="p-1 flex flex-row gap-1 items-center justify-center">
+      <button
+        onClick={() => {
+          setAddPhrasePopupOpen(true);
+        }}
+        className="p-1 flex flex-row gap-1 items-center justify-center"
+      >
         <AddIcon color={themeColors.primary[100]} size={28} />
         <XSmallText text_ga="cuir" text_en="add" dark={true} />
       </button>

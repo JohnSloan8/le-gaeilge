@@ -5,18 +5,19 @@ import { useEffect, useState } from "react";
 import Search from "./Search";
 import type { ChangeEvent } from "react";
 import filterPhrasesBySearchTerm from "@/utils/general/filterPhrasesBySearchTerm";
-
 import type { Session } from "@supabase/supabase-js";
 import SortAndFilter from "./SortAndFilter";
 import EditPhrase from "./EditPhrase";
 import Phrases from "./Phrases";
-import { Popup } from "@/components";
+import { Popup, Text } from "@/components";
 import Sort from "./Sort";
 import ChangeGroup from "./ChangeGroup";
+import { useRouter } from "next/navigation";
+import AddPhrase from "./AddPhrase";
 
 interface ControllerProps {
-  phrases: PhraseModelWithFavourites[];
-  groups: GroupModel[];
+  phrases: PhraseModelWithFavourites[] | null;
+  groups: GroupModel[] | null;
   group_id: number | null;
   favourite: boolean;
   sort: string | null;
@@ -35,16 +36,18 @@ export default function Controller({
     PhraseModelWithFavourites[]
   >([]);
   const [groupId, setGroupId] = useState<number | null>(group_id);
+  const [group, setGroup] = useState<GroupModel | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [editPhrase, setEditPhrase] = useState<number | null>(null);
-  const [order, setOrder] = useState<"newest" | "oldest">(
+  const [order, setOrder] = useState<string>(
     sort === "newest" ? "newest" : "oldest",
   );
   const [editPopupOpen, setEditPopupOpen] = useState<boolean>(false);
   const [sortPopupOpen, setSortPopupOpen] = useState<boolean>(false);
   const [groupPopupOpen, setGroupPopupOpen] = useState<boolean>(false);
+  const [addPhrasePopupOpen, setAddPhrasePopupOpen] = useState<boolean>(false);
   const [showFavourites, setShowFavourites] = useState<boolean>(favourite);
-
+  const router = useRouter();
   useEffect(() => {
     console.log("displayPhrases:", displayPhrases);
   }, [displayPhrases]);
@@ -81,9 +84,32 @@ export default function Controller({
     return filterPhrasesBySearchTerm(_phrases, term);
   };
 
+  const handleChangeGroup = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log("e.target.value:", e.target.value);
+    if (e.target.value !== undefined) {
+      setGroupId(Number(e.target.value));
+      console.log("pushing to router");
+    }
+  };
+
+  useEffect(() => {
+    if (groups !== null && groups.length !== 0) {
+      const group = groups.find((group) => group.id === groupId);
+      setGroup(group === undefined ? null : group);
+    }
+    if (groupId !== group_id) {
+      setGroupPopupOpen(false);
+      router.push(
+        `/focloir?groupId=${groupId}&favourite=${showFavourites}&sort=${order}`,
+      );
+    }
+  }, [groupId]);
+
   useEffect(() => {
     sortPopupOpen && setSortPopupOpen(false);
-    const favouritedPhrases = filterPhrasesByFavourite(phrases);
+    const favouritedPhrases = filterPhrasesByFavourite(
+      phrases !== null ? phrases : [],
+    );
     const sortedPhrases = sortPhrases(favouritedPhrases);
     const searchedPhrases = filterBySearch(sortedPhrases, searchTerm);
     setDisplayPhrases(searchedPhrases);
@@ -92,10 +118,6 @@ export default function Controller({
   useEffect(() => {
     editPhrase === null ? setEditPopupOpen(false) : setEditPopupOpen(true);
   }, [editPhrase]);
-
-  useEffect(() => {
-    alert("need to do this");
-  }, [groupId]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -106,7 +128,7 @@ export default function Controller({
     <div className="relative w-full flex flex-grow flex-col">
       <Popup isOpen={editPopupOpen} setOpen={setEditPopupOpen}>
         <EditPhrase
-          phrase={phrases.find((p) => p.p_id === editPhrase)}
+          phrase={displayPhrases.find((p) => p.p_id === editPhrase)}
           setEditPhrase={(id) => {
             setEditPhrase(id);
           }}
@@ -115,12 +137,15 @@ export default function Controller({
       <Popup isOpen={groupPopupOpen} setOpen={setGroupPopupOpen}>
         <ChangeGroup
           groupId={groupId}
-          setGroupId={setGroupId}
+          handleChangeGroup={handleChangeGroup}
           groups={groups}
         />
       </Popup>
       <Popup isOpen={sortPopupOpen} setOpen={setSortPopupOpen}>
         <Sort order={order} setOrder={setOrder} />
+      </Popup>
+      <Popup isOpen={addPhrasePopupOpen} setOpen={setAddPhrasePopupOpen}>
+        <AddPhrase />
       </Popup>
       <div className="bg-primary-600">
         <Search
@@ -133,8 +158,16 @@ export default function Controller({
         <SortAndFilter
           setGroupPopupOpen={setGroupPopupOpen}
           setSortPopupOpen={setSortPopupOpen}
+          setAddPhrasePopupOpen={setAddPhrasePopupOpen}
           showFavourites={showFavourites}
           setShowFavourites={setShowFavourites}
+        />
+      </div>
+      <div className="w-full">
+        <Text
+          text_en={group !== null ? group.name_en : "no group"}
+          text_ga={group !== null ? group.name_ga : "níl grupa"}
+          centered={true}
         />
       </div>
       <div className="flex flex-col flex-grow p-2">

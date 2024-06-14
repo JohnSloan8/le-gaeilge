@@ -1,4 +1,4 @@
-import editPhrase from "@/app/actions/phrases/edit";
+import { editPhrase } from "@/app/actions";
 import { SmallText, SubmitButton } from "@/components";
 import type { PhraseModelWithFavourites } from "@/types/models";
 import { useEffect, useState } from "react";

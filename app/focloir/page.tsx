@@ -26,33 +26,38 @@ export default async function PhrasesPage({ searchParams }: Props) {
     },
   );
 
+  if (phrasesError !== null) {
+    alert(phrasesError.message);
+  }
+
   const { data: groups, error: groupsError } = await supabase
     .from("groups")
     .select();
 
+  if (groupsError !== null) {
+    alert(groupsError.message);
+  }
+
   return (
     <div className="w-full h-full flex flex-col overflow-y-scroll">
       <XLargeText text_ga="Foclóir" text_en="Dictionary" />
-      {phrases === null || phrases.length === 0 || phrasesError !== null ? (
-        <h1>No Phrases</h1>
-      ) : (
-        <Controller
-          phrases={phrases}
-          groups={groups}
-          groupId={
-            searchParams.groupId === undefined
-              ? null
-              : Number(searchParams.groupId)
-          }
-          session={session}
-          favourite={
-            searchParams.favourite !== undefined
-              ? searchParams.favourite === "true"
-              : false
-          }
-          sort={searchParams.sort !== undefined ? searchParams.sort : null}
-        />
-      )}
+
+      <Controller
+        phrases={phrases}
+        groups={groups}
+        group_id={
+          searchParams.groupId === undefined
+            ? null
+            : Number(searchParams.groupId)
+        }
+        session={session}
+        favourite={
+          searchParams.favourite !== undefined
+            ? searchParams.favourite === "true"
+            : false
+        }
+        sort={searchParams.sort !== undefined ? searchParams.sort : null}
+      />
     </div>
   );
 }
