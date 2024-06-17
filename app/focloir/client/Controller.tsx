@@ -48,9 +48,6 @@ export default function Controller({
   const [addPhrasePopupOpen, setAddPhrasePopupOpen] = useState<boolean>(false);
   const [showFavourites, setShowFavourites] = useState<boolean>(favourite);
   const router = useRouter();
-  useEffect(() => {
-    console.log("displayPhrases:", displayPhrases);
-  }, [displayPhrases]);
 
   const filterPhrasesByFavourite = (_phrases: PhraseModelWithFavourites[]) => {
     if (showFavourites && _phrases.length > 0) {
@@ -145,7 +142,12 @@ export default function Controller({
         <Sort order={order} setOrder={setOrder} />
       </Popup>
       <Popup isOpen={addPhrasePopupOpen} setOpen={setAddPhrasePopupOpen}>
-        <AddPhrase />
+        <AddPhrase
+          groupId={groupId}
+          setAddPhrasePopupOpen={(open) => {
+            setAddPhrasePopupOpen(open);
+          }}
+        />
       </Popup>
       <div className="bg-primary-600">
         <Search

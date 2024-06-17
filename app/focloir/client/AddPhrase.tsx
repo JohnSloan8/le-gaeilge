@@ -1,37 +1,20 @@
 import { addPhrase } from "@/app/actions";
 import { SmallText, SubmitButton } from "@/components";
-// import type { PhraseModelWithFavourites } from "@/types/models";
-// import { useEffect, useState } from "react";
-// import type { ChangeEvent } from "react";
 
-// interface AddPhraseProps {
-// phrase?: PhraseModelWithFavourites;
-//   setAddPhrase: (id: number | null) => void;
-// }
+interface AddPhraseProps {
+  setAddPhrasePopupOpen: (open: boolean) => void;
+  groupId: number;
+}
 
-// export default function AddPhrase({ setAddPhrase }: AddPhraseProps) {
-export default function AddPhrase() {
-  // if (phrase === undefined) {
-  //   return null;
-  // }
-
-  // const [entryGa, setEntryGa] = useState(phrase.p_entry_ga);
-  // const [entryEn, setEntryEn] = useState(phrase.p_entry_en);
-  // const [changed, setChanged] = useState(false);
-
-  // const handleAddGa = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const term = e.target.value;
-  //   setEntryGa(term);
-  // };
-
-  // const handleAddEn = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const term = e.target.value;
-  //   setEntryEn(term);
-  // };
-
+export default function AddPhrase({
+  setAddPhrasePopupOpen,
+  groupId,
+}: AddPhraseProps) {
   return (
     <div>
       <form action={addPhrase} className="p-1 flex flex-col">
+        <input type="hidden" name="groupId" value={groupId} />
+
         <div className="flex gap-1 py-2">
           <label htmlFor="entryGa" className="w-16">
             <SmallText text_ga="Gaeilge" text_en="Irish" dark={false} />
@@ -59,11 +42,11 @@ export default function AddPhrase() {
         <div className="w-full flex justify-center pt-4">
           <SubmitButton
             onSubmitted={() => {
-              return null;
+              setAddPhrasePopupOpen(false);
             }}
           >
             <div className="w-64 border rounded-md bg-primary-600">
-              <SmallText text_ga="nuashonrú" text_en="update" dark={true} />
+              <SmallText text_ga="cuir" text_en="add" dark={true} />
             </div>
           </SubmitButton>
         </div>
