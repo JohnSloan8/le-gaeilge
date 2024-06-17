@@ -6,9 +6,13 @@ import { useRef, useState } from "react";
 
 interface PlayAudioButtonProps {
   src: string | null;
+  size?: number;
 }
 
-export default function PlayAudioButton({ src }: PlayAudioButtonProps) {
+export default function PlayAudioButton({
+  src,
+  size = 24,
+}: PlayAudioButtonProps) {
   const [audioPlaying, setAudioPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -43,17 +47,21 @@ export default function PlayAudioButton({ src }: PlayAudioButtonProps) {
     <div>
       {audioPlaying ? (
         <button
-          className="w-7 h-7 border flex justify-center items-center"
+          className="flex justify-center items-center"
           onClick={stopAudio}
         >
-          <StopIcon size={24} color={themeColors.primary[700]} />
+          <StopIcon size={size} color={themeColors.primary[700]} />
         </button>
       ) : (
         <button
-          className="w-7 h-7 border flex justify-center items-center"
+          className="flex justify-center items-center"
           onClick={playAudio}
         >
-          <PlayIcon size={24} color={themeColors.primary[700]} filled={true} />
+          <PlayIcon
+            size={size}
+            color={themeColors.primary[700]}
+            filled={true}
+          />
         </button>
       )}
       <audio

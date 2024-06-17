@@ -7,6 +7,7 @@ import getIrishTranslation from "./phrases/getIrishTranslation";
 import favourite from "./phrases/favourite";
 import editPhrase from "./phrases/edit";
 import addPhrase from "./phrases/add";
+import addAnswer from "./tests/addAnswer";
 
 export {
   registerForEvent,
@@ -18,4 +19,5 @@ export {
   favourite,
   editPhrase,
   addPhrase,
+  addAnswer,
 };

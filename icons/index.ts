@@ -18,6 +18,8 @@ import AddIcon from "./Add";
 import SignInIcon from "./SignIn";
 import StopIcon from "./Stop";
 import RefreshIcon from "./Refresh";
+import ShowIcon from "./Show";
+import TickIcon from "./Tick";
 
 export {
   CalendarIcon,
@@ -34,10 +36,12 @@ export {
   TranslateIcon,
   BurgerMenuIcon,
   XIcon,
+  TickIcon,
   BookIcon,
   UpDownArrowsIcon,
   AddIcon,
   SignInIcon,
   StopIcon,
   RefreshIcon,
+  ShowIcon,
 };
