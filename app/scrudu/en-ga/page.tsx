@@ -27,6 +27,8 @@ export default async function ScruduPage({ searchParams }: Props) {
 
   if (phrasesError !== null) {
     alert(phrasesError.message);
+    // } else {
+    //   sortPhrasesForTest(phrases)
   }
 
   return (
