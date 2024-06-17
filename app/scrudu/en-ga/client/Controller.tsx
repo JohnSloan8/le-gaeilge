@@ -1,12 +1,12 @@
 "use client";
 
-import type { PhraseModel } from "@/types/models";
+import type { PhraseModel, PhraseModelWithFavourites } from "@/types/models";
 import { useEffect, useState } from "react";
 import TestCard from "./TestCard";
 import { Text } from "@/components";
 
 interface ControllerProps {
-  phrases: PhraseModel[] | null;
+  phrases: PhraseModelWithFavourites[] | null;
 }
 
 export default function Controller({ phrases }: ControllerProps) {
@@ -15,7 +15,8 @@ export default function Controller({ phrases }: ControllerProps) {
   }
 
   const [remainingPhrases, setRemainingPhrases] = useState(phrases);
-  const [currentPhrase, setCurrentPhrase] = useState<PhraseModel | null>(null);
+  const [currentPhrase, setCurrentPhrase] =
+    useState<PhraseModelWithFavourites | null>(null);
 
   const popRandomPhrase = () => {
     if (remainingPhrases.length === 0) {

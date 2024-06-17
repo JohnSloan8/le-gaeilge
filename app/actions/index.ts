@@ -8,6 +8,7 @@ import favourite from "./phrases/favourite";
 import editPhrase from "./phrases/edit";
 import addPhrase from "./phrases/add";
 import addAnswer from "./tests/addAnswer";
+import chooseTest from "./tests/chooseTest";
 
 export {
   registerForEvent,
@@ -20,4 +21,5 @@ export {
   editPhrase,
   addPhrase,
   addAnswer,
+  chooseTest,
 };

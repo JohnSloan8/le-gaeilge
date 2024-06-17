@@ -7,13 +7,15 @@ const addPhrase = async (formData: FormData) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const groupId = Number(formData.get("groupId"));
+  const groupId = formData.get("groupId");
   const entryGa = String(formData.get("entryGa"));
   const entryEn = String(formData.get("entryEn"));
 
-  const { data, error } = await supabase
-    .from("phrases")
-    .insert({ entry_ga: entryGa, entry_en: entryEn, group_id: groupId });
+  const { data, error } = await supabase.from("phrases").insert({
+    entry_ga: entryGa,
+    entry_en: entryEn,
+    group_id: groupId === "" ? null : Number(groupId),
+  });
 
   data !== null && console.log("data:", data);
   error !== null && console.log("error:", error);

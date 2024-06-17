@@ -6,13 +6,13 @@ import { useEffect } from "react";
 
 interface SubmitButtonProps {
   disabled?: boolean;
-  onSubmitted: () => void;
+  onSubmitted?: () => void;
   children: React.ReactNode;
 }
 
 export default function SubmitButton({
   disabled = false,
-  onSubmitted,
+  onSubmitted = () => null,
   children,
 }: SubmitButtonProps) {
   const { pending } = useFormStatus();

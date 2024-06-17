@@ -9,6 +9,7 @@ import {
   XIcon,
   BookIcon,
   SignInIcon,
+  PencilIcon,
 } from "@/icons";
 import { RoundMobileButton } from "@/components";
 import Link from "next/link";
@@ -124,6 +125,23 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
                 <BookIcon color={themeColors.primary[100]} size={24} />
               </div>
               <div className="text-primary-100">foclóir</div>
+            </div>
+          </Link>
+          <Link href="/scrudu">
+            <div
+              className="p-2 flex w-full my-2 items-center"
+              onClick={() => {
+                setShowSidebar(false);
+              }}
+            >
+              <div className="mx-2">
+                <PencilIcon
+                  color={themeColors.primary[100]}
+                  size={24}
+                  filled={true}
+                />
+              </div>
+              <div className="text-primary-100">scrúdú</div>
             </div>
           </Link>
         </Sidebar>
