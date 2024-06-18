@@ -1,6 +1,6 @@
 "use client";
 
-import type { PhraseModel, PhraseModelWithFavourites } from "@/types/models";
+import type { PhraseModelWithFavourites } from "@/types/models";
 import { useEffect, useState } from "react";
 import TestCard from "./TestCard";
 import { Text } from "@/components";
