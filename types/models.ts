@@ -11,6 +11,11 @@ type PhraseModelWithFavouritesArray =
 type ElementType = PhraseModelWithFavouritesArray[number];
 export type PhraseModelWithFavourites = ElementType;
 
+type PhraseModelForTestArray =
+  Database["public"]["Functions"]["get_phrases_for_test"]["Returns"];
+type ElementTypeForTest = PhraseModelForTestArray[number];
+export type PhraseModelForTest = ElementTypeForTest;
+
 export interface ExtendedEventModel extends EventModel {
   group: GroupModel | null;
   attendees: AttendeeModel[] | null;

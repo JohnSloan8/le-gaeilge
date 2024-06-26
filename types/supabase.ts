@@ -326,6 +326,34 @@ export type Database = {
           },
         ];
       };
+      phrases_remembered: {
+        Row: {
+          correct: boolean | null;
+          created_at: string;
+          id: number;
+          phrase_id: number | null;
+        };
+        Insert: {
+          correct?: boolean | null;
+          created_at?: string;
+          id?: number;
+          phrase_id?: number | null;
+        };
+        Update: {
+          correct?: boolean | null;
+          created_at?: string;
+          id?: number;
+          phrase_id?: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_phrases_remembered_phrase_id_fkey";
+            columns: ["phrase_id"];
+            referencedRelation: "phrases";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profiles: {
         Row: {
           created_at: string;
@@ -380,6 +408,25 @@ export type Database = {
           p_audio_data: string;
           p_edited: boolean;
           p_is_favourited: boolean;
+        }[];
+      };
+      get_phrases_for_test: {
+        Args: {
+          user_id_input: string;
+          group_id_input: number;
+        };
+        Returns: {
+          p_id: number;
+          p_created_at: string;
+          p_entry_ga: string;
+          p_entry_en: string;
+          p_author_id: string;
+          p_group_id: number;
+          p_audio_data: string;
+          p_edited: boolean;
+          p_is_favourited: boolean;
+          p_correct_true_count: number;
+          p_correct_false_count: number;
         }[];
       };
     };
