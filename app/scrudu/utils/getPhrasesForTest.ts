@@ -16,24 +16,17 @@ const getNeverDone = (phrases: PhraseModelForTest[]) => {
 const calculateDifficultyMetric = (phrase: PhraseModelForTest) => {
   return (
     (phrase.p_correct_false_count - phrase.p_correct_true_count) /
-    (phrase.p_correct_false_count + phrase.p_correct_true_count)
+    (1 + phrase.p_correct_true_count)
   );
 };
 
 const sortPhrasesByDifficulty = (phrasesDone: PhraseModelForTest[]) => {
-  // filter all with at least one wrong
-  const phrasesWithOnlyMistakes: PhraseModelForTest[] = phrasesDone.filter(
-    (phrase) =>
-      phrase.p_correct_false_count > 0 && phrase.p_correct_true_count === 0,
-  );
-  const sortedPhrasesWithOnlyMistakes = phrasesWithOnlyMistakes.sort(
+  const sortedPhrasesWithMistakes = phrasesDone.sort(
     (a: PhraseModelForTest, b: PhraseModelForTest) => {
-      return calculateDifficultyMetric(a) - calculateDifficultyMetric(b);
+      return calculateDifficultyMetric(b) - calculateDifficultyMetric(a);
     },
   );
-
-  console.log("sortedPhrasesWithOnlyMistakes:", sortedPhrasesWithOnlyMistakes);
-  return sortedPhrasesWithOnlyMistakes;
+  return sortedPhrasesWithMistakes;
 };
 
 const calculateNoRemainingPhrases = (
@@ -58,19 +51,26 @@ const getPhrasesForTest = (
   if (neverDone.length >= noQuestions) {
     phrasesForTest = neverDone.slice(0, noQuestions);
   } else {
-    phrasesForTest.push(neverDone);
+    phrasesForTest = neverDone;
+    console.log("phrasesForTest:", phrasesForTest.length);
     const noRemainingQuestions = calculateNoRemainingPhrases(
       phrasesForTest,
       noQuestions,
     );
+    console.log("noRemainingQuestions:", noRemainingQuestions);
+
     const phrasesSortedByDifficulty = sortPhrasesByDifficulty(done);
-    console.log("phrasesSortedByDifficulty:", phrasesSortedByDifficulty);
+    console.log("phrasesSortedByDifficulty:", phrasesSortedByDifficulty.length);
 
-    // const remainingQuestions = getRe;
+    phrasesForTest = [
+      ...phrasesForTest,
+      ...phrasesSortedByDifficulty.slice(0, noRemainingQuestions),
+    ];
+
+    console.log("phrasesForTest:", phrasesForTest.length);
   }
-  console.log("phrasesForTest:", phrasesForTest.length);
 
-  return neverDone;
+  return phrasesForTest;
 };
 
 export default getPhrasesForTest;

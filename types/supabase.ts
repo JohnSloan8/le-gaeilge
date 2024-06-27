@@ -412,8 +412,8 @@ export type Database = {
       };
       get_phrases_for_test: {
         Args: {
-          user_id_input: string;
-          group_id_input: number;
+          user_id_input?: string;
+          group_id_input?: number;
         };
         Returns: {
           p_id: number;

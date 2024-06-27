@@ -45,7 +45,7 @@ export default async function ScruduPage() {
             name="groupId"
             className="block w-full bg-gray-100 border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">Roghnaigh (choose)</option>
+            <option value="-">Go leir (all)</option>
             {groups?.map((group, index) => (
               <option
                 key={index}

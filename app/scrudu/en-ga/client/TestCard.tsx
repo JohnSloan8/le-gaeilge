@@ -9,10 +9,13 @@ import { addAnswer } from "@/app/actions";
 
 interface TestCardProps {
   phrase: PhraseModelWithFavourites | null;
-  popRandomPhrase: () => void;
+  adjustRemainingPhrases: (correct: boolean) => void;
 }
 
-export default function TestCard({ phrase, popRandomPhrase }: TestCardProps) {
+export default function TestCard({
+  phrase,
+  adjustRemainingPhrases,
+}: TestCardProps) {
   const [showGa, setShowGa] = useState(false);
 
   if (phrase === null) {
@@ -47,9 +50,9 @@ export default function TestCard({ phrase, popRandomPhrase }: TestCardProps) {
         <button
           className={`flex justify-center items-center ${!showGa && "invisible"}`}
           onClick={async () => {
-            await addAnswer(false, phrase.p_id);
+            await addAnswer(true, phrase.p_id);
             setShowGa(false);
-            popRandomPhrase();
+            adjustRemainingPhrases(true);
           }}
         >
           <TickIcon color={themeColors.primary[700]} size={32} />
@@ -59,7 +62,7 @@ export default function TestCard({ phrase, popRandomPhrase }: TestCardProps) {
           onClick={async () => {
             await addAnswer(false, phrase.p_id);
             setShowGa(false);
-            popRandomPhrase();
+            adjustRemainingPhrases(false);
           }}
         >
           <XIcon color={themeColors.primary[700]} size={32} />

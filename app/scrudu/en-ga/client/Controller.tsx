@@ -4,6 +4,7 @@ import type { PhraseModelWithFavourites } from "@/types/models";
 import { useEffect, useState } from "react";
 import TestCard from "./TestCard";
 import { Text } from "@/components";
+import Link from "next/link";
 
 interface ControllerProps {
   phrases: PhraseModelWithFavourites[] | null;
@@ -15,27 +16,18 @@ export default function Controller({ phrases }: ControllerProps) {
   }
 
   const [remainingPhrases, setRemainingPhrases] = useState(phrases);
-  const [currentPhrase, setCurrentPhrase] =
-    useState<PhraseModelWithFavourites | null>(null);
 
-  const popRandomPhrase = () => {
-    if (remainingPhrases.length === 0) {
-      setCurrentPhrase(null);
+  const adjustRemainingPhrases = (correct: boolean) => {
+    if (correct) {
+      setRemainingPhrases((rP) => {
+        return rP.slice(1);
+      });
     } else {
-      const randomIndex = Math.floor(Math.random() * remainingPhrases.length);
-      const item = remainingPhrases.splice(randomIndex, 1)[0]; // Remove the item and get it
-      setCurrentPhrase(item);
-      setRemainingPhrases(remainingPhrases);
+      setRemainingPhrases((rP) => {
+        return [...rP.slice(1), rP[0]];
+      });
     }
   };
-
-  useEffect(() => {
-    popRandomPhrase();
-  }, []);
-
-  useEffect(() => {
-    console.log("currentPhrase:", currentPhrase);
-  }, [currentPhrase]);
 
   useEffect(() => {
     console.log("RemainingPhrases:", remainingPhrases);
@@ -48,7 +40,18 @@ export default function Controller({ phrases }: ControllerProps) {
         text_en="English - Irish"
         centered={true}
       />
-      <TestCard phrase={currentPhrase} popRandomPhrase={popRandomPhrase} />
+      {remainingPhrases.length === 0 ? (
+        <div className="w-full flex justify-center">
+          <Link href="/scrudu" className="underline text-secondary-500">
+            back to test choice
+          </Link>
+        </div>
+      ) : (
+        <TestCard
+          phrase={remainingPhrases[0]}
+          adjustRemainingPhrases={adjustRemainingPhrases}
+        />
+      )}
     </div>
   );
 }
