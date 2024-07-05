@@ -1,0 +1,51 @@
+CREATE OR REPLACE FUNCTION get_phrases_for_test(group_id_input BIGINT, user_id_input UUID)
+RETURNS TABLE (
+ p_id BIGINT,
+ p_created_at TIMESTAMPTZ,
+ p_entry_ga TEXT,
+ p_entry_en TEXT,
+ p_author_id UUID,
+ p_group_id BIGINT,
+ p_audio_data BOOLEAN,
+ p_edited BOOLEAN,
+ p_is_favourited BOOLEAN,
+ p_correct_true_count BIGINT,
+ p_correct_false_count BIGINT
+) AS $$
+BEGIN
+ RETURN QUERY
+ SELECT
+   p.id,
+   p.created_at,
+   p.entry_ga,
+   p.entry_en,
+   p.author_id,
+   p.group_id,
+   p.audio_data,
+   p.edited,
+   CASE
+     WHEN f.user_id = user_id_input THEN true
+     ELSE false
+   END AS p_is_favourited,
+   COALESCE(SUM(CASE WHEN r.correct = TRUE THEN 1 ELSE 0 END), 0) AS p_correct_true_count,
+   COALESCE(SUM(CASE WHEN r.correct = FALSE THEN 1 ELSE 0 END), 0) AS p_correct_false_count
+ FROM
+   public.phrases p
+ LEFT JOIN favourite_phrases f ON p.id = f.phrase_id
+ LEFT JOIN public.profiles u ON f.user_id = u.user_id
+ LEFT JOIN phrases_remembered r ON p.id = r.phrase_id
+ WHERE
+   (group_id_input IS NULL OR group_id IN (
+     SELECT
+       id
+     FROM
+       public.groups
+     WHERE
+       public.groups.id = group_id_input
+   ))
+ GROUP BY
+   p.id, p.created_at, p.entry_ga, p.entry_en, p.author_id, p.group_id, p.audio_data, p.edited, f.user_id
+ ORDER BY
+   p.created_at DESC;
+END;
+$$ LANGUAGE plpgsql;

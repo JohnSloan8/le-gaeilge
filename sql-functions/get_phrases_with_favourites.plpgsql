@@ -1,0 +1,47 @@
+CREATE OR REPLACE FUNCTION get_phrases_with_favourites(
+    group_id_input integer DEFAULT NULL::integer,
+    user_id_input uuid DEFAULT NULL::uuid
+)
+RETURNS TABLE (
+    p_id bigint,
+    p_created_at timestamp with time zone,
+    p_entry_ga text,
+    p_entry_en text,
+    p_author_id uuid,
+    p_group_id bigint,
+    p_edited boolean,
+    p_audio_data boolean,
+    p_is_favourited boolean
+) AS $$
+BEGIN
+    RETURN QUERY
+select
+  p.id,
+  p.created_at,
+  p.entry_ga,
+  p.entry_en,
+  p.author_id,
+  p.group_id,
+  p.edited,
+  p.audio_data,
+  case
+    when f.user_id = user_id_input then true
+    else false
+  end as p_is_favourited
+from
+  public.phrases p
+  left join favourite_phrases f on p.id = f.phrase_id
+  left join public.profiles u on f.user_id = u.user_id
+where
+  (group_id_input is null or group_id in (
+    select
+      id
+    from
+      public.groups
+    where
+      public.groups.id = group_id_input
+  ))
+order by
+  created_at desc;
+  END;
+  $$ LANGUAGE plpgsql;

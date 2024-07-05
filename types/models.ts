@@ -7,7 +7,7 @@ export type AttendeeModel = Database["public"]["Tables"]["attendees"]["Row"];
 export type LocationModel = Database["public"]["Tables"]["locations"]["Row"];
 
 type PhraseModelWithFavouritesArray =
-  Database["public"]["Functions"]["get_phrases_for_group_by_group_id_with_favourite"]["Returns"];
+  Database["public"]["Functions"]["get_phrases_with_favourites"]["Returns"];
 type ElementType = PhraseModelWithFavouritesArray[number];
 export type PhraseModelWithFavourites = ElementType;
 

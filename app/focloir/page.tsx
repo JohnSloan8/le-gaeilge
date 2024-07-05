@@ -16,7 +16,7 @@ export default async function PhrasesPage({ searchParams }: Props) {
   } = await supabase.auth.getSession();
 
   const { data: phrases, error: phrasesError } = await supabase.rpc(
-    "get_phrases_for_group_by_group_id_with_favourite",
+    "get_phrases_with_favourites",
     {
       group_id_input:
         searchParams.groupId === undefined
@@ -27,7 +27,7 @@ export default async function PhrasesPage({ searchParams }: Props) {
   );
 
   if (phrasesError !== null) {
-    alert(phrasesError.message);
+    console.log(phrasesError.message);
   }
 
   const { data: groups, error: groupsError } = await supabase
@@ -35,7 +35,7 @@ export default async function PhrasesPage({ searchParams }: Props) {
     .select();
 
   if (groupsError !== null) {
-    alert(groupsError.message);
+    console.log(groupsError.message);
   }
 
   return (

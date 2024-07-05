@@ -64,11 +64,7 @@ export default function PlayAudioButton({
           />
         </button>
       )}
-      <audio
-        src={src !== null ? `data:audio/wav;base64,${src}` : ""}
-        ref={audioRef}
-        onEnded={stopAudio}
-      />
+      <audio src={src !== null ? src : ""} ref={audioRef} onEnded={stopAudio} />
     </div>
   );
 }

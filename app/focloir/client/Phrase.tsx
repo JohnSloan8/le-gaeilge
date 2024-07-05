@@ -26,7 +26,8 @@ export default function Phrase({
       await getSynthesis(phrase.p_entry_ga, phrase.p_id);
     };
 
-    if (phrase.p_audio_data === null) {
+    console.log("phrase.p_audio_data:", phrase.p_audio_data);
+    if (!phrase.p_audio_data) {
       void updateSynthesis();
     }
   }, []);
@@ -73,12 +74,14 @@ export default function Phrase({
               filled={phrase.p_edited}
             />
           </button>
-          {phrase.p_audio_data === null ? (
+          {!phrase.p_audio_data ? (
             <button className="w-7 h-7 border flex justify-center items-center">
               <LoadingSpinner color={"dark"} size={"small"} />
             </button>
           ) : (
-            <PlayAudioButton src={phrase.p_audio_data} />
+            <PlayAudioButton
+              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}${process.env.NEXT_PUBLIC_AUDIO_STORAGE_PATH}${phrase.p_id}.mp3`}
+            />
           )}
         </div>
       </div>
