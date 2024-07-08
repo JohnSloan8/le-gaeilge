@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
-import daysOfWeek from "@/utils/NLP/days-of-week";
-import monthsOfYear from "@/utils/NLP/months-of-year";
+import { monthsOfYear, daysOfWeek } from "@/utils";
 
 interface DateAndTimeProps {
   start_date: string;

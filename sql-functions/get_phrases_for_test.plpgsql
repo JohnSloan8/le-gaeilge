@@ -1,4 +1,5 @@
-CREATE OR REPLACE FUNCTION get_phrases_for_test(group_id_input BIGINT, user_id_input UUID)
+CREATE OR REPLACE FUNCTION get_phrases_for_test(group_id_input integer DEFAULT NULL::integer,
+    user_id_input uuid DEFAULT NULL::uuid)
 RETURNS TABLE (
  p_id BIGINT,
  p_created_at TIMESTAMPTZ,

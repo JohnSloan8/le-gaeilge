@@ -36,7 +36,7 @@ export default function Search({
           <div className="pr-1 flex-none">
             <SearchIcon size={20} color={themeColors.primary[300]} />
           </div>
-          <div className="flex">
+          <div className="flex flex-grow">
             <input
               className="appearance-none text-gray-700 leading-tight w-full focus:outline-none focus:shadow-outline"
               type="text"
@@ -49,6 +49,7 @@ export default function Search({
           {searchTerm !== "" && (
             <div className="pl-1 flex-none">
               <button
+                type="button"
                 onClick={() => {
                   setSearchTerm("");
                 }}

@@ -1,6 +1,6 @@
 import { EnglishText } from "@/components";
 
-import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
+import { capitalizeNonGrammatical } from "@/utils";
 
 interface LargeTitleProps {
   text_ga: string | null;

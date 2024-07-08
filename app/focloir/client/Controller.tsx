@@ -4,12 +4,12 @@ import type { PhraseModelWithFavourites, GroupModel } from "@/types/models";
 import { useEffect, useState } from "react";
 import Search from "./Search";
 import type { ChangeEvent } from "react";
-import filterPhrasesBySearchTerm from "@/utils/general/filterPhrasesBySearchTerm";
+import { filterPhrasesBySearchTerm } from "@/utils";
 import type { Session } from "@supabase/supabase-js";
 import SortAndFilter from "./SortAndFilter";
 import EditPhrase from "./EditPhrase";
 import Phrases from "./Phrases";
-import { Popup, Text } from "@/components";
+import { MediumText, Popup } from "@/components";
 import Sort from "./Sort";
 import ChangeGroup from "./ChangeGroup";
 import { useRouter } from "next/navigation";
@@ -103,6 +103,18 @@ export default function Controller({
   }, [groupId]);
 
   useEffect(() => {
+    router.push(
+      `/focloir?groupId=${groupId}&favourite=${showFavourites}&sort=${order}`,
+    );
+  }, [showFavourites]);
+
+  useEffect(() => {
+    router.push(
+      `/focloir?groupId=${groupId}&favourite=${showFavourites}&sort=${order}`,
+    );
+  }, [order]);
+
+  useEffect(() => {
     sortPopupOpen && setSortPopupOpen(false);
     const favouritedPhrases = filterPhrasesByFavourite(
       phrases !== null ? phrases : [],
@@ -123,61 +135,75 @@ export default function Controller({
 
   return (
     <div className="relative w-full flex flex-grow flex-col">
-      <Popup isOpen={editPopupOpen} setOpen={setEditPopupOpen}>
-        <EditPhrase
-          phrase={displayPhrases.find((p) => p.p_id === editPhrase)}
-          setEditPhrase={(id) => {
-            setEditPhrase(id);
-          }}
-        />
-      </Popup>
-      <Popup isOpen={groupPopupOpen} setOpen={setGroupPopupOpen}>
-        <ChangeGroup
-          groupId={groupId}
-          handleChangeGroup={handleChangeGroup}
-          groups={groups}
-        />
-      </Popup>
-      <Popup isOpen={sortPopupOpen} setOpen={setSortPopupOpen}>
-        <Sort order={order} setOrder={setOrder} />
-      </Popup>
-      <Popup isOpen={addPhrasePopupOpen} setOpen={setAddPhrasePopupOpen}>
-        <AddPhrase
-          groupId={groupId}
-          setAddPhrasePopupOpen={(open) => {
-            setAddPhrasePopupOpen(open);
-          }}
-        />
-      </Popup>
-      <div className="bg-primary-600">
-        <Search
-          searchTerm={searchTerm}
-          handleSearch={handleSearch}
-          setSearchTerm={setSearchTerm}
-          groupId={groupId}
-          userId={session?.user.id}
-        />
-        <SortAndFilter
-          setGroupPopupOpen={setGroupPopupOpen}
-          setSortPopupOpen={setSortPopupOpen}
-          setAddPhrasePopupOpen={setAddPhrasePopupOpen}
-          showFavourites={showFavourites}
-          setShowFavourites={setShowFavourites}
-        />
+      <div className="relative max-w-xl">
+        <Popup isOpen={editPopupOpen} setOpen={setEditPopupOpen}>
+          <EditPhrase
+            phrase={displayPhrases.find((p) => p.p_id === editPhrase)}
+            setEditPhrase={(id) => {
+              setEditPhrase(id);
+            }}
+          />
+        </Popup>
+      </div>
+      <div className="relative max-w-xl">
+        <Popup isOpen={groupPopupOpen} setOpen={setGroupPopupOpen}>
+          <ChangeGroup
+            groupId={groupId}
+            handleChangeGroup={handleChangeGroup}
+            groups={groups}
+          />
+        </Popup>
+      </div>
+      <div className="relative max-w-xl">
+        <Popup isOpen={sortPopupOpen} setOpen={setSortPopupOpen}>
+          <Sort order={order} setOrder={setOrder} />
+        </Popup>
+      </div>
+      <div className="relative max-w-xl">
+        <Popup isOpen={addPhrasePopupOpen} setOpen={setAddPhrasePopupOpen}>
+          <AddPhrase
+            groupId={groupId}
+            setAddPhrasePopupOpen={(open) => {
+              setAddPhrasePopupOpen(open);
+            }}
+          />
+        </Popup>
       </div>
       <div className="w-full">
-        <Text
-          text_en={group !== null ? group.name_en : "no group"}
-          text_ga={group !== null ? group.name_ga : "níl grupa"}
-          centered={true}
-        />
-      </div>
-      <div className="flex flex-col flex-grow p-2">
-        <Phrases
-          phrases={displayPhrases}
-          session={session}
-          setEditPhrase={setEditPhrase}
-        />
+        <div className="flex justify-center bg-primary-600">
+          <div className="max-w-xl w-full">
+            <Search
+              searchTerm={searchTerm}
+              handleSearch={handleSearch}
+              setSearchTerm={setSearchTerm}
+              groupId={groupId}
+              userId={session?.user.id}
+            />
+            <SortAndFilter
+              setGroupPopupOpen={setGroupPopupOpen}
+              setSortPopupOpen={setSortPopupOpen}
+              setAddPhrasePopupOpen={setAddPhrasePopupOpen}
+              showFavourites={showFavourites}
+              setShowFavourites={setShowFavourites}
+            />
+          </div>
+        </div>
+        <div className="w-full p-2">
+          <MediumText
+            text_en={group !== null ? group.name_en : "All Groups"}
+            text_ga={group !== null ? group.name_ga : "Gach Grúpa"}
+            centered={true}
+          />
+        </div>
+        <div className="flex justify-center">
+          <div className="w-full max-w-xl flex flex-col flex-grow p-2">
+            <Phrases
+              phrases={displayPhrases}
+              session={session}
+              setEditPhrase={setEditPhrase}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import weekday from "dayjs/plugin/weekday";
-import monthsOfYear from "@/utils/NLP/months-of-year";
+import { monthsOfYear } from "@/utils";
 
 dayjs.extend(isToday);
 dayjs.extend(weekday);

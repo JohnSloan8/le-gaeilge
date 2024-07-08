@@ -4,10 +4,9 @@ import Events from "../Events";
 import FilterDate from "./FilterDate";
 import FilterGroup from "./FilterGroup";
 import type { ExtendedEventModel } from "@/types/models";
-import getUniqueGroups from "@/utils/general/getUniqueGroups";
+import getUniqueGroups from "@/utils/sortData/getUniqueGroups";
 import { useEffect, useState } from "react";
-import filterEventsByDate from "../../../utils/general/filterEventsByDate";
-import filterEventsByGroup from "@/utils/general/filterEventsByGroup";
+import { filterEventsByDate, filterEventsByGroup } from "@/utils";
 
 interface EventsClientProps {
   events: ExtendedEventModel[];

@@ -42,7 +42,7 @@ export default function Phrase({
           <form action={session === null ? () => null : favourite}>
             <button
               type="submit"
-              className="w-7 h-7 border flex justify-center items-center"
+              className="w-7 h-7 flex justify-center items-center"
             >
               <input type="hidden" name="phraseId" value={phrase.p_id} />
               <input
@@ -63,7 +63,7 @@ export default function Phrase({
             </button>
           </form>
           <button
-            className="w-7 h-7 border flex justify-center items-center"
+            className="w-7 h-7 flex justify-center items-center"
             onClick={() => {
               setEditPhrase(phrase.p_id);
             }}
@@ -75,7 +75,7 @@ export default function Phrase({
             />
           </button>
           {!phrase.p_audio_data ? (
-            <button className="w-7 h-7 border flex justify-center items-center">
+            <button className="w-7 h-7 flex justify-center items-center">
               <LoadingSpinner color={"dark"} size={"small"} />
             </button>
           ) : (

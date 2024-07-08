@@ -23,7 +23,7 @@ import DateAndTime from "./date-time/DateAndTime";
 
 // titles
 import SmallTitle from "./titles/SmallTitle";
-import MediumTitle from "./titles/MediumTitle";
+import MediumText from "./text/MediumText";
 import LargeTitle from "./titles/LargeTitle";
 import SmallCapitalisedTitle from "./titles/SmallCapitalisedTitle";
 
@@ -88,7 +88,7 @@ export {
   EventTime,
   DateAndTime,
   SmallTitle,
-  MediumTitle,
+  MediumText,
   LargeTitle,
   XLargeText,
   TestText,

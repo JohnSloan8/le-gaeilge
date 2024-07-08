@@ -1,5 +1,5 @@
 import Link from "next/link";
-import removeAccentsAndReplaceSpaces from "@/utils/NLP/convert-to-url";
+import { removeAccentsAndReplaceSpaces } from "@/utils";
 interface LinkButtonProps {
   path: string;
 }

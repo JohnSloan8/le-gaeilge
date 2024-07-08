@@ -1,4 +1,4 @@
-import capitalizeNonGrammatical from "@/utils/NLP/capitalise-non-grammatical";
+import { capitalizeNonGrammatical } from "@/utils";
 import { EnglishText } from "@/components";
 
 interface XLargeTextProps {

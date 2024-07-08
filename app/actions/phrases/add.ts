@@ -7,6 +7,15 @@ const addPhrase = async (formData: FormData) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user === null) {
+    console.log("user is null");
+    return null;
+  }
+
   const groupId = formData.get("groupId");
   const entryGa = String(formData.get("entryGa"));
   const entryEn = String(formData.get("entryEn"));
@@ -15,6 +24,7 @@ const addPhrase = async (formData: FormData) => {
     entry_ga: entryGa,
     entry_en: entryEn,
     group_id: groupId === "" ? null : Number(groupId),
+    author_id: user.id,
   });
 
   data !== null && console.log("data:", data);

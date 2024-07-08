@@ -393,25 +393,45 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      get_phrases_for_test: {
-        Args: {
-          group_id_input: number;
-          user_id_input: string;
-        };
-        Returns: {
-          p_id: number;
-          p_created_at: string;
-          p_entry_ga: string;
-          p_entry_en: string;
-          p_author_id: string;
-          p_group_id: number;
-          p_audio_data: boolean;
-          p_edited: boolean;
-          p_is_favourited: boolean;
-          p_correct_true_count: number;
-          p_correct_false_count: number;
-        }[];
-      };
+      get_phrases_for_test:
+        | {
+            Args: {
+              group_id_input: number;
+              user_id_input: string;
+            };
+            Returns: {
+              p_id: number;
+              p_created_at: string;
+              p_entry_ga: string;
+              p_entry_en: string;
+              p_author_id: string;
+              p_group_id: number;
+              p_audio_data: boolean;
+              p_edited: boolean;
+              p_is_favourited: boolean;
+              p_correct_true_count: number;
+              p_correct_false_count: number;
+            }[];
+          }
+        | {
+            Args: {
+              group_id_input?: number;
+              user_id_input?: string;
+            };
+            Returns: {
+              p_id: number;
+              p_created_at: string;
+              p_entry_ga: string;
+              p_entry_en: string;
+              p_author_id: string;
+              p_group_id: number;
+              p_audio_data: boolean;
+              p_edited: boolean;
+              p_is_favourited: boolean;
+              p_correct_true_count: number;
+              p_correct_false_count: number;
+            }[];
+          };
       get_phrases_with_favourites: {
         Args: {
           group_id_input?: number;

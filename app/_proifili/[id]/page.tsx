@@ -5,7 +5,7 @@
 //   ProfileImageLarge,
 //   SmallPaddingContainer,
 //   MarginTopContainer,
-//   MediumTitle,
+//   MediumText,
 //   SmallText,
 // } from "@/components";
 // import { createClient } from "@/utils/supabase/server";
@@ -62,7 +62,7 @@ export default async function ProfilePage({
   //                 <SmallText text_ga={`leibhéal`} text_en="Irish level" />
   //               </SmallPaddingContainer>
   //               <SmallPaddingContainer>
-  //                 <MediumTitle text_ga={`${profile.irish_level}`} text_en="" />
+  //                 <MediumText text_ga={`${profile.irish_level}`} text_en="" />
   //               </SmallPaddingContainer>
   //             </div>
   //             <div className="flex">
@@ -70,7 +70,7 @@ export default async function ProfilePage({
   //                 <SmallText text_ga={`grupaí`} text_en="groups" />
   //               </SmallPaddingContainer>
   //               <SmallPaddingContainer>
-  //                 <MediumTitle
+  //                 <MediumText
   //                   text_ga={`${groups !== null ? groups.length : 0}`}
   //                   text_en=""
   //                 />
@@ -81,7 +81,7 @@ export default async function ProfilePage({
   //                 <SmallText text_ga={`imeachtaí`} text_en="events" />
   //               </SmallPaddingContainer>
   //               <SmallPaddingContainer>
-  //                 <MediumTitle
+  //                 <MediumText
   //                   text_ga={`${events !== null ? events.length : 0}`}
   //                   text_en=""
   //                 />
@@ -92,14 +92,14 @@ export default async function ProfilePage({
   //       </MarginTopContainer>
 
   //       <MarginTopContainer>
-  //         <MediumTitle text_ga="Groupaí" text_en="Groups" />
+  //         <MediumText text_ga="Groupaí" text_en="Groups" />
   //         <div className="flex flex-wrap w-full justify-center">
   //           <Groups groups={groups} />
   //         </div>
   //       </MarginTopContainer>
 
   //       <MarginTopContainer>
-  //         <MediumTitle text_ga="Imeachtaí" text_en="Events" />
+  //         <MediumText text_ga="Imeachtaí" text_en="Events" />
   //         <div className="flex flex-wrap w-full justify-center">
   //           {/* <Events events={events} groups={groups} /> */}
   //         </div>

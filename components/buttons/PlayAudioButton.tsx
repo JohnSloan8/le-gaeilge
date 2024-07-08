@@ -47,14 +47,14 @@ export default function PlayAudioButton({
     <div>
       {audioPlaying ? (
         <button
-          className="flex justify-center items-center"
+          className="w-7 h-7 flex justify-center items-center"
           onClick={stopAudio}
         >
           <StopIcon size={size} color={themeColors.primary[700]} />
         </button>
       ) : (
         <button
-          className="flex justify-center items-center"
+          className="w-7 h-7 flex justify-center items-center"
           onClick={playAudio}
         >
           <PlayIcon

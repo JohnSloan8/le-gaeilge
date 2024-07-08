@@ -35,7 +35,10 @@ export default function TestCard({
             <LoadingSpinner color={"dark"} size={"small"} />
           </button>
         ) : (
-          <PlayAudioButton src={phrase.p_audio_data} size={32} />
+          <PlayAudioButton
+            src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}${process.env.NEXT_PUBLIC_AUDIO_STORAGE_PATH}${phrase.p_id}.mp3`}
+            size={32}
+          />
         )}
 
         <button
