@@ -21,7 +21,7 @@ export default async function ScruduPage() {
     .select();
 
   if (groupsError !== null) {
-    alert(groupsError.message);
+    console.log(groupsError.message);
   }
 
   return (
