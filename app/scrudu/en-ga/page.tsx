@@ -45,7 +45,6 @@ export default async function ScruduPage({ searchParams }: Props) {
   return (
     <div className="w-full h-full flex flex-col overflow-y-scroll">
       <XLargeText text_ga="Scrúdú" text_en="Test" />
-
       <Controller phrases={phrasesForTest} />
     </div>
   );
