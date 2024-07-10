@@ -5,18 +5,18 @@ import {
   HomeIcon,
   EventsIcon,
   GroupIcon,
-  ProfileIcon,
   XIcon,
   BookIcon,
-  SignInIcon,
   PencilIcon,
 } from "@/icons";
-import { RoundMobileButton } from "@/components";
+import { RoundMobileButton, SmallText } from "@/components";
 import Link from "next/link";
 import Sidebar from "./Sidebar";
+import LoginButton from "./LoginButton";
 import { useState } from "react";
 import { themeColors } from "@/theme";
 import type { Session } from "@supabase/supabase-js";
+import navbarLinks from "./navbarLinks";
 
 interface NavbarClientProps {
   session: Session | null;
@@ -39,17 +39,7 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
             </RoundMobileButton>
           </div>
           <div className="absolute right-0 top-0 flex flex-row p-2 gap-2">
-            <RoundMobileButton>
-              {session !== null ? (
-                <Link href="/proifil">
-                  <ProfileIcon color={themeColors.primary[700]} size={22} />
-                </Link>
-              ) : (
-                <Link href="/login">
-                  <SignInIcon color={themeColors.primary[700]} size={22} />
-                </Link>
-              )}
-            </RoundMobileButton>
+            <LoginButton session={session} />
           </div>
         </>
       )}
@@ -74,21 +64,8 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
           "transition-all duration-500 ease-in-out absolute",
         ].join(" ")}
       >
-        <Sidebar>
-          <Link href="/">
-            <div
-              className="p-2 flex w-full my-2 items-center"
-              onClick={() => {
-                setShowSidebar(false);
-              }}
-            >
-              <div className="mx-2 flex">
-                <HomeIcon color={themeColors.primary[100]} size={24} />
-              </div>
-              <div className="text-primary-100">bhaile</div>
-            </div>
-          </Link>
-          <Link href="/grupai">
+        <Sidebar setShowSidebar={setShowSidebar}>
+          {/* <Link href="/grupai">
             <div
               className="p-2 flex w-full my-2 items-center"
               onClick={() => {
@@ -143,7 +120,7 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
               </div>
               <div className="text-primary-100">scrúdú</div>
             </div>
-          </Link>
+          </Link> */}
         </Sidebar>
       </div>
     </div>
