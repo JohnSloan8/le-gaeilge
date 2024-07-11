@@ -11,7 +11,7 @@ const Sidebar = ({ setShowSidebar }: SidebarProps) => {
   return (
     <div id="sidebarContainer" className="w-56">
       <div className="w-full h-screen shadow-md bg-primary-800">
-        <ul className="pt-12 ">
+        <ul className="pt-1">
           {navbarLinks.map(({ name_ga, name_en, icon: Icon, link }) => (
             <Link href={link} key={link}>
               <div

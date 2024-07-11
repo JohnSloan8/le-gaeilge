@@ -1,22 +1,15 @@
 "use client";
 
-import {
-  BurgerMenuIcon,
-  HomeIcon,
-  EventsIcon,
-  GroupIcon,
-  XIcon,
-  BookIcon,
-  PencilIcon,
-} from "@/icons";
-import { RoundMobileButton, SmallText } from "@/components";
-import Link from "next/link";
-import Sidebar from "./Sidebar";
+import { BurgerMenuIcon, XIcon } from "@/icons";
+import { MediumText, RoundMobileButton } from "@/components";
+
+import SidebarContent from "./SidebarContent";
 import LoginButton from "./LoginButton";
 import { useState } from "react";
 import { themeColors } from "@/theme";
 import type { Session } from "@supabase/supabase-js";
 import navbarLinks from "./navbarLinks";
+import { usePathname } from "next/navigation";
 
 interface NavbarClientProps {
   session: Session | null;
@@ -29,20 +22,42 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
     setShowSidebar(!showSidebar);
   };
 
+  const pathname = usePathname();
+  console.log("pathname:", pathname);
+
+  const getLinkObject = (link: string) => {
+    return navbarLinks.find((navItem) => navItem.link === pathname);
+  };
+
+  const navbarLinkItem = getLinkObject(pathname);
+
   return (
     <div className="absolute top-0 w-full">
-      {!showSidebar && (
-        <>
-          <div className="absolute left-0 flex flex-row p-2 gap-2">
-            <RoundMobileButton handleClick={handleClick}>
-              <BurgerMenuIcon color={themeColors.primary[700]} size={22} />
-            </RoundMobileButton>
+      <div className="w-full flex justify-center h-14 bg-primary-800">
+        <div className="flex flex-row h-full w-full max-w-xl">
+          <div className="flex h-full justify-center">
+            <button onClick={handleClick} className="pl-4">
+              <BurgerMenuIcon color={themeColors.primary[100]} size={24} />
+            </button>
           </div>
-          <div className="absolute right-0 top-0 flex flex-row p-2 gap-2">
+
+          <div className="flex flex-grow justify-center items-center">
+            {navbarLinkItem !== undefined ? (
+              <MediumText
+                text_en={navbarLinkItem?.name_en}
+                text_ga={navbarLinkItem?.name_ga}
+                dark={true}
+                centered={true}
+              />
+            ) : (
+              <div>no title</div>
+            )}
+          </div>
+          <div className="flex h-full justify-center items-center pr-2">
             <LoginButton session={session} />
           </div>
-        </>
-      )}
+        </div>
+      </div>
       <div
         className={[
           showSidebar ? "left-0" : "left-[-101%]",
@@ -64,64 +79,7 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
           "transition-all duration-500 ease-in-out absolute",
         ].join(" ")}
       >
-        <Sidebar setShowSidebar={setShowSidebar}>
-          {/* <Link href="/grupai">
-            <div
-              className="p-2 flex w-full my-2 items-center"
-              onClick={() => {
-                setShowSidebar(false);
-              }}
-            >
-              <div className="mx-2">
-                <GroupIcon color={themeColors.primary[100]} size={24} />
-              </div>
-              <div className="text-primary-100">grúpaí</div>
-            </div>
-          </Link>
-          <Link href="/imeachtai">
-            <div
-              className="p-2 flex w-full my-2 items-center"
-              onClick={() => {
-                setShowSidebar(false);
-              }}
-            >
-              <div className="mx-2">
-                <EventsIcon color={themeColors.primary[100]} size={24} />
-              </div>
-              <div className="text-primary-100">imeachtaí</div>
-            </div>
-          </Link>
-          <Link href="/focloir">
-            <div
-              className="p-2 flex w-full my-2 items-center"
-              onClick={() => {
-                setShowSidebar(false);
-              }}
-            >
-              <div className="mx-2">
-                <BookIcon color={themeColors.primary[100]} size={24} />
-              </div>
-              <div className="text-primary-100">foclóir</div>
-            </div>
-          </Link>
-          <Link href="/scrudu">
-            <div
-              className="p-2 flex w-full my-2 items-center"
-              onClick={() => {
-                setShowSidebar(false);
-              }}
-            >
-              <div className="mx-2">
-                <PencilIcon
-                  color={themeColors.primary[100]}
-                  size={24}
-                  filled={true}
-                />
-              </div>
-              <div className="text-primary-100">scrúdú</div>
-            </div>
-          </Link> */}
-        </Sidebar>
+        <SidebarContent setShowSidebar={setShowSidebar} />
       </div>
     </div>
   );

@@ -25,12 +25,12 @@ export default function Search({
         <input
           type="hidden"
           name="groupId"
-          value={groupId === null ? "null" : groupId}
+          value={groupId === null ? "null" : String(groupId)}
         />
         <input
           type="hidden"
           name="userId"
-          value={userId === undefined ? "" : userId}
+          value={userId === undefined ? "" : String(userId)}
         />
         <div className="flex flex-grow border border-gray-300 bg-white rounded-2xl py-2 px-2">
           <div className="pr-1 flex-none">
@@ -42,7 +42,7 @@ export default function Search({
               type="text"
               name="text"
               placeholder="Search..."
-              value={searchTerm}
+              value={String(searchTerm)}
               onChange={handleSearch}
             />
           </div>
