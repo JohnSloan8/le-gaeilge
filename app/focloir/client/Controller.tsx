@@ -4,7 +4,7 @@ import type { PhraseModelWithFavourites, GroupModel } from "@/types/models";
 import { useEffect, useState } from "react";
 import Search from "./Search";
 import type { ChangeEvent } from "react";
-import { filterPhrasesBySearchTerm } from "@/utils";
+import { filterPhrasesBySearchTerm, getLinkObject } from "@/utils";
 import type { Session } from "@supabase/supabase-js";
 import SortAndFilter from "./SortAndFilter";
 import EditPhrase from "./EditPhrase";
@@ -12,7 +12,7 @@ import Phrases from "./Phrases";
 import { MediumText, Popup } from "@/components";
 import Sort from "./Sort";
 import ChangeGroup from "./ChangeGroup";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import AddPhrase from "./AddPhrase";
 
 interface ControllerProps {
@@ -48,6 +48,7 @@ export default function Controller({
   const [addPhrasePopupOpen, setAddPhrasePopupOpen] = useState<boolean>(false);
   const [showFavourites, setShowFavourites] = useState<boolean>(favourite);
   const router = useRouter();
+  const pathname = usePathname();
 
   const filterPhrasesByFavourite = (_phrases: PhraseModelWithFavourites[]) => {
     if (showFavourites && _phrases.length > 0) {
@@ -133,6 +134,9 @@ export default function Controller({
     setSearchTerm(term);
   };
 
+  const navbarLinkItem = getLinkObject(pathname);
+  console.log("navbarLinkItem", navbarLinkItem);
+
   return (
     <div className="relative w-full flex flex-grow flex-col">
       <div className="relative max-w-xl">
@@ -171,6 +175,18 @@ export default function Controller({
       </div>
       <div className="w-full">
         <div className="flex justify-center bg-primary-600">
+          <div className="flex flex-grow justify-center items-center">
+            {navbarLinkItem !== undefined ? (
+              <MediumText
+                text_en={navbarLinkItem?.name_en}
+                text_ga={navbarLinkItem?.name_ga}
+                dark={true}
+                centered={true}
+              />
+            ) : (
+              <div>no title</div>
+            )}
+          </div>
           <div className="max-w-xl w-full">
             <Search
               searchTerm={searchTerm}

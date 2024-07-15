@@ -1,5 +1,5 @@
 import Link from "next/link";
-import navbarLinks from "./navbarLinks";
+import navbarLinks from "@/utils/paths/navbarLinks";
 import { themeColors } from "@/theme";
 import { SmallText } from "@/components";
 
@@ -10,7 +10,7 @@ interface SidebarProps {
 const Sidebar = ({ setShowSidebar }: SidebarProps) => {
   return (
     <div id="sidebarContainer" className="w-56">
-      <div className="w-full h-screen shadow-md bg-primary-800">
+      <div className="w-full h-screen bg-primary-800 opacity-90">
         <ul className="pt-1">
           {navbarLinks.map(({ name_ga, name_en, icon: Icon, link }) => (
             <Link href={link} key={link}>

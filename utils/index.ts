@@ -11,6 +11,8 @@ import filterPhrasesBySearchTerm from "./sortData/filterPhrasesBySearchTerm";
 import getUniqueGroups from "./sortData/getUniqueGroups";
 import orderPhrases from "./sortData/orderPhrases";
 
+import getLinkObject from "./paths/getLinkObject";
+
 export {
   capitalizeFirstLetter,
   capitalizeNonGrammatical,
@@ -23,4 +25,5 @@ export {
   filterPhrasesBySearchTerm,
   getUniqueGroups,
   orderPhrases,
+  getLinkObject,
 };

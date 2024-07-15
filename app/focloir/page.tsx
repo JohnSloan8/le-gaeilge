@@ -1,6 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { XLargeText } from "@/components";
 import Controller from "./client/Controller";
 
 interface Props {
@@ -39,9 +38,7 @@ export default async function PhrasesPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="w-full h-full flex flex-col overflow-y-scroll">
-      <XLargeText text_ga="Foclóir" text_en="Dictionary" />
-
+    <div className="w-full h-full flex flex-col mt-14">
       <Controller
         phrases={phrases}
         groups={groups}
