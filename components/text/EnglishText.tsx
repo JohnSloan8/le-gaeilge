@@ -20,7 +20,7 @@ export default function EnglishText({
 }: EnglishTextProps) {
   return (
     <div
-      className={`${xsmall ? "text-xs" : "text-sm"} ${dark ? "text-gray-100" : "text-gray-400"} ${!inline ? "mt-[-4px]" : "m-1"} ${robotoCondensed.className}`}
+      className={`${xsmall ? "text-xs" : "text-sm"} ${dark ? "text-gray-100" : "text-gray-400"}  ${robotoCondensed.className}`}
     >
       {text_en !== null ? text_en : ""}
     </div>

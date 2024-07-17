@@ -93,6 +93,37 @@ export type Database = {
           },
         ];
       };
+      categories: {
+        Row: {
+          created_at: string;
+          group_id: number | null;
+          id: number;
+          name_en: string | null;
+          name_ga: string | null;
+        };
+        Insert: {
+          created_at?: string;
+          group_id?: number | null;
+          id?: number;
+          name_en?: string | null;
+          name_ga?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          group_id?: number | null;
+          id?: number;
+          name_en?: string | null;
+          name_ga?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_categories_group_id_fkey";
+            columns: ["group_id"];
+            referencedRelation: "groups";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       events: {
         Row: {
           created_at: string;
@@ -284,6 +315,7 @@ export type Database = {
         Row: {
           audio_data: boolean | null;
           author_id: string | null;
+          category_id: number | null;
           created_at: string;
           edited: boolean | null;
           entry_en: string | null;
@@ -294,6 +326,7 @@ export type Database = {
         Insert: {
           audio_data?: boolean | null;
           author_id?: string | null;
+          category_id?: number | null;
           created_at?: string;
           edited?: boolean | null;
           entry_en?: string | null;
@@ -304,6 +337,7 @@ export type Database = {
         Update: {
           audio_data?: boolean | null;
           author_id?: string | null;
+          category_id?: number | null;
           created_at?: string;
           edited?: boolean | null;
           entry_en?: string | null;
@@ -316,6 +350,12 @@ export type Database = {
             foreignKeyName: "public_phrases_author_id_fkey";
             columns: ["author_id"];
             referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "public_phrases_category_id_fkey";
+            columns: ["category_id"];
+            referencedRelation: "categories";
             referencedColumns: ["id"];
           },
           {
@@ -393,46 +433,26 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      get_phrases_for_test:
-        | {
-            Args: {
-              group_id_input: number;
-              user_id_input: string;
-            };
-            Returns: {
-              p_id: number;
-              p_created_at: string;
-              p_entry_ga: string;
-              p_entry_en: string;
-              p_author_id: string;
-              p_group_id: number;
-              p_audio_data: boolean;
-              p_edited: boolean;
-              p_is_favourited: boolean;
-              p_correct_true_count: number;
-              p_correct_false_count: number;
-            }[];
-          }
-        | {
-            Args: {
-              group_id_input?: number;
-              user_id_input?: string;
-            };
-            Returns: {
-              p_id: number;
-              p_created_at: string;
-              p_entry_ga: string;
-              p_entry_en: string;
-              p_author_id: string;
-              p_group_id: number;
-              p_audio_data: boolean;
-              p_edited: boolean;
-              p_is_favourited: boolean;
-              p_correct_true_count: number;
-              p_correct_false_count: number;
-            }[];
-          };
-      get_phrases_with_favourites: {
+      get_phrases_for_dictionary: {
+        Args: {
+          group_id_input?: number;
+          category_id_input?: number;
+          user_id_input?: string;
+        };
+        Returns: {
+          p_id: number;
+          p_created_at: string;
+          p_entry_ga: string;
+          p_entry_en: string;
+          p_author_id: string;
+          p_group_id: number;
+          p_category_id: number;
+          p_edited: boolean;
+          p_audio_data: boolean;
+          p_is_favourited: boolean;
+        }[];
+      };
+      get_phrases_for_test: {
         Args: {
           group_id_input?: number;
           user_id_input?: string;
@@ -444,9 +464,11 @@ export type Database = {
           p_entry_en: string;
           p_author_id: string;
           p_group_id: number;
-          p_edited: boolean;
           p_audio_data: boolean;
+          p_edited: boolean;
           p_is_favourited: boolean;
+          p_correct_true_count: number;
+          p_correct_false_count: number;
         }[];
       };
     };

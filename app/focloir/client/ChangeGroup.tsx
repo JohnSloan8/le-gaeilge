@@ -12,11 +12,11 @@ export default function ChangeGroup({
   groups,
 }: ChangeGroupProps) {
   return (
-    <div className="p-1">
+    <div className="w-full">
       <select
         value={groupId !== null ? String(groupId) : "-1"}
         onChange={handleChangeGroup}
-        className="block w-full px-4 py-2 mt-2 text-base border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="block w-full px-4 py-2 bg-white text-base border-2 border-primary-600 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-400 focus:border-primary-400"
       >
         <option
           value={"-1"}

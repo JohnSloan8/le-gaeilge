@@ -6,7 +6,7 @@ import type { Dispatch, SetStateAction } from "react";
 
 interface SortAndFilterProps {
   setSortPopupOpen: Dispatch<SetStateAction<boolean>>;
-  setGroupPopupOpen: Dispatch<SetStateAction<boolean>>;
+
   setAddPhrasePopupOpen: Dispatch<SetStateAction<boolean>>;
   showFavourites: boolean;
   setShowFavourites: Dispatch<SetStateAction<boolean>>;
@@ -14,22 +14,13 @@ interface SortAndFilterProps {
 
 export default function SortAndFilter({
   setSortPopupOpen,
-  setGroupPopupOpen,
+
   setAddPhrasePopupOpen,
   showFavourites,
   setShowFavourites,
 }: SortAndFilterProps) {
   return (
     <div className="h-12 pb-2 pt-2 border-t border-primary-100 flex flex-row justify-around">
-      <button
-        className="p-1 flex flex-row gap-1 items-center justify-center"
-        onClick={() => {
-          setGroupPopupOpen(true);
-        }}
-      >
-        <GroupIcon color={themeColors.primary[100]} size={28} />
-        <XSmallText text_ga="grúpa" text_en="group" dark={true} />
-      </button>
       <button
         className="p-1 flex flex-row gap-1 items-center justify-center"
         onClick={() => {

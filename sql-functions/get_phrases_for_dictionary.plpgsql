@@ -1,5 +1,6 @@
-CREATE OR REPLACE FUNCTION get_phrases_with_favourites(
+CREATE OR REPLACE FUNCTION get_phrases_for_dictionary(
     group_id_input integer DEFAULT NULL::integer,
+    category_id_input integer DEFAULT NULL::integer,
     user_id_input uuid DEFAULT NULL::uuid
 )
 RETURNS TABLE (
@@ -9,6 +10,7 @@ RETURNS TABLE (
     p_entry_en text,
     p_author_id uuid,
     p_group_id bigint,
+    p_category_id bigint,
     p_edited boolean,
     p_audio_data boolean,
     p_is_favourited boolean
@@ -22,6 +24,7 @@ select
   p.entry_en,
   p.author_id,
   p.group_id,
+  p.category_id,
   p.edited,
   p.audio_data,
   case
@@ -40,6 +43,15 @@ where
       public.groups
     where
       public.groups.id = group_id_input
+  ))
+and
+ (category_id_input is null or category_id in (
+    select
+      id
+    from
+      public.categories
+    where
+      public.categories.id = category_id_input
   ))
 order by
   created_at desc;

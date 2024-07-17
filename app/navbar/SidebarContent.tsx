@@ -4,21 +4,19 @@ import { themeColors } from "@/theme";
 import { SmallText } from "@/components";
 
 interface SidebarProps {
-  setShowSidebar: (show: boolean) => void;
+  handleClickBurgerMenu: () => void;
 }
 
-const Sidebar = ({ setShowSidebar }: SidebarProps) => {
+const SidebarContent = ({ handleClickBurgerMenu }: SidebarProps) => {
   return (
-    <div id="sidebarContainer" className="w-56">
-      <div className="w-full h-screen bg-primary-800 opacity-90">
+    <div id="sidebarContainer" className="w-56 h-full">
+      <div className="w-full h-full bg-primary-800 pt-14 ">
         <ul className="pt-1">
           {navbarLinks.map(({ name_ga, name_en, icon: Icon, link }) => (
             <Link href={link} key={link}>
               <div
                 className="p-2 flex w-full my-2 items-center"
-                onClick={() => {
-                  setShowSidebar(false);
-                }}
+                onClick={handleClickBurgerMenu}
               >
                 <div className="mx-4 flex">
                   <Icon color={themeColors.primary[100]} size={28} />
@@ -33,4 +31,4 @@ const Sidebar = ({ setShowSidebar }: SidebarProps) => {
   );
 };
 
-export default Sidebar;
+export default SidebarContent;

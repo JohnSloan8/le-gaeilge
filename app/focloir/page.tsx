@@ -3,7 +3,12 @@ import { cookies } from "next/headers";
 import Controller from "./client/Controller";
 
 interface Props {
-  searchParams: { groupId: string; favourite: string; sort: string };
+  searchParams: {
+    groupId: string;
+    categoryId: string;
+    favourite: string;
+    sort: string;
+  };
 }
 
 export default async function PhrasesPage({ searchParams }: Props) {
@@ -15,12 +20,16 @@ export default async function PhrasesPage({ searchParams }: Props) {
   } = await supabase.auth.getSession();
 
   const { data: phrases, error: phrasesError } = await supabase.rpc(
-    "get_phrases_with_favourites",
+    "get_phrases_for_dictionary",
     {
       group_id_input:
         searchParams.groupId === undefined
           ? undefined
           : Number(searchParams.groupId),
+      category_id_input:
+        searchParams.categoryId === undefined
+          ? undefined
+          : Number(searchParams.categoryId),
       user_id_input: session === null ? undefined : session.user.id,
     },
   );
@@ -37,6 +46,15 @@ export default async function PhrasesPage({ searchParams }: Props) {
     console.log(groupsError.message);
   }
 
+  const { data: categories, error: categoriesError } = await supabase
+    .from("categories")
+    .select()
+    .eq("group_id", searchParams.groupId);
+
+  if (categoriesError !== null) {
+    console.log(categoriesError.message);
+  }
+
   return (
     <div className="w-full h-full flex flex-col mt-14">
       <Controller
@@ -47,6 +65,7 @@ export default async function PhrasesPage({ searchParams }: Props) {
             ? null
             : Number(searchParams.groupId)
         }
+        categories={categories}
         session={session}
         favourite={
           searchParams.favourite !== undefined

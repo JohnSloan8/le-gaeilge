@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
 import Navbar from "@/app/navbar/Navbar";
+import { NavbarHeight, navbarHeight } from "@/config";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -26,13 +27,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.className}`}>
-        <main className="flex flex-col items-center w-full">
-          <div className="w-full flex flex-col h-full">
-            <div className="background-image flex-grow w-full">
-              {children}
+        <main className="flex w-full">
+          {/* <div className="w-full flex flex-col h-full"> */}
+          <div className="background-image relative flex-grow h-full w-full">
+            <div className={`mt-${navbarHeight}`}>{children}</div>
+            <div className={`absolute top-0 h-${navbarHeight} w-full`}>
               <Navbar />
             </div>
           </div>
+          {/* </div> */}
         </main>
       </body>
     </html>

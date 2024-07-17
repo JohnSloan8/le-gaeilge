@@ -21,6 +21,9 @@ module.exports = {
         dark: colors.gray[800],
         light: colors.gray[100],
       },
+      height: {
+        "h-main-body": "calc(100vh - 3.5rem)",
+      },
     },
   },
   plugins: [],
