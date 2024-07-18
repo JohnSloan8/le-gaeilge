@@ -1,7 +1,7 @@
 import { XSmallText } from "@/components";
 
 import { themeColors } from "@/theme";
-import { HeartIcon, UpDownArrowsIcon, AddIcon, GroupIcon } from "@/icons";
+import { HeartIcon, UpDownArrowsIcon, AddIcon } from "@/icons";
 import type { Dispatch, SetStateAction } from "react";
 
 interface SortAndFilterProps {

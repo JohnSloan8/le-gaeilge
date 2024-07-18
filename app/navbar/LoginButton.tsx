@@ -10,17 +10,17 @@ interface LoginButtonProps {
 
 const LoginButton = ({ session }: LoginButtonProps) => {
   return (
-    <RoundMobileButton>
+    <button>
       {session !== null ? (
         <Link href="/proifil">
-          <ProfileIcon color={themeColors.primary[700]} size={22} />
+          <ProfileIcon color={themeColors.primary[100]} size={28} />
         </Link>
       ) : (
         <Link href="/login">
-          <SignInIcon color={themeColors.primary[700]} size={22} />
+          <SignInIcon color={themeColors.primary[100]} size={28} />
         </Link>
       )}
-    </RoundMobileButton>
+    </button>
   );
 };
 

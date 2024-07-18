@@ -1,12 +1,6 @@
-import { HomeIcon, EventsIcon, GroupIcon, BookIcon, PencilIcon } from "@/icons";
+import { EventsIcon, GroupIcon, BookIcon, PencilIcon } from "@/icons";
 
 const navbarLinks = [
-  {
-    name_ga: "Baile",
-    name_en: "Home",
-    link: "/",
-    icon: HomeIcon,
-  },
   {
     name_ga: "Grúpaí",
     name_en: "Groups",
