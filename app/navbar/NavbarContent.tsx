@@ -6,7 +6,7 @@ import { SmallText } from "@/components";
 const NavbarContent = () => {
   return (
     // <div className="">
-    <ul className="flex h-full flex-row items-center gap-6 ">
+    <ul className="flex h-full flex-row items-center gap-6">
       {navbarLinks.map(({ name_ga, name_en, icon: Icon, link }) => (
         <Link href={link} key={link}>
           <div className="flex w-full items-center">

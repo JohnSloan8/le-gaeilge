@@ -1,4 +1,3 @@
-import { RoundMobileButton } from "@/components";
 import { ProfileIcon, SignInIcon } from "@/icons";
 import { themeColors } from "@/theme";
 import type { Session } from "@supabase/supabase-js";
