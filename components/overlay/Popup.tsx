@@ -17,7 +17,7 @@ const Popup = ({ isOpen, children, setOpen }: PopupProps) => {
           setOpen(false);
         }}
       ></div>
-      <div className="relative bg-white max-w-xl p-2 w-full rounded shadow-lg z-50">
+      <div className="relative bg-white max-w-2xl p-2 w-full rounded shadow-lg z-50">
         {children}
       </div>
     </div>

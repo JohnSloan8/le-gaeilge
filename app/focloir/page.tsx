@@ -8,6 +8,7 @@ interface Props {
     categoryId: string;
     favourite: string;
     sort: string;
+    search: string;
   };
 }
 
@@ -71,6 +72,9 @@ export default async function PhrasesPage({ searchParams }: Props) {
           searchParams.favourite !== undefined
             ? searchParams.favourite === "true"
             : false
+        }
+        search={
+          searchParams.search === undefined ? "" : String(searchParams.search)
         }
         sort={searchParams.sort !== undefined ? searchParams.sort : null}
       />

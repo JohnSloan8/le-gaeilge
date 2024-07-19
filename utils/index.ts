@@ -8,8 +8,10 @@ import filterEventsByDate from "./sortData/filterEventsByDate";
 import filterEventsByGroup from "./sortData/filterEventsByGroup";
 import filterPhrasesByGroup from "./sortData/filterPhrasesByGroup";
 import filterPhrasesBySearchTerm from "./sortData/filterPhrasesBySearchTerm";
+import filterPhrasesByFavourite from "./sortData/filterPhrasesByFavourite";
 import getUniqueGroups from "./sortData/getUniqueGroups";
 import orderPhrases from "./sortData/orderPhrases";
+import sortPhrases from "./sortData/sortPhrases";
 
 import getLinkObject from "./paths/getLinkObject";
 
@@ -23,7 +25,9 @@ export {
   filterEventsByGroup,
   filterPhrasesByGroup,
   filterPhrasesBySearchTerm,
+  filterPhrasesByFavourite,
   getUniqueGroups,
   orderPhrases,
   getLinkObject,
+  sortPhrases,
 };

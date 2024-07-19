@@ -16,7 +16,7 @@ export default function ChangeGroup({
       <select
         value={groupId !== null ? String(groupId) : "-1"}
         onChange={handleChangeGroup}
-        className="block w-full px-4 py-2 bg-white text-base border-2 border-primary-600 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-400 focus:border-primary-400"
+        className="block w-full px-4 py-2 bg-gray-200 text-base rounded-sm outline-none"
       >
         <option
           value={"-1"}

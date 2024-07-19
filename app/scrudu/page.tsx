@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { XLargeText, SmallText, SubmitButton, MediumText } from "@/components";
+import { SmallText, SubmitButton, MediumText } from "@/components";
 import { redirect } from "next/navigation";
 import { chooseTest } from "../actions";
 
@@ -26,10 +26,8 @@ export default async function ScruduPage() {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <XLargeText text_ga="Scrúdú" text_en="Test" />
-
       <div className="w-full flex justify-center">
-        <div className="w-full max-w-xl">
+        <div className="w-full max-w-2xl">
           <form
             action={chooseTest}
             className="bg-white p-6 rounded shadow-md m-2"

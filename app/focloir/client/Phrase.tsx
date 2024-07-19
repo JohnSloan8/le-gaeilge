@@ -23,11 +23,11 @@ export default function Phrase({
 }: PhraseProps) {
   useEffect(() => {
     const updateSynthesis = async () => {
-      await getSynthesis(phrase.p_entry_ga, phrase.p_id);
+      await getSynthesis(String(phrase.p_entry_ga), Number(phrase.p_id));
     };
 
     console.log("phrase.p_audio_data:", phrase.p_audio_data);
-    if (!phrase.p_audio_data) {
+    if (phrase.p_audio_data === null) {
       void updateSynthesis();
     }
   }, []);
@@ -65,7 +65,7 @@ export default function Phrase({
           <button
             className="w-7 h-7 flex justify-center items-center"
             onClick={() => {
-              setEditPhrase(phrase.p_id);
+              setEditPhrase(Number(phrase.p_id));
             }}
           >
             <PencilIcon
@@ -74,7 +74,7 @@ export default function Phrase({
               filled={phrase.p_edited}
             />
           </button>
-          {!phrase.p_audio_data ? (
+          {phrase.p_audio_data !== null ? (
             <button className="w-7 h-7 flex justify-center items-center">
               <LoadingSpinner color={"dark"} size={"small"} />
             </button>

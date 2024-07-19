@@ -1,13 +1,13 @@
 "use client";
 
-import type { PhraseModelWithFavourites } from "@/types/models";
+import type { PhraseModelForTest } from "@/types/models";
 import { useEffect, useState } from "react";
 import TestCard from "./TestCard";
 import { MediumText } from "@/components";
 import Link from "next/link";
 
 interface ControllerProps {
-  phrases: PhraseModelWithFavourites[] | null;
+  phrases: PhraseModelForTest[] | null;
 }
 
 export default function Controller({ phrases }: ControllerProps) {
@@ -42,7 +42,7 @@ export default function Controller({ phrases }: ControllerProps) {
           centered={true}
         />
       </div>
-      <div className="w-full max-w-xl">
+      <div className="w-full max-w-2xl">
         {remainingPhrases.length === 0 ? (
           <div className="w-full flex justify-center">
             <Link href="/scrudu" className="underline text-secondary-500">

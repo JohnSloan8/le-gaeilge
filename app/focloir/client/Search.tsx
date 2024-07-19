@@ -32,7 +32,7 @@ export default function Search({
           name="userId"
           value={userId === undefined ? "" : String(userId)}
         />
-        <div className="flex flex-grow border border-gray-300 bg-white rounded-2xl py-2 px-2">
+        <div className="flex flex-grow border border-gray-300 bg-white rounded-lg py-2 px-2">
           <div className="pr-1 flex-none">
             <SearchIcon size={20} color={themeColors.primary[300]} />
           </div>

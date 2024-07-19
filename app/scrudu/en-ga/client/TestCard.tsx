@@ -1,6 +1,6 @@
 "use client";
 
-import type { PhraseModelWithFavourites } from "@/types/models";
+import type { PhraseModelForTest } from "@/types/models";
 import { LoadingSpinner, PlayAudioButton, TestText } from "@/components";
 import { ShowIcon, TickIcon, XIcon } from "@/icons";
 import { themeColors } from "@/theme";
@@ -8,7 +8,7 @@ import { useState } from "react";
 import { addAnswer } from "@/app/actions";
 
 interface TestCardProps {
-  phrase: PhraseModelWithFavourites | null;
+  phrase: PhraseModelForTest | null;
   adjustRemainingPhrases: (correct: boolean) => void;
 }
 

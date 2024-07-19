@@ -8,15 +8,19 @@ import type {
 import { useEffect, useState } from "react";
 import Search from "./Search";
 import type { ChangeEvent } from "react";
-import { filterPhrasesBySearchTerm, getLinkObject } from "@/utils";
+import {
+  filterPhrasesByFavourite,
+  filterPhrasesBySearchTerm,
+  sortPhrases,
+} from "@/utils";
 import type { Session } from "@supabase/supabase-js";
 import SortAndFilter from "./SortAndFilter";
 import EditPhrase from "./EditPhrase";
 import Phrases from "./Phrases";
-import { MediumText, Popup, SmallText } from "@/components";
+import { Popup, SmallText } from "@/components";
 import Sort from "./Sort";
 import ChangeGroup from "./ChangeGroup";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import AddPhrase from "./AddPhrase";
 import ChangeCategory from "./ChangeCategory";
 
@@ -28,6 +32,7 @@ interface ControllerProps {
   sort: string | null;
   session: Session | null;
   categories: CategoryModel[] | null;
+  search: string;
 }
 
 export default function Controller({
@@ -38,50 +43,23 @@ export default function Controller({
   favourite,
   sort,
   categories,
+  search,
 }: ControllerProps) {
   const [displayPhrases, setDisplayPhrases] = useState<
     PhraseModelWithFavourites[]
   >([]);
   const [groupId, setGroupId] = useState<number | null>(group_id);
-  const [group, setGroup] = useState<GroupModel | null>(null);
-  const [categoryId, setCategoryId] = useState<CategoryModel | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [categoryId, setCategoryId] = useState<number | null>(null);
+  const [searchTerm, setSearchTerm] = useState<string>(search);
   const [editPhrase, setEditPhrase] = useState<number | null>(null);
   const [order, setOrder] = useState<string>(
     sort === "newest" ? "newest" : "oldest",
   );
   const [editPopupOpen, setEditPopupOpen] = useState<boolean>(false);
   const [sortPopupOpen, setSortPopupOpen] = useState<boolean>(false);
-  const [groupPopupOpen, setGroupPopupOpen] = useState<boolean>(false);
   const [addPhrasePopupOpen, setAddPhrasePopupOpen] = useState<boolean>(false);
   const [showFavourites, setShowFavourites] = useState<boolean>(favourite);
   const router = useRouter();
-  const pathname = usePathname();
-
-  const filterPhrasesByFavourite = (_phrases: PhraseModelWithFavourites[]) => {
-    if (showFavourites && _phrases.length > 0) {
-      return _phrases.filter((p) => p.p_is_favourited);
-    }
-    return _phrases;
-  };
-
-  const sortPhrases = (_phrases: PhraseModelWithFavourites[]) => {
-    let sortedPhrases = [];
-    if (order === "newest") {
-      sortedPhrases = _phrases.sort(
-        (a, b) =>
-          new Date(b.p_created_at).getTime() -
-          new Date(a.p_created_at).getTime(),
-      );
-    } else {
-      sortedPhrases = _phrases.sort(
-        (a, b) =>
-          new Date(a.p_created_at).getTime() -
-          new Date(b.p_created_at).getTime(),
-      );
-    }
-    return sortedPhrases;
-  };
 
   const filterBySearch = (
     _phrases: PhraseModelWithFavourites[],
@@ -105,22 +83,9 @@ export default function Controller({
     }
   };
 
-  // useEffect(() => {
-  //   if (groups !== null && groups.length !== 0) {
-  //     const group = groups.find((group) => group.id === groupId);
-  //     setGroup(group === undefined ? null : group);
-  //   }
-  //   if (groupId !== group_id) {
-  //     setGroupPopupOpen(false);
-  //     router.push(
-  //       `/focloir?groupId=${groupId}&favourite=${showFavourites}&sort=${order}&category=${categoryId}`,
-  //     );
-  //   }
-  // }, [groupId]);
-
   useEffect(() => {
     router.push(
-      `/focloir?groupId=${groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId}`,
+      `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
     );
   }, [order, categoryId, showFavourites, groupId]);
 
@@ -128,8 +93,9 @@ export default function Controller({
     sortPopupOpen && setSortPopupOpen(false);
     const favouritedPhrases = filterPhrasesByFavourite(
       phrases !== null ? phrases : [],
+      showFavourites,
     );
-    const sortedPhrases = sortPhrases(favouritedPhrases);
+    const sortedPhrases = sortPhrases(favouritedPhrases, order);
     const searchedPhrases = filterBySearch(sortedPhrases, searchTerm);
     setDisplayPhrases(searchedPhrases);
   }, [showFavourites, order, searchTerm, phrases]);
@@ -143,12 +109,9 @@ export default function Controller({
     setSearchTerm(term);
   };
 
-  const navbarLinkItem = getLinkObject(pathname);
-  console.log("navbarLinkItem", navbarLinkItem);
-
   return (
     <div className="relative w-full flex flex-grow flex-col">
-      <div className="relative max-w-xl">
+      <div className="relative max-w-2xl">
         <Popup isOpen={editPopupOpen} setOpen={setEditPopupOpen}>
           <EditPhrase
             phrase={displayPhrases.find((p) => p.p_id === editPhrase)}
@@ -158,12 +121,12 @@ export default function Controller({
           />
         </Popup>
       </div>
-      <div className="relative max-w-xl">
+      <div className="relative max-w-2xl">
         <Popup isOpen={sortPopupOpen} setOpen={setSortPopupOpen}>
           <Sort order={order} setOrder={setOrder} />
         </Popup>
       </div>
-      <div className="relative max-w-xl">
+      <div className="relative max-w-2xl">
         <Popup isOpen={addPhrasePopupOpen} setOpen={setAddPhrasePopupOpen}>
           <AddPhrase
             groupId={groupId}
@@ -175,20 +138,42 @@ export default function Controller({
       </div>
       <div className="w-full">
         <div className="flex flex-col justify-center bg-primary-600">
-          <div className="flex justify-center pt-1">
-            {navbarLinkItem !== undefined ? (
-              <MediumText
-                text_en={navbarLinkItem?.name_en}
-                text_ga={navbarLinkItem?.name_ga}
-                dark={true}
-                centered={true}
-              />
-            ) : (
-              <div>no title</div>
-            )}
-          </div>
           <div className="flex justify-center">
-            <div className="max-w-xl w-full">
+            <div className="max-w-2xl w-full">
+              <div className="w-full flex max-w-2xl gap-4 flex-col md:flex-row items-center p-2">
+                <div className="w-3/4 md:w-1/2 flex flex-col">
+                  <SmallText
+                    text_en="Group"
+                    text_ga="Grúpa"
+                    inline={true}
+                    centered={true}
+                    dark={true}
+                  />
+                  <div className="items-center justify-center">
+                    <ChangeGroup
+                      groupId={groupId}
+                      handleChangeGroup={handleChangeGroup}
+                      groups={groups}
+                    />
+                  </div>
+                </div>
+                <div className="w-3/4 md:w-1/2  flex flex-col">
+                  <SmallText
+                    text_en="Category"
+                    text_ga="Catagóir"
+                    inline={true}
+                    centered={true}
+                    dark={true}
+                  />
+                  <div className="items-center justify-center">
+                    <ChangeCategory
+                      categoryId={categoryId}
+                      handleChangeCategory={handleChangeCategory}
+                      categories={categories}
+                    />
+                  </div>
+                </div>
+              </div>
               <Search
                 searchTerm={searchTerm}
                 handleSearch={handleSearch}
@@ -206,42 +191,8 @@ export default function Controller({
           </div>
         </div>
 
-        <div className="flex justify-center pt-2">
-          <div className="w-full flex max-w-xl gap-4 flex-col md:flex-row items-center py-2">
-            <div className="w-3/4 md:w-1/2 flex flex-col">
-              <SmallText
-                text_en="Group"
-                text_ga="Grúpa"
-                inline={true}
-                centered={true}
-              />
-              <div className="border items-center justify-center">
-                <ChangeGroup
-                  groupId={groupId}
-                  handleChangeGroup={handleChangeGroup}
-                  groups={groups}
-                />
-              </div>
-            </div>
-            <div className="w-3/4 md:w-1/2  flex flex-col">
-              <SmallText
-                text_en="Category"
-                text_ga="Catagóir"
-                inline={true}
-                centered={true}
-              />
-              <div className="border items-center justify-center">
-                <ChangeCategory
-                  categoryId={categoryId}
-                  handleChangeCategory={handleChangeCategory}
-                  categories={categories}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className="w-full max-w-xl flex flex-col flex-grow p-2">
+        <div className="flex justify-center mt-4">
+          <div className="w-full max-w-2xl flex flex-col flex-grow p-2">
             <Phrases
               phrases={displayPhrases}
               session={session}

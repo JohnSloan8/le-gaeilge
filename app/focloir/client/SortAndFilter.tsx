@@ -20,9 +20,9 @@ export default function SortAndFilter({
   setShowFavourites,
 }: SortAndFilterProps) {
   return (
-    <div className="h-12 pb-2 pt-2 border-t border-primary-100 flex flex-row justify-around">
+    <div className="h-14 pb-2 pt-2 border-t border-primary-100 flex flex-row justify-around">
       <button
-        className="p-1 flex flex-row gap-1 items-center justify-center"
+        className="flex px-2 flex-row  w-28 items-center justify-around border rounded-lg"
         onClick={() => {
           setShowFavourites(!showFavourites);
         }}
@@ -35,7 +35,7 @@ export default function SortAndFilter({
         <XSmallText text_ga="ceanáin" text_en="favourites" dark={true} />
       </button>
       <button
-        className="p-1 flex flex-row gap-1 items-center justify-center"
+        className="px-2 border rounded-lg w-28 flex flex-row items-center justify-around"
         onClick={() => {
           setSortPopupOpen(true);
         }}
@@ -47,7 +47,7 @@ export default function SortAndFilter({
         onClick={() => {
           setAddPhrasePopupOpen(true);
         }}
-        className="p-1 flex flex-row gap-1 items-center justify-center"
+        className="px-2 border rounded-lg w-28 flex flex-row items-center  justify-around"
       >
         <AddIcon color={themeColors.primary[100]} size={28} />
         <XSmallText text_ga="cuir" text_en="add" dark={true} />

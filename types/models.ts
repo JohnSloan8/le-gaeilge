@@ -8,7 +8,7 @@ export type LocationModel = Database["public"]["Tables"]["locations"]["Row"];
 export type CategoryModel = Database["public"]["Tables"]["categories"]["Row"];
 
 type PhraseModelWithFavouritesArray =
-  Database["public"]["Functions"]["get_phrases_with_favourites"]["Returns"];
+  Database["public"]["Functions"]["get_phrases_for_dictionary"]["Returns"];
 type ElementType = PhraseModelWithFavouritesArray[number];
 export type PhraseModelWithFavourites = ElementType;
 
