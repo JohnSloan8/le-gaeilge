@@ -26,6 +26,8 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
     setShowSidebar(!showSidebar);
   };
 
+  console.log("linkObject:", linkObject);
+
   return (
     <div className="w-full h-full">
       <div className="w-full flex justify-center h-full bg-primary-800">
@@ -35,6 +37,7 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
               <HomeIcon color={themeColors.primary[100]} size={24} />
             </div>
           </Link>
+
           <div className="h-full flex items-center absolute left-1/2 -translate-x-1/2">
             <MediumText
               text_ga={

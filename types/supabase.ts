@@ -124,6 +124,21 @@ export type Database = {
           },
         ];
       };
+      dialects: {
+        Row: {
+          created_at: string;
+          name: string;
+        };
+        Insert: {
+          created_at?: string;
+          name: string;
+        };
+        Update: {
+          created_at?: string;
+          name?: string;
+        };
+        Relationships: [];
+      };
       events: {
         Row: {
           created_at: string;
@@ -397,6 +412,7 @@ export type Database = {
       profiles: {
         Row: {
           created_at: string;
+          dialect: string | null;
           id: number;
           image: string | null;
           irish_level: string | null;
@@ -405,6 +421,7 @@ export type Database = {
         };
         Insert: {
           created_at?: string;
+          dialect?: string | null;
           id?: number;
           image?: string | null;
           irish_level?: string | null;
@@ -413,6 +430,7 @@ export type Database = {
         };
         Update: {
           created_at?: string;
+          dialect?: string | null;
           id?: number;
           image?: string | null;
           irish_level?: string | null;
@@ -420,6 +438,12 @@ export type Database = {
           user_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: "public_profiles_dialect_fkey";
+            columns: ["dialect"];
+            referencedRelation: "dialects";
+            referencedColumns: ["name"];
+          },
           {
             foreignKeyName: "public_profiles_user_id_fkey";
             columns: ["user_id"];

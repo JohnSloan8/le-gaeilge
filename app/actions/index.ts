@@ -11,6 +11,7 @@ import editPhrase from "./phrases/edit";
 import addPhrase from "./phrases/add";
 import addAnswer from "./tests/addAnswer";
 import chooseTest from "./tests/chooseTest";
+import updateProfile from "./profile/updateProfile";
 
 export {
   registerForEvent,
@@ -26,4 +27,5 @@ export {
   addPhrase,
   addAnswer,
   chooseTest,
+  updateProfile,
 };
