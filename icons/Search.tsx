@@ -1,9 +1,6 @@
-interface SearchIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function SearchIcon({ color, size }: SearchIconProps) {
+export default function SearchIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}

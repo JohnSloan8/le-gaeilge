@@ -87,7 +87,13 @@ export default function Controller({
     router.push(
       `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
     );
-  }, [order, categoryId, showFavourites, groupId]);
+  }, [order, categoryId, showFavourites]);
+
+  useEffect(() => {
+    router.push(
+      `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=null`,
+    );
+  }, [groupId]);
 
   useEffect(() => {
     sortPopupOpen && setSortPopupOpen(false);
@@ -137,18 +143,11 @@ export default function Controller({
         </Popup>
       </div>
       <div className="w-full">
-        <div className="flex flex-col justify-center bg-primary-600">
+        <div className="flex flex-col justify-center bg-primary-600 py-2">
           <div className="flex justify-center">
             <div className="max-w-2xl w-full">
-              <div className="w-full flex max-w-2xl gap-4 flex-col md:flex-row items-center p-2">
-                <div className="w-3/4 md:w-1/2 flex flex-col">
-                  <SmallText
-                    text_en="Group"
-                    text_ga="Grúpa"
-                    inline={true}
-                    centered={true}
-                    dark={true}
-                  />
+              <div className="w-full flex max-w-2xl flex-row gap-2 px-2 items-center">
+                <div className="w-1/2 flex flex-col">
                   <div className="items-center justify-center">
                     <ChangeGroup
                       groupId={groupId}
@@ -157,14 +156,7 @@ export default function Controller({
                     />
                   </div>
                 </div>
-                <div className="w-3/4 md:w-1/2  flex flex-col">
-                  <SmallText
-                    text_en="Category"
-                    text_ga="Catagóir"
-                    inline={true}
-                    centered={true}
-                    dark={true}
-                  />
+                <div className="w-1/2  flex flex-col">
                   <div className="items-center justify-center">
                     <ChangeCategory
                       categoryId={categoryId}

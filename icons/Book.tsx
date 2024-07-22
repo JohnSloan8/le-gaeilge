@@ -1,9 +1,6 @@
-interface BookIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function BookIcon({ color, size }: BookIconProps) {
+export default function BookIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}

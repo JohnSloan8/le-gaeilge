@@ -20,9 +20,9 @@ export default function SortAndFilter({
   setShowFavourites,
 }: SortAndFilterProps) {
   return (
-    <div className="h-14 pb-2 pt-2 border-t border-primary-100 flex flex-row justify-around">
+    <div className=" pb-2 pt-1 flex flex-row justify-around">
       <button
-        className="flex px-2 flex-row  w-28 items-center justify-around border rounded-lg"
+        className="flex p-1 flex-row items-center justify-around border rounded-full"
         onClick={() => {
           setShowFavourites(!showFavourites);
         }}
@@ -32,25 +32,25 @@ export default function SortAndFilter({
           size={28}
           filled={showFavourites}
         />
-        <XSmallText text_ga="ceanáin" text_en="favourites" dark={true} />
+        {/* <XSmallText text_ga="ceanáin" text_en="favourites" dark={true} /> */}
       </button>
       <button
-        className="px-2 border rounded-lg w-28 flex flex-row items-center justify-around"
+        className="p-1 border rounded-full  flex flex-row items-center justify-around"
         onClick={() => {
           setSortPopupOpen(true);
         }}
       >
         <UpDownArrowsIcon color={themeColors.primary[100]} size={28} />
-        <XSmallText text_ga="sórtáil" text_en="sort" dark={true} />
+        {/* <XSmallText text_ga="sórtáil" text_en="sort" dark={true} /> */}
       </button>
       <button
         onClick={() => {
           setAddPhrasePopupOpen(true);
         }}
-        className="px-2 border rounded-lg w-28 flex flex-row items-center  justify-around"
+        className="p-1 border rounded-full  flex flex-row items-center  justify-around"
       >
         <AddIcon color={themeColors.primary[100]} size={28} />
-        <XSmallText text_ga="cuir" text_en="add" dark={true} />
+        {/* <XSmallText text_ga="cuir" text_en="add" dark={true} /> */}
       </button>
     </div>
   );

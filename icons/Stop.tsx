@@ -1,9 +1,6 @@
-interface StopIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-const StopIcon = ({ color, size }: StopIconProps) => {
+const StopIcon = ({ color, size }: IconModel) => {
   return (
     <svg
       fill={color}

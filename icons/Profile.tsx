@@ -1,9 +1,6 @@
-interface ProfileIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function ProfileIcon({ color, size }: ProfileIconProps) {
+export default function ProfileIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}

@@ -1,9 +1,6 @@
-interface TranslateIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function TranslateIcon({ color, size }: TranslateIconProps) {
+export default function TranslateIcon({ color, size }: IconModel) {
   return (
     <svg
       fill={color}

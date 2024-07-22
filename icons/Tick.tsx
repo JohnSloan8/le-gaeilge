@@ -1,9 +1,6 @@
-interface TickIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function TickIcon({ color, size }: TickIconProps) {
+export default function TickIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}

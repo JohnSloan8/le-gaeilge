@@ -1,9 +1,6 @@
-interface EventsIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function EventsIcon({ color, size }: EventsIconProps) {
+export default function EventsIcon({ color, size }: IconModel) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

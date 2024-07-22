@@ -1,12 +1,6 @@
-interface UpDownArrowsIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function UpDownArrowsIcon({
-  color,
-  size,
-}: UpDownArrowsIconProps) {
+export default function UpDownArrowsIcon({ color, size }: IconModel) {
   return (
     <svg
       fill={color}

@@ -22,3 +22,19 @@ export interface ExtendedEventModel extends EventModel {
   attendees: AttendeeModel[] | null;
   location: LocationModel;
 }
+
+// Non Supabase Models
+
+export interface IconModel {
+  color: string;
+  size: number;
+  filled?: boolean;
+}
+
+export interface NavbarLinksModel {
+  name_ga: string;
+  name_en: string;
+  link: string;
+  icon: IconModel;
+  showLink: boolean;
+}

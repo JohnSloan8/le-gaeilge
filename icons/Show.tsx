@@ -1,9 +1,6 @@
-interface ShowIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function ShowIcon({ color, size }: ShowIconProps) {
+export default function ShowIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}

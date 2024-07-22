@@ -1,10 +1,6 @@
-interface PencilIconProps {
-  color: string;
-  size: number;
-  filled?: boolean;
-}
+import type { IconModel } from "@/types/models";
 
-const PencilIcon = ({ color, size, filled = false }: PencilIconProps) => {
+const PencilIcon = ({ color, size, filled = false }: IconModel) => {
   return (
     <svg
       width={size}

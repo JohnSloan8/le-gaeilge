@@ -1,9 +1,6 @@
-interface SignInIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function SignInIcon({ color, size }: SignInIconProps) {
+export default function SignInIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}

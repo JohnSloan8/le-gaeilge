@@ -7,7 +7,9 @@ import {
   HomeIcon,
 } from "@/icons";
 
-const navbarLinks = [
+import type { NavbarLinksModel } from "@/types/models";
+
+const navbarLinks: NavbarLinksModel[] = [
   {
     name_ga: "Baile",
     name_en: "Home",
@@ -53,3 +55,4 @@ const navbarLinks = [
 ];
 
 export default navbarLinks;
+export type { navbarLinksModel };

@@ -1,9 +1,6 @@
-interface HomeIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function HomeIcon({ color, size }: HomeIconProps) {
+export default function HomeIcon({ color, size }: IconModel) {
   return (
     <svg
       fill={color}

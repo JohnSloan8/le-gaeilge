@@ -16,12 +16,12 @@ export default function ChangeCategory({
       <select
         value={categoryId !== null ? String(categoryId) : "-1"}
         onChange={handleChangeCategory}
-        className="block w-full px-4 py-2 bg-gray-200 text-base rounded-sm outline-none"
+        className="block w-full pl-1 py-2 bg-gray-200 text-sm rounded-sm outline-none"
       >
         <option
           value={"-1"}
           className="text-gray-700"
-        >{`go leir (all)`}</option>
+        >{`Go Leir Catagóir (All Categories)`}</option>
         {categories?.map((category, index) => (
           <option
             key={index}

@@ -1,14 +1,6 @@
-interface HeartIconProps {
-  color: string;
-  size: number;
-  filled?: boolean;
-}
+import type { IconModel } from "@/types/models";
 
-export default function HeartIcon({
-  color,
-  size,
-  filled = false,
-}: HeartIconProps) {
+export default function HeartIcon({ color, size, filled = false }: IconModel) {
   return (
     <svg
       width={size}

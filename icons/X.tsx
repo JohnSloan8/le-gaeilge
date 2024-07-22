@@ -1,9 +1,6 @@
-interface XIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function XIcon({ color, size }: XIconProps) {
+export default function XIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}

@@ -1,10 +1,6 @@
-interface PlayIconProps {
-  color: string;
-  size: number;
-  filled?: boolean;
-}
+import type { IconModel } from "@/types/models";
 
-const PlayIcon = ({ color, size, filled = false }: PlayIconProps) => {
+const PlayIcon = ({ color, size, filled = false }: IconModel) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

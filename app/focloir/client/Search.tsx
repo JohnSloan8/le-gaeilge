@@ -41,7 +41,7 @@ export default function Search({
               className="appearance-none text-gray-700 leading-tight w-full focus:outline-none focus:shadow-outline"
               type="text"
               name="text"
-              placeholder="Search..."
+              placeholder="Cuardaigh (Search)..."
               value={String(searchTerm)}
               onChange={handleSearch}
             />

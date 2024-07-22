@@ -1,9 +1,6 @@
-interface BurgerMenuIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function BurgerMenuIcon({ color, size }: BurgerMenuIconProps) {
+export default function BurgerMenuIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}

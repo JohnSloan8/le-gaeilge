@@ -1,9 +1,6 @@
-interface RefreshIconProps {
-  color: string;
-  size: number;
-}
+import type { IconModel } from "@/types/models";
 
-export default function RefreshIcon({ color, size }: RefreshIconProps) {
+export default function RefreshIcon({ color, size }: IconModel) {
   return (
     <svg
       width={size}
