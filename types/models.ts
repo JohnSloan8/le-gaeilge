@@ -35,6 +35,6 @@ export interface NavbarLinksModel {
   name_ga: string;
   name_en: string;
   link: string;
-  icon: IconModel;
+  icon: ({ color, size, filled }: IconModel) => React.JSX.Element;
   showLink: boolean;
 }

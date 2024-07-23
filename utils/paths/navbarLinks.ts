@@ -55,4 +55,3 @@ const navbarLinks: NavbarLinksModel[] = [
 ];
 
 export default navbarLinks;
-export type { navbarLinksModel };

@@ -74,7 +74,7 @@ export default function Phrase({
               filled={phrase.p_edited}
             />
           </button>
-          {phrase.p_audio_data !== null ? (
+          {phrase.p_audio_data === null ? (
             <button className="w-7 h-7 flex justify-center items-center">
               <LoadingSpinner color={"dark"} size={"small"} />
             </button>

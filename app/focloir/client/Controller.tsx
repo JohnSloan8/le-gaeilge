@@ -61,6 +61,8 @@ export default function Controller({
   const [showFavourites, setShowFavourites] = useState<boolean>(favourite);
   const router = useRouter();
 
+  console.log("categories:", categories);
+
   const filterBySearch = (
     _phrases: PhraseModelWithFavourites[],
     term: string,
@@ -85,13 +87,13 @@ export default function Controller({
 
   useEffect(() => {
     router.push(
-      `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
+      `/focloir?groupId=${groupId === -1 ? "null" : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
     );
   }, [order, categoryId, showFavourites]);
 
   useEffect(() => {
     router.push(
-      `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=null`,
+      `/focloir?groupId=${groupId === -1 ? "null" : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=null`,
     );
   }, [groupId]);
 

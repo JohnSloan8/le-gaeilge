@@ -4,6 +4,7 @@ import { MediumText, SmallText, SubmitButton } from "@/components";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { updateProfile } from "../actions";
+import Name from "./Name";
 
 export default async function ProfilesPage() {
   const cookieStore = cookies();
@@ -27,7 +28,6 @@ export default async function ProfilesPage() {
     console.log(profileError.message);
     return <h1>no profile</h1>;
   }
-  console.log("profile:", profile);
 
   const { data: dialects, error: dialectsError } = await supabase
     .from("dialects")
@@ -63,32 +63,28 @@ export default async function ProfilesPage() {
               text_en="Update your Profile"
               centered={true}
             />
+            <input type="hidden" name="profileId" value={profile.id} />
 
             <div className="my-4">
               <label htmlFor="name" className="block text-gray-700 mb-1">
                 <SmallText text_en="Name" text_ga="Ainm" />
               </label>
-              <input
-                placeholder={profile.name}
-                className="block w-full bg-gray-100 border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                name="name"
-                type="text"
-              />
+              <Name name={profile.name} />
             </div>
 
             <div className="my-4">
-              <label htmlFor="groupId" className="block text-gray-700 mb-1">
+              <label htmlFor="dialect" className="block text-gray-700 mb-1">
                 <SmallText text_en="Dialect" text_ga="Dialect" />
               </label>
               <select
-                id="groupId"
-                name="groupId"
+                id="dialect"
+                name="dialect"
                 className="block w-full bg-gray-100 border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {dialects?.map((dialect, index) => (
                   <option
                     key={index}
-                    value={String(dialect.id)}
+                    value={String(dialect.name)}
                     className="text-gray-700"
                   >{`${dialect.name}`}</option>
                 ))}
@@ -96,16 +92,20 @@ export default async function ProfilesPage() {
             </div>
 
             <div className="my-4">
-              <label htmlFor="groupId" className="block text-gray-700 mb-1">
+              <label htmlFor="irishLevel" className="block text-gray-700 mb-1">
                 <SmallText text_en="Irish Level" text_ga="Irish Level" />
               </label>
               <select
-                id="IrishLevel"
-                name="IrishLevel"
+                id="irishLevel"
+                name="irishLevel"
                 className="block w-full bg-gray-100 border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                {levels?.map((level, index) => (
-                  <option key={index} value={level} className="text-gray-700">
+                {levels.map((level, index) => (
+                  <option
+                    key={index}
+                    value={String(level)}
+                    className="text-gray-700"
+                  >
                     {level}
                   </option>
                 ))}
