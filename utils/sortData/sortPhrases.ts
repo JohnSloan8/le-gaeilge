@@ -1,7 +1,10 @@
-import type { PhraseModelWithFavourites } from "@/types/models";
+import type { PhraseModelForDictionary } from "@/types/models";
 
-const sortPhrases = (phrases: PhraseModelWithFavourites[], order: string) => {
-  let sortedPhrases = [];
+const sortPhrases = (
+  phrases: PhraseModelForDictionary[],
+  order: string,
+): PhraseModelForDictionary[] => {
+  let sortedPhrases: PhraseModelForDictionary[] = [];
   if (order === "newest") {
     sortedPhrases = phrases.sort(
       (a, b) =>

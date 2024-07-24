@@ -12,7 +12,7 @@ interface Props {
   };
 }
 
-export default async function PhrasesPage({ searchParams }: Props) {
+export default async function FocloirPage({ searchParams }: Props) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -20,37 +20,21 @@ export default async function PhrasesPage({ searchParams }: Props) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  const groupId: number | undefined = ["null", undefined].includes(
-    searchParams.groupId,
-  )
-    ? undefined
-    : Number(searchParams.groupId);
-  const categoryId: number | undefined = ["null", undefined].includes(
-    searchParams.categoryId,
-  )
-    ? undefined
-    : Number(searchParams.categoryId);
-  const favourite: boolean | undefined = ["null", undefined].includes(
-    searchParams.favourite,
-  )
-    ? undefined
-    : Boolean(searchParams.favourite);
-  const sort: string | undefined = ["null", undefined].includes(
-    searchParams.sort,
-  )
-    ? undefined
-    : String(searchParams.sort);
-  const search: string | undefined = ["null", undefined].includes(
-    searchParams.search,
-  )
-    ? undefined
-    : String(searchParams.search);
-
-  console.log("groupId:", groupId);
-  console.log("categoryId:", categoryId);
-  console.log("favourite:", favourite);
-  console.log("sort:", sort);
-  console.log("search:", search);
+  const groupId =
+    searchParams.groupId !== undefined
+      ? Number(searchParams.groupId)
+      : undefined;
+  const categoryId =
+    searchParams.categoryId !== undefined
+      ? Number(searchParams.categoryId)
+      : undefined;
+  const favourite =
+    searchParams.favourite !== undefined
+      ? Boolean(searchParams.favourite)
+      : undefined;
+  const sort = searchParams.sort !== undefined ? searchParams.sort : undefined;
+  const search =
+    searchParams.search !== undefined ? searchParams.search : undefined;
 
   const { data: phrases, error: phrasesError } = await supabase.rpc(
     "get_phrases_for_dictionary",
@@ -76,35 +60,23 @@ export default async function PhrasesPage({ searchParams }: Props) {
   const { data: categories, error: categoriesError } = await supabase
     .from("categories")
     .select()
-    .eq("group_id", `${searchParams.groupId === undefined ? null : groupId}`);
+    .eq("group_id", `${groupId === undefined ? null : groupId}`);
 
   if (categoriesError !== null) {
     console.log(categoriesError.message);
   }
-
-  console.log("searchParams.groupId:", searchParams.groupId);
 
   return (
     <div className="w-full h-full flex flex-col mt-14">
       <Controller
         phrases={phrases}
         groups={groups}
-        group_id={
-          searchParams.groupId === undefined
-            ? null
-            : Number(searchParams.groupId)
-        }
+        group_id={groupId}
         categories={categories}
         session={session}
-        favourite={
-          searchParams.favourite !== undefined
-            ? searchParams.favourite === "true"
-            : false
-        }
-        search={
-          searchParams.search === undefined ? "" : String(searchParams.search)
-        }
-        sort={searchParams.sort !== undefined ? searchParams.sort : null}
+        favourite={favourite}
+        search={search}
+        sort={sort}
       />
     </div>
   );

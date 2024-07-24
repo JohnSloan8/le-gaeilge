@@ -1,7 +1,7 @@
-import type { PhraseModelWithFavourites } from "@/types/models";
+import type { PhraseModelForDictionary } from "@/types/models";
 
 const filterPhrasesByGroup = (
-  phrases: PhraseModelWithFavourites[] | null,
+  phrases: PhraseModelForDictionary[] | null,
   filter: string,
 ) => {
   if (phrases === null) return null;

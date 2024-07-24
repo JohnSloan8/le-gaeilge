@@ -1,7 +1,7 @@
 import type { CategoryModel } from "@/types/models";
 
 interface ChangeCategoryProps {
-  categoryId: number | null;
+  categoryId?: number;
   handleChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   categories: CategoryModel[] | null;
 }
@@ -14,7 +14,7 @@ export default function ChangeCategory({
   return (
     <div className="w-full">
       <select
-        value={categoryId !== null ? String(categoryId) : "-1"}
+        value={categoryId}
         onChange={handleChangeCategory}
         className="block w-full pl-1 py-2 bg-gray-200 text-sm rounded-sm outline-none"
       >

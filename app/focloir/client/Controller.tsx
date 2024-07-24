@@ -1,7 +1,7 @@
 "use client";
 
 import type {
-  PhraseModelWithFavourites,
+  PhraseModelForDictionary,
   GroupModel,
   CategoryModel,
 } from "@/types/models";
@@ -17,7 +17,7 @@ import type { Session } from "@supabase/supabase-js";
 import SortAndFilter from "./SortAndFilter";
 import EditPhrase from "./EditPhrase";
 import Phrases from "./Phrases";
-import { Popup, SmallText } from "@/components";
+import { Popup } from "@/components";
 import Sort from "./Sort";
 import ChangeGroup from "./ChangeGroup";
 import { useRouter } from "next/navigation";
@@ -25,20 +25,22 @@ import AddPhrase from "./AddPhrase";
 import ChangeCategory from "./ChangeCategory";
 
 interface ControllerProps {
-  phrases: PhraseModelWithFavourites[] | null;
+  phrases: PhraseModelForDictionary[] | null;
   groups: GroupModel[] | null;
-  group_id: number | null;
-  favourite: boolean;
-  sort: string | null;
+  group_id?: number;
+  category_id?: number;
+  favourite?: boolean;
+  sort?: string;
   session: Session | null;
   categories: CategoryModel[] | null;
-  search: string;
+  search?: string;
 }
 
 export default function Controller({
   phrases,
   groups,
   group_id,
+  category_id,
   session,
   favourite,
   sort,
@@ -46,11 +48,13 @@ export default function Controller({
   search,
 }: ControllerProps) {
   const [displayPhrases, setDisplayPhrases] = useState<
-    PhraseModelWithFavourites[]
+    PhraseModelForDictionary[]
   >([]);
-  const [groupId, setGroupId] = useState<number | null>(group_id);
-  const [categoryId, setCategoryId] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>(search);
+  const [groupId, setGroupId] = useState<number | undefined>(group_id);
+  const [categoryId, setCategoryId] = useState<number | undefined>(category_id);
+  const [searchTerm, setSearchTerm] = useState<string>(
+    search !== undefined ? search : "",
+  );
   const [editPhrase, setEditPhrase] = useState<number | null>(null);
   const [order, setOrder] = useState<string>(
     sort === "newest" ? "newest" : "oldest",
@@ -58,36 +62,51 @@ export default function Controller({
   const [editPopupOpen, setEditPopupOpen] = useState<boolean>(false);
   const [sortPopupOpen, setSortPopupOpen] = useState<boolean>(false);
   const [addPhrasePopupOpen, setAddPhrasePopupOpen] = useState<boolean>(false);
-  const [showFavourites, setShowFavourites] = useState<boolean>(favourite);
+  const [showFavourites, setShowFavourites] = useState<boolean>(
+    favourite !== undefined ? favourite : false,
+  );
   const router = useRouter();
 
-  console.log("categories:", categories);
-
   const filterBySearch = (
-    _phrases: PhraseModelWithFavourites[],
+    _phrases: PhraseModelForDictionary[],
     term: string,
   ) => {
     return filterPhrasesBySearchTerm(_phrases, term);
   };
 
   const handleChangeGroup = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log("e.target.value:", e.target.value);
     if (e.target.value !== undefined) {
       setGroupId(Number(e.target.value));
-      console.log("pushing to router");
     }
   };
 
   const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log("e.target.value:", e.target.value);
     if (e.target.value !== undefined) {
       setCategoryId(Number(e.target.value));
     }
   };
 
   useEffect(() => {
+    const queryStringArray = [];
+    if (groupId !== undefined) queryStringArray.push(`groupId=${groupId}`);
+    if (favourite !== undefined)
+      queryStringArray.push(`favourite=${favourite}`);
+    if (sort !== undefined) queryStringArray.push(`sort=${sort}`);
+    if (categoryId !== undefined)
+      queryStringArray.push(`categoryId=${categoryId}`);
+    if (search !== undefined) queryStringArray.push(`search=${search}`);
+
+    let queryString = "";
+    if (queryStringArray.length > 1) {
+      queryString = queryStringArray.join("&");
+    }
+
+    if (queryStringArray.length > 0) "?".concat(queryString);
+
+    console.log("queryString: ", queryString);
+
     router.push(
-      `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
+      `/focloir? === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
     );
   }, [order, categoryId, showFavourites]);
 

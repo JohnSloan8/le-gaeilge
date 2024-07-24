@@ -23,7 +23,7 @@ const addPhrase = async (formData: FormData) => {
   const { data, error } = await supabase.from("phrases").insert({
     entry_ga: entryGa,
     entry_en: entryEn,
-    group_id: groupId === "" ? null : Number(groupId),
+    group_id: groupId === undefined ? null : Number(groupId),
     author_id: user.id,
   });
 

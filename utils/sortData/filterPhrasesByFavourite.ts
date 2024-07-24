@@ -1,7 +1,7 @@
-import type { PhraseModelWithFavourites } from "@/types/models";
+import type { PhraseModelForDictionary } from "@/types/models";
 
 const filterPhrasesByFavourite = (
-  _phrases: PhraseModelWithFavourites[],
+  _phrases: PhraseModelForDictionary[],
   showFavourites: boolean,
 ) => {
   if (showFavourites && _phrases.length > 0) {

@@ -7,10 +7,10 @@ export type AttendeeModel = Database["public"]["Tables"]["attendees"]["Row"];
 export type LocationModel = Database["public"]["Tables"]["locations"]["Row"];
 export type CategoryModel = Database["public"]["Tables"]["categories"]["Row"];
 
-type PhraseModelWithFavouritesArray =
+type PhraseModelForDictionaryArray =
   Database["public"]["Functions"]["get_phrases_for_dictionary"]["Returns"];
-type ElementType = PhraseModelWithFavouritesArray[number];
-export type PhraseModelWithFavourites = ElementType;
+type ElementType = PhraseModelForDictionaryArray[number];
+export type PhraseModelForDictionary = ElementType;
 
 type PhraseModelForTestArray =
   Database["public"]["Functions"]["get_phrases_for_test"]["Returns"];

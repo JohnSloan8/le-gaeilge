@@ -8,7 +8,7 @@ interface SearchProps {
   searchTerm: string;
   setSearchTerm: Dispatch<SetStateAction<string>>;
   handleSearch: (e: ChangeEvent<HTMLInputElement>) => void;
-  groupId: number | null;
+  groupId?: number;
   userId?: string;
 }
 
@@ -22,16 +22,8 @@ export default function Search({
   return (
     <div className="flex h-14 w-full justify-center p-2">
       <form action={getIrishTranslation} className="flex gap-2 w-full h-10">
-        <input
-          type="hidden"
-          name="groupId"
-          value={groupId === null ? "null" : String(groupId)}
-        />
-        <input
-          type="hidden"
-          name="userId"
-          value={userId === undefined ? "" : String(userId)}
-        />
+        <input type="hidden" name="groupId" value={groupId} />
+        <input type="hidden" name="userId" value={userId} />
         <div className="flex flex-grow border border-gray-300 bg-white rounded-lg py-2 px-2">
           <div className="pr-1 flex-none">
             <SearchIcon size={20} color={themeColors.primary[300]} />

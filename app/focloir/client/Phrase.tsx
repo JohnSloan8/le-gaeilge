@@ -1,6 +1,6 @@
 import { LoadingSpinner, PlayAudioButton, SmallText } from "@/components";
 import { HeartIcon, PencilIcon } from "@/icons";
-import type { PhraseModelWithFavourites } from "@/types/models";
+import type { PhraseModelForDictionary } from "@/types/models";
 import { themeColors } from "@/theme";
 import { favourite } from "@/app/actions";
 import type { Session } from "@supabase/supabase-js";
@@ -11,7 +11,7 @@ import type { Dispatch, SetStateAction } from "react";
 // import { useEffect, useState } from "react";
 // import getSynthesis from "@/app/actions/phrases/getSynthesis";
 interface PhraseProps {
-  phrase: PhraseModelWithFavourites;
+  phrase: PhraseModelForDictionary;
   session: Session | null;
   setEditPhrase: Dispatch<SetStateAction<number | null>>;
 }

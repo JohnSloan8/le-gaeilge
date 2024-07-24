@@ -3,7 +3,7 @@ import { SmallText, SubmitButton } from "@/components";
 
 interface AddPhraseProps {
   setAddPhrasePopupOpen: (open: boolean) => void;
-  groupId: number | null;
+  groupId?: number;
 }
 
 export default function AddPhrase({
@@ -13,11 +13,7 @@ export default function AddPhrase({
   return (
     <div>
       <form action={addPhrase} className="p-1 flex flex-col">
-        <input
-          type="hidden"
-          name="groupId"
-          value={groupId !== null ? String(groupId) : ""}
-        />
+        <input type="hidden" name="groupId" value={groupId} />
 
         <div className="flex gap-1 py-2">
           <label htmlFor="entryGa" className="w-16">

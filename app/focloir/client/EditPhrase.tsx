@@ -1,11 +1,11 @@
 import { editPhrase } from "@/app/actions";
 import { SmallText, SubmitButton } from "@/components";
-import type { PhraseModelWithFavourites } from "@/types/models";
+import type { PhraseModelForDictionary } from "@/types/models";
 import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 
 interface EditPhraseProps {
-  phrase?: PhraseModelWithFavourites;
+  phrase?: PhraseModelForDictionary;
   setEditPhrase: (id: number | null) => void;
 }
 

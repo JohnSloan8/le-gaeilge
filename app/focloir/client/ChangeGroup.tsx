@@ -1,7 +1,7 @@
 import type { GroupModel } from "@/types/models";
 
 interface ChangeGroupProps {
-  groupId: number | null;
+  groupId?: number;
   handleChangeGroup: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   groups: GroupModel[] | null;
 }
@@ -14,7 +14,7 @@ export default function ChangeGroup({
   return (
     <div className="w-full">
       <select
-        value={groupId !== null ? String(groupId) : "-1"}
+        value={groupId}
         onChange={handleChangeGroup}
         className="block w-full pl-1 py-2 bg-gray-200 text-sm rounded-sm outline-none"
       >
