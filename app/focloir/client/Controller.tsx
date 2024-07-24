@@ -75,14 +75,18 @@ export default function Controller({
   };
 
   const handleChangeGroup = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value !== undefined) {
+    if (e.target.value !== "-1") {
       setGroupId(Number(e.target.value));
+    } else {
+      setGroupId(undefined);
     }
   };
 
   const handleChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value !== undefined) {
+    if (e.target.value !== "-1") {
       setCategoryId(Number(e.target.value));
+    } else {
+      setCategoryId(undefined);
     }
   };
 
@@ -105,16 +109,8 @@ export default function Controller({
 
     console.log("queryString: ", queryString);
 
-    router.push(
-      `/focloir? === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
-    );
-  }, [order, categoryId, showFavourites]);
-
-  useEffect(() => {
-    router.push(
-      `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=null`,
-    );
-  }, [groupId]);
+    router.push(`/focloir${queryString}`);
+  }, [order, categoryId, showFavourites, groupId]);
 
   useEffect(() => {
     sortPopupOpen && setSortPopupOpen(false);

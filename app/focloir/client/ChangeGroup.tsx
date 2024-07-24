@@ -14,7 +14,7 @@ export default function ChangeGroup({
   return (
     <div className="w-full">
       <select
-        value={groupId}
+        value={groupId === undefined ? "-1" : groupId}
         onChange={handleChangeGroup}
         className="block w-full pl-1 py-2 bg-gray-200 text-sm rounded-sm outline-none"
       >
