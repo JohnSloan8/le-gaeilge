@@ -87,13 +87,13 @@ export default function Controller({
 
   useEffect(() => {
     router.push(
-      `/focloir?groupId=${groupId === -1 ? "null" : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
+      `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=${categoryId === -1 ? null : categoryId}`,
     );
   }, [order, categoryId, showFavourites]);
 
   useEffect(() => {
     router.push(
-      `/focloir?groupId=${groupId === -1 ? "null" : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=null`,
+      `/focloir?groupId=${groupId === -1 ? null : groupId}&favourite=${showFavourites}&sort=${order}&categoryId=null`,
     );
   }, [groupId]);
 
