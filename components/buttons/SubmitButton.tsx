@@ -29,7 +29,7 @@ export default function SubmitButton({
     <button
       type="submit"
       disabled={pending || disabled}
-      className={`h-10 border min-w-24 rounded-lg px-2 ${disabled ? "opacity-50" : ""}`}
+      className={`h-10  min-w-24 rounded-lg px-2 ${disabled ? "opacity-50" : ""}`}
     >
       {children}
     </button>

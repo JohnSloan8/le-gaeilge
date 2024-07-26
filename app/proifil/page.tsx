@@ -114,7 +114,7 @@ export default async function ProfilesPage() {
 
             <div className="flex justify-center pt-4">
               <SubmitButton>
-                <div className="w-64 border rounded-md bg-primary-600">
+                <div className="w-64 rounded-md bg-primary-600">
                   <SmallText text_ga="update" text_en="update" dark={true} />
                 </div>
               </SubmitButton>
