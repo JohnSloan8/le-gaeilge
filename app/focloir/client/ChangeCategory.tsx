@@ -14,12 +14,12 @@ export default function ChangeCategory({
   return (
     <div className="w-full">
       <select
-        value={categoryId === undefined ? "-1" : categoryId}
+        value={categoryId}
         onChange={handleChangeCategory}
         className="block w-full pl-1 py-2 bg-gray-200 text-sm rounded-sm outline-none"
       >
         <option
-          value={"-1"}
+          value={-1}
           className="text-gray-700"
         >{`Go Leir Catagóir (All Categories)`}</option>
         {categories?.map((category, index) => (

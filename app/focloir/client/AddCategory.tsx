@@ -1,18 +1,18 @@
-import { addPhrase } from "@/app/actions";
+import { addCategory } from "@/app/actions";
 import { SmallText, SubmitButton } from "@/components";
 
-interface AddPhraseProps {
-  setAddPhrasePopupOpen: (open: boolean) => void;
+interface AddCategoryProps {
+  setAddCategoryPopupOpen: (open: boolean) => void;
   groupId: number;
 }
 
-export default function AddPhrase({
-  setAddPhrasePopupOpen,
+export default function AddCategory({
+  setAddCategoryPopupOpen,
   groupId,
-}: AddPhraseProps) {
+}: AddCategoryProps) {
   return (
     <div>
-      <form action={addPhrase} className="p-1 flex flex-col">
+      <form action={addCategory} className="p-1 flex flex-col">
         <input type="hidden" name="groupId" value={groupId} />
 
         <div className="flex gap-1 py-2">
@@ -42,7 +42,7 @@ export default function AddPhrase({
         <div className="w-full flex justify-center pt-4">
           <SubmitButton
             onSubmitted={() => {
-              setAddPhrasePopupOpen(false);
+              setAddCategoryPopupOpen(false);
             }}
           >
             <div className="w-64 border rounded-md bg-primary-600">

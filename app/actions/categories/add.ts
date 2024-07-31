@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 
-const addPhrase = async (formData: FormData) => {
+const addCategory = async (formData: FormData) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -20,16 +20,15 @@ const addPhrase = async (formData: FormData) => {
   const entryGa = String(formData.get("entryGa"));
   const entryEn = String(formData.get("entryEn"));
 
-  const { data, error } = await supabase.from("phrases").insert({
-    entry_ga: entryGa,
-    entry_en: entryEn,
+  const { data, error } = await supabase.from("categories").insert({
+    name_ga: entryGa,
+    name_en: entryEn,
     group_id: groupId === -1 ? null : Number(groupId),
-    author_id: user.id,
   });
 
   data !== null && console.log("data:", data);
   error !== null && console.log("error:", error);
-  revalidateTag(`phrases`);
+  revalidateTag(`categories`);
 };
 
-export default addPhrase;
+export default addCategory;

@@ -21,12 +21,10 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const path = usePathname();
   const linkObject = getLinkObject(path);
-  console.log("linkObject", linkObject);
+
   const handleClickBurgerMenu = () => {
     setShowSidebar(!showSidebar);
   };
-
-  console.log("linkObject:", linkObject);
 
   return (
     <div className="w-full h-full">
