@@ -166,7 +166,7 @@ export default function Controller({
         </Popup>
       </div>
       <div className="relative max-w-2xl">
-        <Popup isOpen={addCategoryPopupOpen} setOpen={setAddPhrasePopupOpen}>
+        <Popup isOpen={addCategoryPopupOpen} setOpen={setAddCategoryPopupOpen}>
           <AddCategory
             groupId={groupId}
             setAddCategoryPopupOpen={(open) => {
@@ -189,42 +189,40 @@ export default function Controller({
                     />
                   </div>
                 </div>
-                <div className="w-1/2  flex flex-col">
-                  <div className="flex items-center justify-center">
-                    {categories !== null && categories.length !== 0 && (
-                      <>
-                        <ChangeCategory
-                          categoryId={categoryId}
-                          handleChangeCategory={handleChangeCategory}
-                          categories={categories}
-                        />
-                        <button
-                          onClick={() => {
-                            setAddCategoryPopupOpen(true);
-                          }}
-                          className="ml-2 p-1 border rounded-md  flex flex-row items-center  justify-around"
-                        >
-                          <AddIcon color={themeColors.primary[100]} size={24} />
-                          {/* <XSmallText text_ga="cuir" text_en="add" dark={true} /> */}
-                        </button>
-                      </>
-                    )}
-                  </div>
+                <div className="w-1/2 flex items-center justify-between ">
+                  <>
+                    <ChangeCategory
+                      categoryId={categoryId}
+                      handleChangeCategory={handleChangeCategory}
+                      categories={categories}
+                    />
+                    <button
+                      onClick={() => {
+                        setAddCategoryPopupOpen(true);
+                      }}
+                      className="ml-2 p-1 border rounded-md flex flex-row items-center  justify-around"
+                    >
+                      <AddIcon color={themeColors.primary[100]} size={24} />
+                      {/* <XSmallText text_ga="cuir" text_en="add" dark={true} /> */}
+                    </button>
+                  </>
                 </div>
               </div>
-              <Search
-                searchTerm={searchTerm}
-                handleSearch={handleSearch}
-                setSearchTerm={setSearchTerm}
-                groupId={groupId}
-                userId={session?.user.id}
-              />
-              <SortAndFilter
-                setSortPopupOpen={setSortPopupOpen}
-                setAddPhrasePopupOpen={setAddPhrasePopupOpen}
-                showFavourites={showFavourites}
-                setShowFavourites={setShowFavourites}
-              />
+              <div className="w-full flex">
+                <Search
+                  searchTerm={searchTerm}
+                  handleSearch={handleSearch}
+                  setSearchTerm={setSearchTerm}
+                  groupId={groupId}
+                  userId={session?.user.id}
+                />
+                <SortAndFilter
+                  setSortPopupOpen={setSortPopupOpen}
+                  setAddPhrasePopupOpen={setAddPhrasePopupOpen}
+                  showFavourites={showFavourites}
+                  setShowFavourites={setShowFavourites}
+                />
+              </div>
             </div>
           </div>
         </div>

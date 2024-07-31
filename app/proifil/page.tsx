@@ -38,8 +38,6 @@ export default async function ProfilesPage() {
     return <h1>no dialects</h1>;
   }
 
-  console.log("dialects:", dialects);
-
   const levels = [
     "low beginner",
     "high beginner",

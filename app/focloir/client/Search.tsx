@@ -52,7 +52,7 @@ export default function Search({
           )}
         </div>
 
-        <SubmitButton>
+        <SubmitButton disabled={searchTerm === ""}>
           <div className="p-0 w-full h-full flex flex-row gap-1 items-center justify-center">
             <div className=" mr-1 flex items-center justify-center">
               <TranslateIcon color={themeColors.primary[100]} size={26} />
