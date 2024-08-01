@@ -14,11 +14,11 @@ export default function ChangeGroup({
 }: ChangeGroupProps) {
   // alert(groupId);
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <select
         value={groupId}
         onChange={handleChangeGroup}
-        className="block w-full pl-1 py-2 bg-gray-200 text-sm rounded-sm outline-none"
+        className="block w-full h-full pl-1 py-2 bg-gray-200 text-sm rounded-sm outline-none"
       >
         <option
           value={-1}

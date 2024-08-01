@@ -17,7 +17,7 @@ import type { Session } from "@supabase/supabase-js";
 import SortAndFilter from "./SortAndFilter";
 import EditPhrase from "./EditPhrase";
 import Phrases from "./Phrases";
-import { Popup } from "@/components";
+import { Popup, SmallText } from "@/components";
 import Sort from "./Sort";
 import ChangeGroup from "./ChangeGroup";
 import { useRouter } from "next/navigation";
@@ -176,12 +176,21 @@ export default function Controller({
         </Popup>
       </div>
       <div className="w-full">
-        <div className="flex flex-col justify-center bg-primary-600 py-2">
+        <div className="flex flex-col justify-center bg-primary-600 py-4">
           <div className="flex justify-center">
             <div className="max-w-2xl w-full">
-              <div className="w-full flex max-w-2xl flex-row gap-2 px-2 items-center">
-                <div className="w-1/2 flex flex-col">
-                  <div className="items-center justify-center">
+              <div className="px-2">
+                <SmallText
+                  text_ga="Grupaí & Categóirí"
+                  text_en="Groups & Categories"
+                  inline={true}
+                  dark={true}
+                />
+              </div>
+
+              <div className="w-full flex max-w-2xl flex-row gap-2 px-2 items-center h-10">
+                <div className="w-1/2 flex flex-col h-full">
+                  <div className="items-center justify-center h-full">
                     <ChangeGroup
                       groupId={groupId}
                       handleChangeGroup={handleChangeGroup}
@@ -189,39 +198,47 @@ export default function Controller({
                     />
                   </div>
                 </div>
-                <div className="w-1/2 flex items-center justify-between ">
-                  <>
-                    <ChangeCategory
-                      categoryId={categoryId}
-                      handleChangeCategory={handleChangeCategory}
-                      categories={categories}
-                    />
-                    <button
-                      onClick={() => {
-                        setAddCategoryPopupOpen(true);
-                      }}
-                      className="ml-2 p-1 border rounded-md flex flex-row items-center  justify-around"
-                    >
-                      <AddIcon color={themeColors.primary[100]} size={24} />
-                      {/* <XSmallText text_ga="cuir" text_en="add" dark={true} /> */}
-                    </button>
-                  </>
+                <div className="w-1/2 flex items-center justify-between  h-full">
+                  <ChangeCategory
+                    categoryId={categoryId}
+                    handleChangeCategory={handleChangeCategory}
+                    categories={categories}
+                  />
+                  <button
+                    onClick={() => {
+                      setAddCategoryPopupOpen(true);
+                    }}
+                    className="ml-2 p-1 border rounded-md flex flex-row items-center  h-full justify-around"
+                  >
+                    <AddIcon color={themeColors.primary[100]} size={24} />
+                    {/* <XSmallText text_ga="cuir" text_en="add" dark={true} /> */}
+                  </button>
                 </div>
               </div>
-              <div className="w-full flex">
-                <Search
-                  searchTerm={searchTerm}
-                  handleSearch={handleSearch}
-                  setSearchTerm={setSearchTerm}
-                  groupId={groupId}
-                  userId={session?.user.id}
-                />
-                <SortAndFilter
-                  setSortPopupOpen={setSortPopupOpen}
-                  setAddPhrasePopupOpen={setAddPhrasePopupOpen}
-                  showFavourites={showFavourites}
-                  setShowFavourites={setShowFavourites}
-                />
+              <div className="w-full flex flex-col mt-4">
+                <div className="px-2">
+                  <SmallText
+                    text_ga="Cuardaigh & Sórtáil"
+                    text_en="Search & Sort"
+                    inline={true}
+                    dark={true}
+                  />
+                </div>
+                <div className="w-full flex flex-row h-full">
+                  <Search
+                    searchTerm={searchTerm}
+                    handleSearch={handleSearch}
+                    setSearchTerm={setSearchTerm}
+                    groupId={groupId}
+                    userId={session?.user.id}
+                  />
+                  <SortAndFilter
+                    setSortPopupOpen={setSortPopupOpen}
+                    setAddPhrasePopupOpen={setAddPhrasePopupOpen}
+                    showFavourites={showFavourites}
+                    setShowFavourites={setShowFavourites}
+                  />
+                </div>
               </div>
             </div>
           </div>

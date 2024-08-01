@@ -20,9 +20,9 @@ export default function SortAndFilter({
   setShowFavourites,
 }: SortAndFilterProps) {
   return (
-    <div className="h-10 mt-2 flex flex-row">
+    <div className="h-full flex flex-row">
       <button
-        className="flex p-1 flex-row items-center justify-around border rounded-md"
+        className="flex p-1 flex-row items-center justify-around border rounded-md h-10"
         onClick={() => {
           setShowFavourites(!showFavourites);
         }}

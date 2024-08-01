@@ -20,8 +20,8 @@ export default function Search({
   userId,
 }: SearchProps) {
   return (
-    <div className="flex h-14 w-full justify-center p-2">
-      <form action={getIrishTranslation} className="flex gap-2 w-full h-10">
+    <div className="flex h-full w-full justify-center px-2">
+      <form action={getIrishTranslation} className="flex gap-2 w-full ">
         <input type="hidden" name="groupId" value={groupId} />
         <input type="hidden" name="userId" value={userId} />
         <div className="flex flex-grow border border-gray-300 bg-white rounded-lg py-2 px-2">
