@@ -100,7 +100,7 @@ export default function Controller({
     if (favourite !== undefined)
       queryStringArray.push(`favourite=${favourite}`);
     if (sort !== undefined) queryStringArray.push(`sort=${sort}`);
-    if (![undefined, -1].includes(categoryId))
+    if (![undefined, -1].includes(categoryId) && groupId === group_id)
       queryStringArray.push(`categoryId=${categoryId}`);
     if (searchTerm !== "") queryStringArray.push(`search=${searchTerm}`);
 

@@ -27,15 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.className}`}>
-        <main className="flex w-full h-screen">
-          {/* <div className="w-full flex flex-col h-full"> */}
-          <div className="background-image relative flex-grow h-full w-full">
+        <main className="flex w-full h-full ">
+          <div className="background-image relative flex-grow h-full min-h-screen w-full">
             <div className={`mt-${navbarHeight}`}>{children}</div>
             <div className={`absolute top-0 h-${navbarHeight} w-full`}>
               <Navbar />
             </div>
           </div>
-          {/* </div> */}
         </main>
       </body>
     </html>
