@@ -17,23 +17,26 @@ import type { Session } from "@supabase/supabase-js";
 import SortAndFilter from "./SortAndFilter";
 import EditPhrase from "./EditPhrase";
 import Phrases from "./Phrases";
-import { Popup } from "@/components";
+import { Popup, SmallText } from "@/components";
 import Sort from "./Sort";
 import ChangeGroup from "./ChangeGroup";
 import { useRouter } from "next/navigation";
 import AddPhrase from "./AddPhrase";
 import ChangeCategory from "./ChangeCategory";
+import { AddIcon } from "@/icons";
+import { themeColors } from "@/theme";
+import AddCategory from "./AddCategory";
 
 interface ControllerProps {
   phrases: PhraseModelForDictionary[] | null;
   groups: GroupModel[] | null;
-  group_id?: number;
-  category_id?: number;
+  group_id: number;
+  category_id: number;
   favourite?: boolean;
   sort?: string;
   session: Session | null;
   categories: CategoryModel[] | null;
-  search?: string;
+  search: string;
 }
 
 export default function Controller({
@@ -50,18 +53,18 @@ export default function Controller({
   const [displayPhrases, setDisplayPhrases] = useState<
     PhraseModelForDictionary[]
   >([]);
-  const [groupId, setGroupId] = useState<number | undefined>(group_id);
-  const [categoryId, setCategoryId] = useState<number | undefined>(category_id);
-  const [searchTerm, setSearchTerm] = useState<string>(
-    search !== undefined ? search : "",
-  );
+  const [groupId, setGroupId] = useState<number>(group_id);
+  const [categoryId, setCategoryId] = useState<number>(category_id);
+  const [searchTerm, setSearchTerm] = useState<string>(search);
   const [editPhrase, setEditPhrase] = useState<number | null>(null);
   const [order, setOrder] = useState<string>(
-    sort === "newest" ? "newest" : "oldest",
+    sort === "oldest" ? "oldest" : "newest",
   );
   const [editPopupOpen, setEditPopupOpen] = useState<boolean>(false);
   const [sortPopupOpen, setSortPopupOpen] = useState<boolean>(false);
   const [addPhrasePopupOpen, setAddPhrasePopupOpen] = useState<boolean>(false);
+  const [addCategoryPopupOpen, setAddCategoryPopupOpen] =
+    useState<boolean>(false);
   const [showFavourites, setShowFavourites] = useState<boolean>(
     favourite !== undefined ? favourite : false,
   );
@@ -78,7 +81,7 @@ export default function Controller({
     if (e.target.value !== "-1") {
       setGroupId(Number(e.target.value));
     } else {
-      setGroupId(undefined);
+      setGroupId(-1);
     }
   };
 
@@ -86,31 +89,33 @@ export default function Controller({
     if (e.target.value !== "-1") {
       setCategoryId(Number(e.target.value));
     } else {
-      setCategoryId(undefined);
+      setCategoryId(-1);
     }
   };
 
   useEffect(() => {
     const queryStringArray = [];
-    if (groupId !== undefined) queryStringArray.push(`groupId=${groupId}`);
+    if (![undefined, -1].includes(groupId))
+      queryStringArray.push(`groupId=${groupId}`);
     if (favourite !== undefined)
       queryStringArray.push(`favourite=${favourite}`);
     if (sort !== undefined) queryStringArray.push(`sort=${sort}`);
-    if (categoryId !== undefined)
+    if (![undefined, -1].includes(categoryId) && groupId === group_id)
       queryStringArray.push(`categoryId=${categoryId}`);
-    if (search !== undefined) queryStringArray.push(`search=${search}`);
+    if (searchTerm !== "") queryStringArray.push(`search=${searchTerm}`);
 
     let queryString = "";
     if (queryStringArray.length > 1) {
       queryString = queryStringArray.join("&");
+    } else if (queryStringArray.length === 1) {
+      queryString = queryStringArray[0];
     }
 
-    if (queryStringArray.length > 0) "?".concat(queryString);
-
-    console.log("queryString: ", queryString);
-
+    if (queryStringArray.length > 0) {
+      queryString = `?${queryString}`;
+    }
     router.push(`/focloir${queryString}`);
-  }, [order, categoryId, showFavourites, groupId]);
+  }, [categoryId, groupId]);
 
   useEffect(() => {
     sortPopupOpen && setSortPopupOpen(false);
@@ -119,6 +124,7 @@ export default function Controller({
       showFavourites,
     );
     const sortedPhrases = sortPhrases(favouritedPhrases, order);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const searchedPhrases = filterBySearch(sortedPhrases, searchTerm);
     setDisplayPhrases(searchedPhrases);
   }, [showFavourites, order, searchTerm, phrases]);
@@ -159,13 +165,32 @@ export default function Controller({
           />
         </Popup>
       </div>
+      <div className="relative max-w-2xl">
+        <Popup isOpen={addCategoryPopupOpen} setOpen={setAddCategoryPopupOpen}>
+          <AddCategory
+            groupId={groupId}
+            setAddCategoryPopupOpen={(open) => {
+              setAddCategoryPopupOpen(open);
+            }}
+          />
+        </Popup>
+      </div>
       <div className="w-full">
-        <div className="flex flex-col justify-center bg-primary-600 py-2">
+        <div className="flex flex-col justify-center bg-primary-600 py-4">
           <div className="flex justify-center">
             <div className="max-w-2xl w-full">
-              <div className="w-full flex max-w-2xl flex-row gap-2 px-2 items-center">
-                <div className="w-1/2 flex flex-col">
-                  <div className="items-center justify-center">
+              <div className="px-2">
+                <SmallText
+                  text_ga="Grupaí & Categóirí"
+                  text_en="Groups & Categories"
+                  inline={true}
+                  dark={true}
+                />
+              </div>
+
+              <div className="w-full flex max-w-2xl flex-row gap-2 px-2 items-center h-10">
+                <div className="w-1/2 flex flex-col h-full">
+                  <div className="items-center justify-center h-full">
                     <ChangeGroup
                       groupId={groupId}
                       handleChangeGroup={handleChangeGroup}
@@ -173,29 +198,48 @@ export default function Controller({
                     />
                   </div>
                 </div>
-                <div className="w-1/2  flex flex-col">
-                  <div className="items-center justify-center">
-                    <ChangeCategory
-                      categoryId={categoryId}
-                      handleChangeCategory={handleChangeCategory}
-                      categories={categories}
-                    />
-                  </div>
+                <div className="w-1/2 flex items-center justify-between  h-full">
+                  <ChangeCategory
+                    categoryId={categoryId}
+                    handleChangeCategory={handleChangeCategory}
+                    categories={categories}
+                  />
+                  <button
+                    onClick={() => {
+                      setAddCategoryPopupOpen(true);
+                    }}
+                    className="ml-2 p-1 border rounded-md flex flex-row items-center  h-full justify-around"
+                  >
+                    <AddIcon color={themeColors.primary[100]} size={24} />
+                    {/* <XSmallText text_ga="cuir" text_en="add" dark={true} /> */}
+                  </button>
                 </div>
               </div>
-              <Search
-                searchTerm={searchTerm}
-                handleSearch={handleSearch}
-                setSearchTerm={setSearchTerm}
-                groupId={groupId}
-                userId={session?.user.id}
-              />
-              <SortAndFilter
-                setSortPopupOpen={setSortPopupOpen}
-                setAddPhrasePopupOpen={setAddPhrasePopupOpen}
-                showFavourites={showFavourites}
-                setShowFavourites={setShowFavourites}
-              />
+              <div className="w-full flex flex-col mt-4">
+                <div className="px-2">
+                  <SmallText
+                    text_ga="Cuardaigh & Sórtáil"
+                    text_en="Search & Sort"
+                    inline={true}
+                    dark={true}
+                  />
+                </div>
+                <div className="w-full flex flex-row h-full">
+                  <Search
+                    searchTerm={searchTerm}
+                    handleSearch={handleSearch}
+                    setSearchTerm={setSearchTerm}
+                    groupId={groupId}
+                    userId={session?.user.id}
+                  />
+                  <SortAndFilter
+                    setSortPopupOpen={setSortPopupOpen}
+                    setAddPhrasePopupOpen={setAddPhrasePopupOpen}
+                    showFavourites={showFavourites}
+                    setShowFavourites={setShowFavourites}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

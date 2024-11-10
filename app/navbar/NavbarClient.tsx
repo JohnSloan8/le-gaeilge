@@ -55,11 +55,11 @@ const NavbarClient = ({ session }: NavbarClientProps) => {
                 <NavbarContent />
               </div>
               <div className="flex h-full justify-center">
-                <button onClick={handleClickBurgerMenu} className="px-4">
+                <button onClick={handleClickBurgerMenu} className="px-4 my-2">
                   <BurgerMenuIcon color={themeColors.primary[100]} size={24} />
                 </button>
               </div>
-              <div className="flex h-full justify-center items-center pr-4">
+              <div className="flex h-full justify-center items-center mt-1.5 pr-4">
                 <LoginButton session={session} />
               </div>
             </div>

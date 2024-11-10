@@ -21,26 +21,23 @@ export default async function FocloirPage({ searchParams }: Props) {
   } = await supabase.auth.getSession();
 
   const groupId =
-    searchParams.groupId !== undefined
-      ? Number(searchParams.groupId)
-      : undefined;
+    searchParams.groupId !== undefined ? Number(searchParams.groupId) : -1;
   const categoryId =
     searchParams.categoryId !== undefined
       ? Number(searchParams.categoryId)
-      : undefined;
+      : -1;
   const favourite =
     searchParams.favourite !== undefined
       ? Boolean(searchParams.favourite)
       : undefined;
   const sort = searchParams.sort !== undefined ? searchParams.sort : undefined;
-  const search =
-    searchParams.search !== undefined ? searchParams.search : undefined;
+  const search = searchParams.search !== undefined ? searchParams.search : "";
 
   const { data: phrases, error: phrasesError } = await supabase.rpc(
     "get_phrases_for_dictionary",
     {
-      group_id_input: groupId,
-      category_id_input: categoryId,
+      group_id_input: groupId === -1 ? undefined : groupId,
+      category_id_input: categoryId === -1 ? undefined : categoryId,
       user_id_input: session === null ? undefined : session.user.id,
     },
   );
@@ -72,6 +69,7 @@ export default async function FocloirPage({ searchParams }: Props) {
         phrases={phrases}
         groups={groups}
         group_id={groupId}
+        category_id={categoryId}
         categories={categories}
         session={session}
         favourite={favourite}

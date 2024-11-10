@@ -42,32 +42,23 @@ const getPhrasesForTest = (
 ) => {
   const [neverDone, done] = getNeverDone(phrases);
 
-  console.log("phrases:", phrases.length);
-  console.log("neverDone:", neverDone.length);
-  console.log("done:", done.length);
-
   let phrasesForTest = [];
 
   if (neverDone.length >= noQuestions) {
     phrasesForTest = neverDone.slice(0, noQuestions);
   } else {
     phrasesForTest = neverDone;
-    console.log("phrasesForTest:", phrasesForTest.length);
     const noRemainingQuestions = calculateNoRemainingPhrases(
       phrasesForTest,
       noQuestions,
     );
-    console.log("noRemainingQuestions:", noRemainingQuestions);
 
     const phrasesSortedByDifficulty = sortPhrasesByDifficulty(done);
-    console.log("phrasesSortedByDifficulty:", phrasesSortedByDifficulty.length);
 
     phrasesForTest = [
       ...phrasesForTest,
       ...phrasesSortedByDifficulty.slice(0, noRemainingQuestions),
     ];
-
-    console.log("phrasesForTest:", phrasesForTest.length);
   }
 
   return phrasesForTest;

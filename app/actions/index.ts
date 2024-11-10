@@ -12,6 +12,7 @@ import addPhrase from "./phrases/add";
 import addAnswer from "./tests/addAnswer";
 import chooseTest from "./tests/chooseTest";
 import updateProfile from "./profile/updateProfile";
+import addCategory from "./categories/add";
 
 export {
   registerForEvent,
@@ -28,4 +29,5 @@ export {
   addAnswer,
   chooseTest,
   updateProfile,
+  addCategory,
 };
