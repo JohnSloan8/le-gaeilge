@@ -4,16 +4,19 @@ import { SmallText, SubmitButton } from "@/components";
 interface AddPhraseProps {
   setAddPhrasePopupOpen: (open: boolean) => void;
   groupId: number;
+  categoryId: number;
 }
 
 export default function AddPhrase({
   setAddPhrasePopupOpen,
   groupId,
+  categoryId,
 }: AddPhraseProps) {
   return (
     <div>
       <form action={addPhrase} className="p-1 flex flex-col">
         <input type="hidden" name="groupId" value={groupId} />
+        <input type="hidden" name="categoryId" value={categoryId} />
 
         <div className="flex gap-1 py-2">
           <label htmlFor="entryGa" className="w-16">

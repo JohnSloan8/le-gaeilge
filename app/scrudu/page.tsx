@@ -1,8 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import { SmallText, SubmitButton, MediumText } from "@/components";
 import { redirect } from "next/navigation";
-import { chooseTest } from "../actions";
+
 import Controller from "./Controller";
 
 export default async function ScruduPage() {

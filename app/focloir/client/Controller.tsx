@@ -159,6 +159,7 @@ export default function Controller({
         <Popup isOpen={addPhrasePopupOpen} setOpen={setAddPhrasePopupOpen}>
           <AddPhrase
             groupId={groupId}
+            categoryId={categoryId}
             setAddPhrasePopupOpen={(open) => {
               setAddPhrasePopupOpen(open);
             }}

@@ -11,6 +11,8 @@ const getSynthesis = async (text: string, phraseId: number) => {
   const audioData: string = await getSynthesisAudio(text);
   const mp3Blob = base64ToMp3(audioData);
 
+  console.log("getting synthesis");
+
   const { data, error } = await supabase.storage
     .from("audio")
     .upload(`${phraseId}.mp3`, mp3Blob, {

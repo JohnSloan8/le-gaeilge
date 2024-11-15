@@ -27,7 +27,7 @@ export default function Phrase({
     };
 
     console.log("phrase.p_audio_data:", phrase.p_audio_data);
-    if (phrase.p_audio_data === null) {
+    if (!phrase.p_audio_data) {
       void updateSynthesis();
     }
   }, []);

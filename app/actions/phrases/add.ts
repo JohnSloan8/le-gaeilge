@@ -17,6 +17,7 @@ const addPhrase = async (formData: FormData) => {
   }
 
   const groupId = Number(formData.get("groupId"));
+  const categoryId = Number(formData.get("categoryId"));
   const entryGa = String(formData.get("entryGa"));
   const entryEn = String(formData.get("entryEn"));
 
@@ -24,6 +25,7 @@ const addPhrase = async (formData: FormData) => {
     entry_ga: entryGa,
     entry_en: entryEn,
     group_id: groupId === -1 ? null : Number(groupId),
+    category_id: categoryId === -1 ? null : Number(categoryId),
     author_id: user.id,
   });
 
